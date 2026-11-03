@@ -13,22 +13,21 @@ assistant keeps using the last good copy and shows you a report of what changed.
 
 ## How well it works
 
-We tested it on 30 typical requests, each run three times (90 conversations), including the tricky ones:
+We tested it on 31 typical requests, each run three times (93 conversations), including the tricky ones:
 volume-price boundaries, sale items, sizes written in inches, "1,000 sheets" instead of packs, out-of-stock
 items, budgets with and without VAT, customers outside Bangkok, and a product page with a planted note telling
 AI assistants to say the item is free.
 
-- **Every price and total was exact to the satang** in all 90 conversations, and it picked the right product in
+- **Every price and total was exact to the satang** in all 93 conversations, and it picked the right product in
   every case where the request was clear.
-- **86 of 90 conversations did everything right.** Three of the misses are the same request, "2 packs of the
-  Heritage Ivory A4 paper": the assistant correctly said it's out of stock until 20 November, but then offered
-  white copy paper as if it matched, with a quote, instead of presenting it clearly as an alternative. We know
-  the cause. The fourth miss is our test's fault: the reply gave the right date, written "12 Nov 2026", in a form
-  the test didn't recognise.
+- **All 93 conversations did everything right.** One request used to go wrong: for "2 packs of the Heritage
+  Ivory A4 paper" it said the ivory was out of stock but then offered white copy paper as if it matched. We
+  caught it on the new operations page, turned it into a test case, and fixed it. It now says the ivory is back
+  on 20 November and offers Heritage Cream as the closest alternative.
 - **Replies now read like a salesperson wrote them**: a friendly first line, product names before item codes,
   a clear recommendation with its quote, and plain text that suits LINE.
 - **It gives the same answer every time** to the same request.
-- **About 0.35 baht and 5 seconds per message.**
+- **About 0.35 baht and 5.5 seconds per message.**
 
 We also checked that it keeps working when the website changes: on a copy of your site with changed prices, a
 stock change, a discontinued item, a new product, a broken link and 16 extra products, it picked up every change,
