@@ -5,6 +5,16 @@ under 250 a pack, 20 packs"* into the right products and an exact quote. **The m
 reply; code decides facts, matches and prices**, and a code check rejects a reply whose prices, totals, SKUs or
 product names don't match that turn's tool results.
 
+## Who uses it
+
+**Phase 1, sales staff (the pilot).** Staff paste a customer's message into the chat page, read the draft reply
+and its quote table, edit if needed, copy the reply and send it to the customer themselves. Nothing reaches a
+customer without a person in between, and every edit tells us where the assistant is wrong. **Phase 2,
+customers directly on LINE**, once the pilot's edit rate shows the drafts go out unchanged almost every time,
+with a "talk to a person" handoff to staff. **Operations** (whoever updates the website) run `pl ingest` after
+a site change, review the report, and `pl promote` a held refresh; they watch `/ops` for the thresholds below.
+This is the same plan as the owner summary (`CUSTOMER_SUMMARY.md`, "What we recommend next").
+
 ## Run it (5 commands)
 
 From this folder, with Python 3.11+ and the site served at `http://localhost:8000/paperlane/`

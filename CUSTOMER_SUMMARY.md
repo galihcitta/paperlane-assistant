@@ -63,6 +63,7 @@ It also:
 
 1. **Pilot it with your sales team for two weeks**: they paste real customer messages in, compare its quote
    with their own, and flag anything they would change. That gives us real-world accuracy, not just our tests.
-2. **Connect it to your LINE Official Account**, with a "talk to a person" button that hands the chat to staff.
+2. **Connect it to your LINE Official Account** once the pilot shows staff rarely need to change its drafts,
+   with a "talk to a person" button that hands the chat to staff.
 3. **Make refreshing the catalog a routine**: refresh after every website update, with you approving the
    change report before it goes live.
