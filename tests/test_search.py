@@ -142,3 +142,15 @@ def test_delivery_area(v1_items, loc, inside):
 def test_no_narrowing_question_when_product_named(v1_items):
     r = S(v1_items, product_type="paper", size="A4", weight_gsm=80, keywords=["lotus bright premium"], quantity={"value": 10})
     assert r["matches"][0]["sku"] == "PL-CP-A4-80" and "narrowing_question" not in r
+
+
+@pytest.mark.parametrize("text,asks", [("Do you have A4 colour paper? 5 reams", True),
+                                       ("any color paper in A4, 5 reams", True),
+                                       ("1,000 sheets of coloured A4", False),
+                                       ("pastel A4 paper, 5 reams", False),
+                                       ("5 reams of blue A4", False)])
+def test_vague_colour_wording_asks_even_if_kind_coloured(v1_items, text, asks):
+    for colour in (None, "colour"):
+        r = search(Criteria(product_type="paper", paper_kind="coloured", paper_colour=colour, size="A4",
+                            quantity={"value": 5, "unit": "reams"}), v1_items, customer_text=text)
+        assert (r["decision"] == "needs_clarification" and r["missing_or_ambiguous"] == "paper_colour") == asks, (text, colour)

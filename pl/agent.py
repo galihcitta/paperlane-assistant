@@ -139,7 +139,9 @@ class Agent:
             elif s.delivery_location:
                 c = c.model_copy(update={"delivery_location": s.delivery_location})
             s.criteria[c.item_label] = c
-            res = search(c, self.items)
+            said = " ".join(m["content"] for m in s.messages if m["role"] == "user" and isinstance(m["content"], str)
+                            and not m["content"].startswith("[automatic check"))
+            res = search(c, self.items, customer_text=said)
             if "error" in res:
                 return res, True
             turn["decision"] = res["decision"]

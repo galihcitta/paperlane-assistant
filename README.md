@@ -148,15 +148,13 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 - **Two requests on the same chat session at once aren't serialised.** Different sessions are safe (the shared
   DB connection is locked); simultaneous messages in one session can interleave its history.
 
-- **"Colour paper" no longer triggers the clarifying question** (eval E14, 0/3). "Do you have A4 colour paper?"
-  can mean coloured stock or printing in colour; since the line-total ranking fix it is read as coloured stock and
-  quoted. The quote is correct for coloured paper, but the assistant should ask first. Cause and fix in
-  `eval/results.md`; not fixed because the eval was to run once on the reviewed code.
 - **Eval scope.** 30 requests x 3 runs on the v1 catalog: 87/90 pass, totals exact in every run. That is a
   designed test set, not real customer traffic; real messages will be messier (Thai, typos, several questions in
   one message).
 - **Narrowing questions can be weak**, e.g. "smooth or uncoated?" for coloured paper, where both are plain
   finishes.
+- **Wording can be off even when the price is right.** In eval E21 the reply opened "Yes, it's in stock today"
+  to "Is it free today?". The price (650.56) was correct and it never said "free", but the wording was poor.
 - **Cost and speed:** about $0.01 and 5-6 seconds per message (p95 about 9 seconds) on Claude Sonnet 5.5.
 
 ## With another week

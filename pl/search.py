@@ -48,6 +48,9 @@ class Criteria(BaseModel):
     delivery_location: str | None = Field(None, description="where the customer wants delivery, if they said")
 
 
+# Wording that clearly means coloured paper stock (not "printed in colour").
+_EXPLICIT_COLOUR = re.compile(r"\bcolou?red\b|\bpastels?\b|\bbrights?\b|\brainbow\b|\b(?:blue|green|pink|yellow|red|"
+                              r"orange|purple|violet|lilac|ivory|cream|black|grey|gray|brown|assorted)\b", re.I)
 _GENERIC_COLOUR = {"colour", "color", "coloured", "colored", "colourful", "colorful", "any colour", "any color", "coloured paper"}
 REQUIRED = {"printed_flyer": ["size", "sides", "colour_mode", "quantity"], "paper": ["size", "quantity"]}
 QUESTIONS = {
@@ -94,7 +97,7 @@ def merge(prev: Criteria | None, new: Criteria) -> Criteria:
     return Criteria(**data)
 
 
-def normalise(c: Criteria) -> tuple[Norm, list[str]]:
+def normalise(c: Criteria, customer_text: str | None = None) -> tuple[Norm, list[str]]:
     errs: list[str] = []
     n = Norm(paper_kind=c.paper_kind, keywords=[k.lower() for k in c.keywords],
              min_gsm=c.min_gsm, max_gsm=c.max_gsm, quantity=c.quantity)
@@ -110,12 +113,15 @@ def normalise(c: Criteria) -> tuple[Norm, list[str]]:
         n.colour_mode = N.parse_colour_mode(c.colour_mode)
         if n.colour_mode is None:
             errs.append(f"colour_mode {c.colour_mode!r} not recognised; allowed: full colour (CMYK), black and white")
-    if c.paper_colour:
-        if c.paper_colour.strip().lower() in _GENERIC_COLOUR:
-            if c.paper_kind != "coloured":  # "any coloured paper" is already said by paper_kind
-                n.ambiguous.append("paper_colour")
-        else:
-            n.paper_colour = N.parse_colour(c.paper_colour)
+    # "colour paper" may mean coloured stock or white paper printed in colour: ask, unless the customer's own
+    # words say coloured stock ("coloured", "pastel", a named colour). The model's paper_kind alone doesn't count.
+    generic = bool(c.paper_colour) and c.paper_colour.strip().lower() in _GENERIC_COLOUR
+    if generic or (c.paper_kind == "coloured" and not c.paper_colour and customer_text is not None):
+        said = customer_text if customer_text is not None else c.paper_colour
+        if c.paper_kind != "coloured" or not _EXPLICIT_COLOUR.search(said):
+            n.ambiguous.append("paper_colour")
+    elif c.paper_colour:
+        n.paper_colour = N.parse_colour(c.paper_colour)
     if c.finish:
         n.finish = N.parse_finish(c.finish)
     if c.weight_lb is not None:
@@ -203,8 +209,9 @@ def _criteria_view(n: Norm) -> dict:
     return {k: v for k, v in n.model_dump().items() if v not in (None, [], False) and k != "ambiguous"}
 
 
-def search(c: Criteria, items: dict[str, Item]) -> dict:
-    n, errs = normalise(c)
+def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None) -> dict:
+    """customer_text: the customer's own messages this session, used only to judge vague colour wording."""
+    n, errs = normalise(c, customer_text)
     if errs:
         return {"error": "invalid criteria", "details": errs}
     base = {"criteria_used": _criteria_view(n)}
