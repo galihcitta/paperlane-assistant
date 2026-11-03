@@ -1,7 +1,20 @@
 """Shared Anthropic client settings."""
 import os
+from pathlib import Path
 
 import anthropic
+
+
+def _load_dotenv(path: Path = Path(".env")):
+    """Minimal .env support (KEY=VALUE lines); real environment variables win."""
+    if path.is_file():
+        for line in path.read_text().splitlines():
+            k, sep, v = line.strip().partition("=")
+            if sep and not k.startswith("#"):
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+_load_dotenv()
 
 DEFAULT_MODEL = "claude-sonnet-5-5"
 
