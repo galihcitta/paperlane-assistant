@@ -23,8 +23,8 @@
     "criteria_total": 6,
     "pass": true,
     "run": 0,
-    "latency_s": 6.5,
-    "reply": "5 options match: letter flyers, one side, full colour, under 250 a pack at 20 packs. Each pack has 100 sheets. Here are the top 3:\n\n1. PL-PR-LTR-MT-100-40 – Letter Flyers, Matte, 100 gsm: 198.00 per pack (20-pack tier price, list 225.00)\n2. PL-PR-LTR-GL-100-40 – Letter Flyers, Gloss, 100 gsm: 206.80 per pack (20-pack tier price)\n3. PL-PR-LTR-MT-130-40 – Letter Flyers, Matte, 130 gsm: 219.12 per pack (20-pack tier price)\n\nAll three are in stock.\n\nBreakdown for option 1, PL-PR-LTR-MT-100-40, 20 packs:\n- Unit price: 198.00 (tier:20 price rule)\n- Subtotal: 3,960.00\n- Delivery: 0.00 (free, because the subtotal is over 3,000)\n- VAT 7%: 277.20\n- Total: 4,237.20\n\nPrices exclude VAT, and the budget of 250 per pack was treated as excluding VAT. They come from the catalog snapshot dated 2026-11-03.\n\nMatte or gloss?",
+    "latency_s": 7.1,
+    "reply": "We have 5 one-sided, full-colour Letter flyers under ฿250 a pack at 20 packs. Here are the top 3:\n\n- Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40): ฿198.00 per pack, 20-pack price (normally ฿225.00). It's the cheapest option.\n- Gloss 100 gsm Letter Flyers (PL-PR-LTR-GL-100-40): ฿206.80 per pack, 20-pack price (normally ฿235.00).\n- Matte 130 gsm Letter Flyers (PL-PR-LTR-MT-130-40): ฿219.12 per pack, 20-pack price (normally ฿249.00). It's a thicker sheet.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40). For 20 packs (100 sheets each):\n- Unit price x packs: ฿198.00 x 20\n- Subtotal: ฿3,960.00\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿277.20\n- Total: ฿4,237.20\n\nPrices exclude VAT. Your ฿250 limit was read as a per-pack price before VAT.\n\nPrices are from our catalog of 3 Nov 2026.\n\nWould you like matte or gloss?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-40",
@@ -63,8 +63,8 @@
     "criteria_total": 6,
     "pass": true,
     "run": 1,
-    "latency_s": 5.2,
-    "reply": "5 options match your request: letter size, one side, full colour, under 250 a pack at 20 packs. Here are the top 3. Each pack has 100 sheets.\n\n1. PL-PR-LTR-MT-100-40 – Letter Flyers, Matte, 100 gsm: 198.00 per pack (20-pack tier)\n2. PL-PR-LTR-GL-100-40 – Letter Flyers, Gloss, 100 gsm: 206.80 per pack (20-pack tier)\n3. PL-PR-LTR-MT-130-40 – Letter Flyers, Matte, 130 gsm: 219.12 per pack (20-pack tier)\n\nAll three are in stock.\n\nBreakdown for option 1, PL-PR-LTR-MT-100-40:\n- Unit price: 198.00 per pack (20-pack tier price, down from the 225.00 list price)\n- Subtotal (20 packs): 3,960.00\n- Delivery: 0.00 (free, because the subtotal is over 3,000)\n- VAT 7%: 277.20\n- Total: 4,237.20\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nDo you prefer matte or gloss?",
+    "latency_s": 5.5,
+    "reply": "Five letter-size, one-sided, full-colour flyers come in under ฿250 a pack at 20 packs. Here are the top three:\n\n1. Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40): ฿198.00 per pack, the 20-pack price. It normally costs ฿225.00.\n2. Gloss 100 gsm Letter Flyers (PL-PR-LTR-GL-100-40): ฿206.80 per pack, the 20-pack price. It normally costs ฿235.00.\n3. Matte 130 gsm Letter Flyers (PL-PR-LTR-MT-130-40): ฿219.12 per pack, the 20-pack price. It normally costs ฿249.00. The paper is thicker.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40). For 20 packs (100 sheets per pack):\n- Unit price x packs: ฿198.00 x 20\n- Subtotal: ฿3,960.00\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿277.20\n- Total: ฿4,237.20\n\nI read \"under 250 a pack\" as a price before VAT. All of these are in stock.\n\nPrices from our catalog of 3 Nov 2026.\n\nDo you prefer matte or gloss?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-40",
@@ -103,8 +103,8 @@
     "criteria_total": 6,
     "pass": true,
     "run": 2,
-    "latency_s": 5.5,
-    "reply": "5 options match: letter-size, one side, full colour, under 250 a pack at 20 packs (1 pack = 100 sheets).\n\n1. PL-PR-LTR-MT-100-40 – Letter Flyers, Matte, 100 gsm: 198.00/pack (20-pack tier price)\n2. PL-PR-LTR-GL-100-40 – Letter Flyers, Gloss, 100 gsm: 206.80/pack (20-pack tier price)\n3. PL-PR-LTR-MT-130-40 – Letter Flyers, Matte, 130 gsm: 219.12/pack (20-pack tier price)\n\nBreakdown for the first one, PL-PR-LTR-MT-100-40:\n- Unit price: 198.00 × 20 packs (tier:20, list price 225.00)\n- Subtotal: 3,960.00\n- Delivery: 0.00 (free from a 3,000.00 subtotal)\n- VAT 7%: 277.20\n- Total: 4,237.20\n\nPrices exclude VAT, and the budget of 250 per pack is treated as excluding VAT. They come from the catalog snapshot crawled 2026-11-03.\n\nDo you want matte or gloss?",
+    "latency_s": 7.6,
+    "reply": "Five letter-size, one-sided, full-colour flyers come in under ฿250 a pack at 20 packs. Here are the top three.\n\n1. Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40): ฿198.00 per pack, the 20-pack price. Normally ฿225.00.\n2. Gloss 100 gsm Letter Flyers (PL-PR-LTR-GL-100-40): ฿206.80 per pack, the 20-pack price. Normally ฿235.00.\n3. Matte 130 gsm Letter Flyers (PL-PR-LTR-MT-130-40): ฿219.12 per pack, the 20-pack price. Normally ฿249.00. This one is a heavier paper.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40). For 20 packs (100 sheets per pack):\n- Unit price x packs: ฿198.00 x 20\n- Subtotal: ฿3,960.00\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿277.20\n- Total: ฿4,237.20\n\nPrices exclude VAT. I read your \"under 250\" limit as a price per pack before VAT.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like matte or gloss?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-40",
@@ -145,8 +145,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 0,
-    "latency_s": 4.5,
-    "reply": "There is 1 matching option.\n\nPL-CP-A4-70: Siam Office Copy Paper A4 70gsm, 109.00 THB per ream. It's white, uncoated, in stock, and a ream is 500 sheets.\n\nQuote for 9 reams (9 packs):\n- Unit price: 109.00 (list price)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nTip: ordering 10 reams drops the unit price to 104.64. Free delivery starts at a 3,000.00 subtotal. This quote is for the 9 reams you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.7,
+    "reply": "Yes, we have one option that fits: the Siam Office A4 70gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream (500 sheets), regular price. In stock.\n\nMy pick is PL-CP-A4-70. For 9 reams (1 ream = 1 pack of 500 sheets):\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00.\n\nIf you order 10 reams instead, the unit price drops to ฿104.64. I've quoted the 9 you asked for.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 9 reams?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -185,8 +185,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 4.9,
-    "reply": "1 option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm: 109.00 per ream (500 sheets)\nWhy it matches: A4, 70 gsm, white, uncoated, in stock.\n\nQuote for 9 reams (9 packs):\n- Unit price: 109.00 (list price, no volume discount)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nTip: if you order 10 reams (+1), the unit price drops to 104.64. I've quoted the 9 reams you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.3,
+    "reply": "There's one option that fits: the Siam Office A4 70gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream at the regular price. Each ream is 500 sheets, and it's in stock.\n\nMy pick is PL-CP-A4-70. For 9 reams (9 packs, same thing):\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal, so this order pays ฿150.00.\n\nIf you order 10 reams, the unit price drops to ฿104.64. I've quoted the 9 reams you asked for.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to quote 10 reams as well, or go ahead with 9?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -225,8 +225,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 4.8,
-    "reply": "There is 1 matching option.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm\n- Unit price: 109.00 per ream of 500 sheets (list price, no volume discount at 9)\n- In stock. It's white, uncoated A4, 70 gsm.\n\nQuote for 9 reams:\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nTip: if you order 10 reams, the unit price drops to 104.64. The quote above is for the 9 reams you asked for.\n\nPrices come from the catalog snapshot crawled at 2026-11-03 14:43 UTC. Prices exclude VAT, and the total includes it.",
+    "latency_s": 4.9,
+    "reply": "Yes, we have one option that fits: the Siam Office A4 70gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream at 9 reams. This is the regular price. One ream is 500 sheets, and it's in stock.\n\nMy pick is PL-CP-A4-70. For 9 reams:\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal.\n\nIf you order 10 reams instead, the unit price drops to ฿104.64.\n\nPrices from our catalog of 3 Nov 2026.\n\nDo you want me to quote 10 reams, or go ahead with 9?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -267,8 +267,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 0,
-    "latency_s": 5.1,
-    "reply": "There is 1 match.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, unit price 104.64 per ream (500 sheets). It's A4, 70 gsm, white, uncoated and in stock.\n\nQuote for 10 reams (10 packs, no rounding needed):\n- Unit price: 104.64 (10-pack volume tier, down from the 109.00 list price)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free from a 3,000.00 subtotal. Prices exclude VAT, and the total includes it. They come from the catalog snapshot crawled 2026-11-03.",
+    "latency_s": 5.0,
+    "reply": "Yes, we have one option that fits: Siam Office Copy Paper A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-pack price (normally ฿109.00). Each ream is 500 sheets, and it's in stock.\n\nMy pick is PL-CP-A4-70. For 10 reams (10 packs):\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to adjust the quantity, or do you have a delivery location for me to check?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -307,8 +307,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 5.3,
-    "reply": "There is 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 104.64 per ream\n- White, uncoated, in stock\n- A ream is 500 sheets. You asked for 10 reams, which is 10 packs, so no rounding was needed.\n\nQuote:\n- Unit price: 104.64 (10-pack volume tier; list price 109.00)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is below that, so delivery is charged.\n\nPrices exclude VAT, and the total includes it. They come from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.9,
+    "reply": "Yes, we have one option that fits: the Siam Office A4 70 gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price (normally ฿109.00). A ream is 500 sheets, and it's in stock.\n\nMy pick is PL-CP-A4-70. For 10 reams (10 packs):\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to change the quantity or add anything else?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -347,8 +347,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 5.0,
-    "reply": "One option matches your request.\n\nPL-CP-A4-70: Siam Office Copy Paper A4 70gsm, 104.64 THB per ream\n- It's A4, 70 gsm, white and uncoated.\n- It's in stock.\n- A ream is 500 sheets, so 10 reams is 10 packs.\n\nQuote:\n- Unit price: 104.64 (10-pack volume tier, down from the 109.00 list price)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nFree delivery starts at a 3,000.00 subtotal, and this order is below that.",
+    "latency_s": 4.7,
+    "reply": "Yes, we have one option for Siam Office A4 70gsm copy paper, and it's in stock.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price; normally ฿109.00. Each ream has 500 sheets.\n\nMy pick is PL-CP-A4-70. For 10 reams (10 packs):\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nDelivery is free once the subtotal reaches ฿3,000.00. Your subtotal is below that, so delivery is ฿150.00. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to change the quantity or add anything else?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -389,8 +389,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 0,
-    "latency_s": 5.5,
-    "reply": "One option matches your request.\n\nPL-PR-LTR-GL-170-40 – Letter-size Flyers (8.5 × 11 in), Gloss\n- Unit price: 259.00 per pack of 100 sheets. This is a sale price, down from the 299.00 list price.\n- It matches on: Letter size, one side, full colour, gloss, 170 gsm, in stock.\n\nQuote for 20 packs (2,000 sheets):\n- Subtotal: 5,180.00\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 362.60\n- Total: 5,542.60\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Prices exclude VAT, and the total includes it.",
+    "latency_s": 8.1,
+    "reply": "Yes, one option fits your spec exactly.\n\n1. Gloss 170 gsm Letter Flyers, 8.5 × 11 in, one side, full colour (PL-PR-LTR-GL-170-40): ฿259.00 per pack of 100 sheets. This is a sale price, normally ฿299.00. It's in stock.\n\nMy pick is PL-PR-LTR-GL-170-40. For 20 packs (2,000 sheets):\n- Unit price x packs: ฿259.00 x 20\n- Subtotal: ฿5,180.00\n- Delivery: ฿0.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿362.60\n- Total: ฿5,542.60\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWhere should we deliver this? I'll check that it's within our delivery area.",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-GL-170-40"
@@ -428,8 +428,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 1,
-    "latency_s": 5.1,
-    "reply": "One option matches your request.\n\nPL-PR-LTR-GL-170-40: Letter-size Flyers (8.5 × 11 in) – Gloss, 259.00 per pack of 100 sheets\n- Why it matches: Letter size, one side, full colour, gloss, 170 gsm, in stock.\n\nQuote for 20 packs (2,000 sheets):\n- Unit price: 259.00 per pack. This is a sale price, down from the 299.00 list price.\n- Subtotal: 5,180.00\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 362.60\n- Total: 5,542.60\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.6,
+    "reply": "One option fits your spec exactly.\n\n- Gloss 170 gsm Letter Flyers, 8.5 × 11 in (PL-PR-LTR-GL-170-40): ฿259.00 per pack, sale price (normally ฿299.00). They're single-sided, full colour, and in stock. Each pack has 100 sheets.\n\nMy pick is the Gloss 170 gsm Letter Flyers (PL-PR-LTR-GL-170-40). For 20 packs:\n- Unit price x packs: ฿259.00 x 20 = ฿5,180.00\n- Subtotal: ฿5,180.00\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿362.60\n- Total: ฿5,542.60\n\nPrices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this order? Also tell me where it's going, so I can check delivery.",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-GL-170-40"
@@ -467,8 +467,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 2,
-    "latency_s": 4.6,
-    "reply": "One option matches your request.\n\nPL-PR-LTR-GL-170-40 – Letter-size Flyers (8.5 × 11 in), Gloss\n- Unit price: 259.00 per pack of 100 sheets. This is a sale price, down from the 299.00 list price.\n- Why it matches: Letter size, one side, full colour, gloss, 170 gsm, in stock.\n\nQuote for 20 packs (2,000 sheets):\n- Subtotal: 5,180.00\n- Delivery: 0.00 (free, since the subtotal is over 3,000.00)\n- VAT 7%: 362.60\n- Total: 5,542.60\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Prices exclude VAT, and the total includes it.",
+    "latency_s": 5.4,
+    "reply": "Good news: one option fits your spec exactly.\n\n- Letter-size Gloss Flyers, 170 gsm, one side, full colour (PL-PR-LTR-GL-170-40): ฿259.00 per pack, sale price (normally ฿299.00). A pack is 100 sheets, and it's in stock.\n\nMy pick is the Letter-size Gloss Flyers (PL-PR-LTR-GL-170-40). For 20 packs:\n- Unit price x packs: ฿259.00 x 20\n- Subtotal: ฿5,180.00\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿362.60\n- Total: ฿5,542.60\n\nPrices exclude VAT, and the total includes it. 20 packs is 2,000 flyers.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this? Also, where should we deliver?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-GL-170-40"
@@ -509,8 +509,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 0,
-    "latency_s": 4.7,
-    "reply": "There is 1 option that matches.\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte\n- Unit price: 192.70 per pack of 100 sheets (list price 205.00, volume tier price for 5+ packs)\n- Why it matches: A4, one side (4/0), full colour, matte, 100 gsm, in stock\n\nQuote for 15 packs (1,500 flyers):\n- Subtotal: 2,890.50\n- Delivery: 150.00\n- VAT 7%: 212.84\n- Total: 3,253.34\n\nSuggestion: you're 109.50 short of free delivery. Adding 1 more pack would make delivery free, and the total would be 3,299.02. Your quote stays at 15 packs unless you tell me otherwise.\n\nPrices are from the catalog snapshot of 2026-11-03.\n\nWhere should we deliver this?",
+    "latency_s": 5.7,
+    "reply": "Yes, one option fits your A4 matte 100 gsm, 4/0 full colour flyers.\n\n1. Digital A4 Matte Flyers, 100 gsm (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 15-pack price (normally ฿205.00). One pack is 100 sheets, printed on one side in full colour. It's in stock.\n\nMy pick is the Digital A4 Matte Flyers (PL-PR-A4-MT-100-40). For 15 packs:\n- Unit price x packs: ฿192.70 x 15\n- Subtotal: ฿2,890.50\n- Delivery: ฿150.00\n- VAT 7%: ฿212.84\n- Total: ฿3,253.34\n\nYour subtotal is ฿109.50 below the ฿3,000.00 free-delivery line. If you added 1 more pack (16 packs), delivery would be free and the total would be ฿3,299.02. That is ฿45.68 more than this quote. I've quoted the 15 packs you asked for.\n\nPrices exclude VAT, and the total includes 7% VAT. Prices are from our catalog of 3 Nov 2026.\n\nDo you want to go ahead with 15 packs, or switch to 16?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -549,8 +549,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 1,
-    "latency_s": 5.0,
-    "reply": "We have 1 option that matches.\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte\n- Unit price: 192.70 per pack of 100 sheets (list price 205.00)\n- It matches because it's A4, one side (4/0), full colour, matte, 100 gsm, and in stock.\n\nQuote for 15 packs (1,500 flyers):\n- Price rule: volume tier at 5+ packs\n- Subtotal: 2,890.50\n- Delivery: 150.00\n- VAT 7%: 212.84\n- Total: 3,253.34\n\nTip: this is 109.50 below the free-delivery threshold of 3,000.00. If you add 1 more pack, delivery becomes free and the total is 3,299.02. That is 45.68 more than this quote. Your quote stays at 15 packs unless you tell me to change it.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.7,
+    "reply": "Yes, one option fits your A4 matte 100 gsm, 4/0 full colour flyers.\n\n1. Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 15-pack price; normally ฿205.00. One side, full colour, in stock. A pack is 100 sheets.\n\nMy pick is the Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40). For 15 packs:\n- Unit price x packs: ฿192.70 x 15\n- Subtotal: ฿2,890.50\n- Delivery: ฿150.00\n- VAT 7%: ฿212.84\n- Total: ฿3,253.34\n\nYour subtotal is ฿109.50 under the ฿3,000.00 free-delivery line. If you added 1 more pack, delivery would be free and the total would be ฿3,299.02. That's only a suggestion, and the quote above is for 15 packs.\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 15 packs, or try 16?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -589,8 +589,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 2,
-    "latency_s": 4.8,
-    "reply": "There is 1 option that matches.\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte\n- Unit price: 192.70 per pack of 100 sheets (list price 205.00, volume tier 5 applied)\n- It matches on A4, one side (4/0), full colour, matte, 100 gsm, and it's in stock.\n\nQuote for 15 packs (1,500 sheets):\n- Subtotal: 2,890.50\n- Delivery: 150.00\n- VAT 7%: 212.84\n- Total: 3,253.34\n\nTip: the subtotal is 109.50 short of the 3,000.00 free-delivery threshold. If you add 1 more pack, delivery is free and the total comes to 3,299.02, which is 45.68 more than this quote. The quote above stays at 15 packs.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.5,
+    "reply": "Yes, one option fits your A4 matte 100 gsm, 4/0 full colour flyers.\n\n1. Digital Flyers A4 – Matte (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 15-pack price (normally ฿205.00). One side, full colour, in stock. Each pack has 100 sheets.\n\nMy pick is this one. For 15 packs:\n- Unit price x packs: ฿192.70 x 15\n- Subtotal: ฿2,890.50\n- Delivery: ฿150.00\n- VAT 7%: ฿212.84\n- Total: ฿3,253.34\n\nPrices exclude VAT, and the total includes it. Your subtotal is ฿109.50 below the ฿3,000.00 free-delivery threshold. If you added 1 more pack, delivery would be free and the total would be ฿3,299.02 (+฿45.68 compared with this quote). I've kept your quote at 15 packs.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 15 packs, or try 16?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -630,8 +630,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 0,
-    "latency_s": 4.7,
-    "reply": "There is 1 option that matches:\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte\n- A4, 100 gsm, matte, one side (4/0), full colour\n- Pack of 100 sheets, in stock\n- Unit price for 16 packs: 192.70 per pack (volume tier 5, list price 205.00)\n\nQuote for 16 packs (1,600 sheets):\n- Subtotal: 3,083.20\n- Delivery: 0.00 (free from a 3,000.00 subtotal)\n- VAT 7%: 215.82\n- Total: 3,299.02\n\nIf you order 20 packs (4 more), the unit price drops to 180.40. I've quoted the 16 packs you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.3,
+    "reply": "One option fits your A4 matte 100 gsm, 4/0 full colour flyers.\n\n1. Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 5-pack tier price (normally ฿205.00). One side, full colour, in stock. Each pack has 100 sheets.\n\nMy pick is the Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40). For 16 packs:\n- Unit price x packs: ฿192.70 x 16\n- Subtotal: ฿3,083.20\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿215.82\n- Total: ฿3,299.02\n\nIf you order 20 packs (4 more), the unit price drops to ฿180.40. I've quoted the 16 packs you asked for.\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 16 packs, or quote 20?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -669,8 +669,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 1,
-    "latency_s": 4.6,
-    "reply": "There is 1 option that matches exactly:\n\nPL-PR-A4-MT-100-40, Digital Flyers A4 – Matte, 192.70 per pack (pack of 100 sheets)\n- A4 printed flyer, one side (4/0), full colour, matte, 100 gsm, in stock\n\nQuote for 16 packs (1,600 sheets):\n- Unit price: 192.70 (volume tier 5; list price 205.00)\n- Subtotal: 3,083.20\n- Delivery: 0.00 (free from a 3,000.00 subtotal)\n- VAT 7%: 215.82\n- Total: 3,299.02\n\nTip: if you order 20 packs (4 more), the unit price drops to 180.40.\n\nPrices exclude VAT, and the total includes it. They come from the catalog snapshot of 2026-11-03.",
+    "latency_s": 5.0,
+    "reply": "Yes, one option fits your A4 matte 100 gsm, 4/0 full colour flyers.\n\n- Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 5+ pack price; normally ฿205.00. One side, full colour, pack of 100 sheets, in stock.\n\nMy pick is the Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40). For 16 packs:\n- Unit price x packs: ฿192.70 x 16\n- Subtotal: ฿3,083.20\n- Delivery: ฿0.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿215.82\n- Total: ฿3,299.02\n\nTip: at 20 packs (+4) the unit price drops to ฿180.40.\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nShould I keep it at 16 packs, or would you like to check 20?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -708,8 +708,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 2,
-    "latency_s": 4.7,
-    "reply": "We have 1 option that matches exactly:\n\nPL-PR-A4-MT-100-40, Digital Flyers A4 – Matte, unit price 192.70 per pack of 100 sheets\n- A4, one side (4/0), full colour, matte, 100 gsm, in stock\n\nBreakdown for 16 packs (1,600 sheets):\n- Unit price: 192.70 per pack (volume tier 5, list price 205.00)\n- Subtotal: 3,083.20\n- Delivery: 0.00 (free because the subtotal is over 3,000.00)\n- VAT 7%: 215.82\n- Total: 3,299.02\n\nTip: if you order 20 packs (4 more), the unit price drops to 180.40.\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Prices exclude VAT, and the total includes it.",
+    "latency_s": 5.0,
+    "reply": "Yes, one option fits your A4 matte 100 gsm flyers, one side, full colour.\n\n- Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40): ฿192.70 per pack of 100 sheets at the 16-pack price (normally ฿205.00). In stock.\n\nMy pick is the Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40). For 16 packs:\n- Unit price x packs: ฿192.70 x 16\n- Subtotal: ฿3,083.20\n- Delivery: ฿0.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿215.82\n- Total: ฿3,299.02\n\nIf you ordered 20 packs (4 more), the unit price would drop to ฿180.40. I've quoted the 16 packs you asked for.\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 16 packs?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -749,8 +749,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 0,
-    "latency_s": 7.4,
-    "reply": "9 products match A4 80gsm. Your Lotus Bright Premium is the first one. 10 reams = 10 packs (1 ream = 500 sheets).\n\n1. PL-CP-A4-80, Lotus Bright Premium A4 80gsm: 122.55 per ream (10-pack tier price, list 129.00). It's white, uncoated and in stock.\n2. PL-CP-A4-80-NUSA, Nusa Paper Copy A4 80gsm: 117.00 per ream. It's white, uncoated and in stock.\n3. PL-CP-A4-80-ECO, PaperLane Essentials Recycled A4 80gsm: 120.00 per ream. It's white, uncoated and in stock.\n\nQuote for PL-CP-A4-80 (10 reams):\nUnit price: 122.55 (volume tier for 10 packs)\nSubtotal: 1,225.50\nDelivery: 150.00\nVAT 7%: 96.29\nTotal: 1,471.79\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 1,774.50 short of that.\n\nThe other 6 matches are coloured papers. Do you want white paper, or would you like one of those colours?\n\nPrices are from the catalog snapshot crawled 2026-11-03.",
+    "latency_s": 7.8,
+    "reply": "Yes, we have Lotus Bright Premium A4 80gsm in stock. Nine A4 80gsm papers fit your request, and these are the top 3:\n\n- Lotus Bright Premium A4 80gsm (PL-CP-A4-80): ฿122.55 per ream, 10-ream price; normally ฿129.00. This is the exact product you asked for.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿117.00 per ream, 10-ream price; normally ฿121.50.\n- PaperLane Essentials Recycled A4 80gsm (PL-CP-A4-80-ECO): ฿120.00 per ream, 10-ream price; normally ฿125.00. This one is recycled paper.\n\nMy pick is the Lotus Bright Premium A4 80gsm (PL-CP-A4-80), since it's what you asked for. Each ream is 500 sheets. For 10 reams:\n- Unit price x packs: ฿122.55 x 10\n- Subtotal: ฿1,225.50\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿96.29\n- Total: ฿1,471.79\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with the Lotus, or switch to one of the cheaper options?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-80",
@@ -790,8 +790,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 6.1,
-    "reply": "9 products match A4 80gsm. Your exact product is first. 10 reams = 10 packs (1 ream = 500 sheets).\n\n1. PL-CP-A4-80 – Lotus Bright Premium A4 80gsm: 122.55 per ream (10-pack tier price, list 129.00). White, uncoated, in stock.\n2. PL-CP-A4-80-NUSA – Nusa Paper Copy A4 80gsm: 117.00 per ream. White, uncoated, in stock.\n3. PL-CP-A4-80-ECO – PaperLane Essentials Recycled A4 80gsm: 120.00 per ream. White, uncoated, in stock.\n\nQuote for PL-CP-A4-80 (10 reams):\nUnit price: 122.55 (tier:10 price)\nSubtotal: 1,225.50\nDelivery: 150.00\nVAT 7%: 96.29\nTotal: 1,471.79\n\nYour subtotal is 1,774.50 short of the 3,000.00 free-delivery threshold.\n\nThe other 6 matches are coloured A4 80gsm papers. Do you want white paper, or a coloured one?",
+    "latency_s": 6.6,
+    "reply": "Yes, we have it, and 9 A4 80 gsm papers fit your request. Lotus Bright Premium is the first one below.\n\n- Lotus Bright Premium A4 80gsm (PL-CP-A4-80): ฿122.55 per ream, 10-ream price; normally ฿129.00. This is the exact product you asked for.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿117.00 per ream, 10-ream price; normally ฿121.50. It's a cheaper alternative.\n- PaperLane Essentials Recycled A4 80gsm (PL-CP-A4-80-ECO): ฿120.00 per ream, 10-ream price; normally ฿125.00. It's recycled paper.\n\nMy pick is Lotus Bright Premium A4 80gsm (PL-CP-A4-80), since it's what you asked for. For 10 reams (500 sheets each):\n- Unit price x packs: ฿122.55 x 10\n- Subtotal: ฿1,225.50\n- Delivery: ฿150.00\n- VAT 7%: ฿96.29\n- Total: ฿1,471.79\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿1,774.50 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this, or look at one of the other options?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-80",
@@ -831,8 +831,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 5.8,
-    "reply": "9 products match A4 80gsm. Your exact product is first. 10 reams = 10 packs (1 ream = 1 pack of 500 sheets), so no rounding.\n\n1. PL-CP-A4-80 – Lotus Bright Premium A4 80gsm: 122.55 per ream (tier:10 price). It's white, uncoated and in stock.\n2. PL-CP-A4-80-NUSA – Nusa Paper Copy A4 80gsm: 117.00 per ream. It's white, uncoated and in stock.\n3. PL-CP-A4-80-ECO – PaperLane Essentials Recycled A4 80gsm: 120.00 per ream. It's white, uncoated and in stock.\n\nQuote for PL-CP-A4-80 (10 reams):\nUnit price: 122.55 (10-ream tier price, list price 129.00)\nSubtotal: 1,225.50\nDelivery: 150.00\nVAT 7%: 96.29\nTotal: 1,471.79\n\nDelivery is free from a 3,000.00 subtotal. This order is below that.\n\nPrices are from the catalog snapshot crawled 2026-11-03.\n\nThe other 6 matches are coloured A4 80gsm papers. Do you want white paper only, or would you like to see coloured options too?",
+    "latency_s": 6.6,
+    "reply": "Yes, we have Lotus Bright Premium A4 80gsm. 9 options fit A4 80gsm, and 1 of them is the exact one you asked for. 10 reams is 10 packs of 500 sheets each.\n\n1. Lotus Bright Premium A4 80gsm (PL-CP-A4-80): ฿122.55 per ream, 10-pack price; normally ฿129.00. This is the exact product you asked for.\n2. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿117.00 per ream, 10-pack price; normally ฿121.50. It's a cheaper alternative.\n3. PaperLane Essentials Recycled A4 80gsm (PL-CP-A4-80-ECO): ฿120.00 per ream, 10-pack price; normally ฿125.00. It's recycled paper.\n\nMy pick is the Lotus Bright Premium A4 80gsm (PL-CP-A4-80), since it's what you asked for. For 10 reams:\n- Unit price x packs: ฿122.55 x 10\n- Subtotal: ฿1,225.50\n- Delivery: ฿150.00\n- VAT 7%: ฿96.29\n- Total: ฿1,471.79\n\nDelivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿1,774.50 short of that. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to place this as 10 reams, or change the quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-80",
@@ -875,7 +875,7 @@
     "pass": true,
     "run": 0,
     "latency_s": 4.8,
-    "reply": "One option matches your request (20 lb is about 75 gsm, Letter, 5 reams):\n\nPL-CP-LTR-20 – Siam Office Letter 20 lb\n- Price: 135.00 per ream (500 sheets), list price\n- Why it matches: Letter size, 75 gsm, uncoated white, in stock\n- 5 reams = 5 packs (no rounding)\n\nBreakdown for PL-CP-LTR-20:\n- Subtotal: 675.00\n- Delivery: 150.00\n- VAT 7%: 57.75\n- Total: 882.75\n\nTip: delivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,325.00 below that.\n\nPrices exclude VAT and come from the catalog snapshot of 2026-11-03.",
+    "reply": "We have one option for 20 lb Letter paper in 5 reams.\n\n1. Siam Office Letter 20 lb, white uncoated (PL-CP-LTR-20): ฿135.00 per ream, regular price. 20 lb is about 75 gsm, and a ream is 500 sheets. It's in stock.\n\nMy pick is PL-CP-LTR-20. For 5 reams (5 packs):\n- Unit price x packs: ฿135.00 x 5\n- Subtotal: ฿675.00\n- Delivery: ฿150.00\n- VAT 7%: ฿57.75\n- Total: ฿882.75\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal, so you'd need ฿2,325.00 more to get free delivery.\n\nPrices from our catalog of 3 Nov 2026.\n\nShould I deliver this within Bangkok? If not, tell me where to.",
     "decision": "matches",
     "items": [
      "PL-CP-LTR-20"
@@ -911,8 +911,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 4.2,
-    "reply": "We have 1 option that matches:\n\nPL-CP-LTR-20 – Siam Office Letter 20 lb, unit price 135.00 per ream\n- Letter size, 75 gsm (20 lb converted), uncoated, white\n- 500 sheets per ream, in stock\n\nQuote for 5 reams (5 packs):\n- Unit price: 135.00 per ream (list price)\n- Subtotal: 675.00\n- Delivery: 150.00\n- VAT 7%: 57.75\n- Total: 882.75\n\nDelivery is free once the subtotal reaches 3,000.00. This order is 2,325.00 short of that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.3,
+    "reply": "We have 1 option for 20 lb (about 75 gsm) Letter paper:\n\n- Siam Office Letter 20 lb, white uncoated (PL-CP-LTR-20): ฿135.00 per ream, regular price. A ream is 500 sheets, and it's in stock.\n\nMy pick is PL-CP-LTR-20. For 5 reams (5 packs, 2,500 sheets):\n- Unit price x packs: ฿135.00 x 5\n- Subtotal: ฿675.00\n- Delivery: ฿150.00\n- VAT 7%: ฿57.75\n- Total: ฿882.75\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,325.00 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to quote a different quantity, or is 5 reams right?",
     "decision": "matches",
     "items": [
      "PL-CP-LTR-20"
@@ -948,8 +948,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 5.3,
-    "reply": "One option matches your request (20 lb is about 75 gsm, Letter, 5 reams):\n\nPL-CP-LTR-20, Siam Office Letter 20 lb, 135.00 per ream\n- Letter size, 75 gsm, uncoated, white\n- 1 ream is 500 sheets, and it's in stock\n\nBreakdown for 5 reams:\n- Unit price: 135.00 per ream (list price, no volume discount)\n- Subtotal: 675.00\n- Delivery: 150.00\n- VAT 7%: 57.75\n- Total: 882.75\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,325.00 below that. I've quoted the 5 reams you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.1,
+    "reply": "One option fits your 20 lb Letter paper, 5 reams.\n\n- Siam Office Letter 20 lb (PL-CP-LTR-20): ฿135.00 per ream, regular price. It's white, uncoated, 75 gsm, 500 sheets per ream, and in stock.\n\nMy pick is PL-CP-LTR-20. For 5 reams (5 packs):\n- Unit price x packs: ฿135.00 x 5\n- Subtotal: ฿675.00\n- Delivery: ฿150.00\n- VAT 7%: ฿57.75\n- Total: ฿882.75\n\nPrices exclude VAT, but the total includes it. Delivery is free from a ฿3,000.00 subtotal, and yours is ฿2,325.00 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nIs this for delivery in Bangkok?",
     "decision": "matches",
     "items": [
      "PL-CP-LTR-20"
@@ -987,8 +987,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 0,
-    "latency_s": 4.4,
-    "reply": "One option matches your request.\n\nPL-PR-LTR-MT-100-44 – Letter-size Flyers (8.5 × 11 in), Matte\n- 290.46 per pack of 100 sheets (10 packs)\n- It matches on all of these: Letter size, printed both sides, full colour, matte, 100 gsm, in stock.\n\nBreakdown:\n- Unit price: 290.46 per pack (volume tier 5, list price 309.00)\n- Subtotal: 2,904.60\n- Delivery: 150.00\n- VAT 7%: 213.82\n- Total: 3,268.42\n\nTip: your subtotal is 95.40 short of the 3,000.00 free-delivery threshold. I've quoted the 10 packs you asked for.\n\nPrices exclude VAT, and the total includes it. They come from the catalog snapshot of 2026-11-03.\n\nWhere should this be delivered?",
+    "latency_s": 5.5,
+    "reply": "One option fits your 8.5x11 matte 100 gsm, double-sided colour flyers.\n\n1. Letter-size Flyers (8.5 × 11 in) – Matte (PL-PR-LTR-MT-100-44): ฿290.46 per pack at the 10-pack price. Normally ฿309.00. Each pack has 100 sheets.\n\nMy pick is the Letter-size Flyers – Matte (PL-PR-LTR-MT-100-44). For 10 packs:\n- Unit price x packs: ฿290.46 x 10\n- Subtotal: ฿2,904.60\n- Delivery: ฿150.00\n- VAT 7%: ฿213.82\n- Total: ฿3,268.42\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿95.40 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nDo you want me to quote a different quantity, or is 10 packs right?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-44"
@@ -1026,8 +1026,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 1,
-    "latency_s": 4.9,
-    "reply": "One option matches your request.\n\nPL-PR-LTR-MT-100-44: Letter-size Flyers (8.5 × 11 in) – Matte\n- Unit price at 10 packs: 290.46 per pack of 100 sheets\n- Why it matches: Letter size, both sides, full colour, matte, 100 gsm, in stock\n\nBreakdown for PL-PR-LTR-MT-100-44:\n- Unit price: 290.46 (volume tier 5, list price 309.00)\n- 10 packs (1,000 sheets): subtotal 2,904.60\n- Delivery: 150.00\n- VAT 7%: 213.82\n- Total: 3,268.42\n\nYour subtotal is 95.40 short of the 3,000.00 free-delivery threshold. I've quoted exactly the 10 packs you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Do you want delivery in Bangkok or somewhere else?",
+    "latency_s": 6.2,
+    "reply": "There is 1 option that fits your 8.5x11 in, two-sided, full-colour, matte 100 gsm flyers.\n\n- Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-44): ฿290.46 per pack at the 10-pack price (normally ฿309.00). A pack is 100 sheets, printed both sides in full colour. It's in stock.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-44). For 10 packs:\n- Unit price x packs: ฿290.46 x 10\n- Subtotal: ฿2,904.60\n- Delivery: ฿150.00\n- VAT 7%: ฿213.82\n- Total: ฿3,268.42\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿95.40 short of that, so you'd pay ฿150.00 delivery on this order.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 10 packs, or look at a different quantity?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-44"
@@ -1065,8 +1065,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 2,
-    "latency_s": 4.2,
-    "reply": "One option matches your request.\n\nPL-PR-LTR-MT-100-44 – Letter-size Flyers (8.5 × 11 in) – Matte\n- Unit price: 290.46 per pack of 100 sheets (list price 309.00)\n- It matches on: Letter size, both sides, full colour, matte, 100 gsm. It's in stock.\n\nQuote for 10 packs (1,000 flyers):\n- Unit price: 290.46, volume tier 5 applied\n- Subtotal: 2,904.60\n- Delivery: 150.00\n- VAT 7%: 213.82\n- Total: 3,268.42\n\nYour subtotal is 95.40 under the 3,000.00 free-delivery threshold. I've quoted the 10 packs you asked for.\n\nPrices are from the catalog snapshot of 2026-11-03.",
+    "latency_s": 5.1,
+    "reply": "One option fits your 8.5x11 matte, double-sided, full-colour spec.\n\n1. Matte 100 gsm Letter Flyers, 8.5 × 11 in (PL-PR-LTR-MT-100-44): ฿290.46 per pack at the 10-pack price (normally ฿309.00). Each pack has 100 sheets. It's printed full colour on both sides and is in stock.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-44). For 10 packs:\n- Unit price x packs: ฿290.46 x 10\n- Subtotal: ฿2,904.60\n- Delivery: ฿150.00\n- VAT 7%: ฿213.82\n- Total: ฿3,268.42\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal, and your subtotal is ฿95.40 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to quote a different quantity?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-44"
@@ -1106,8 +1106,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 0,
-    "latency_s": 5.7,
-    "reply": "Nothing matches exactly. The A4 gloss 170gsm double-sided full-colour flyer is out of stock.\n\nCan't order now:\n- PL-PR-A4-GL-170-44, Digital Flyers A4 – Gloss. Expected back in stock 2026-11-12.\n\nIn-stock alternatives (10 packs, 100 sheets per pack, double-sided, full colour):\n1. PL-PR-A4-MT-170-44, Digital Flyers A4 – Matte: 343.10 per pack (tier:5 price, list 365.00). It differs only in finish, which is matte instead of gloss. Weight is still 170 gsm.\n2. PL-PR-A4-GL-130-44, Digital Flyers A4 – Gloss: 318.66 per pack (tier:5 price, list 339.00). It differs in weight, which is 130 gsm instead of 170.\n3. PL-PR-A4-GL-100-44, Digital Flyers A4 – Gloss: 281.06 per pack (tier:5 price, list 299.00). It differs in weight, which is 100 gsm instead of 170.\n\nI can give you a full quote with delivery and VAT for any of these. Would you prefer to keep the 170 gsm weight (matte) or keep the gloss finish (lighter paper)?",
+    "latency_s": 6.7,
+    "reply": "Sorry, we have no A4 gloss 170 gsm double-sided full-colour flyers that you can order right now.\n\nThe exact match is Digital Flyers A4 Gloss 170 gsm (PL-PR-A4-GL-170-44). It's temporarily out of stock and is expected back on 2026-11-12. We can't take orders for it until then.\n\nThese in-stock alternatives are also A4, double-sided and full colour. Prices are for 10 packs (100 sheets per pack):\n\n1. Matte 170 gsm A4 Flyers (PL-PR-A4-MT-170-44): ฿343.10 per pack, the 10-pack price (normally ฿365.00). The only difference is that it's matte instead of gloss.\n2. Gloss 130 gsm A4 Flyers (PL-PR-A4-GL-130-44): ฿318.66 per pack, the 10-pack price (normally ฿339.00). It's gloss but 40 gsm lighter.\n3. Gloss 100 gsm A4 Flyers (PL-PR-A4-GL-100-44): ฿281.06 per pack, the 10-pack price (normally ฿299.00). It's gloss but 70 gsm lighter.\n\nIf you need the 170 gsm weight, the matte one is the closest. If you need gloss, the 130 gsm is the closest.\n\nPrices exclude VAT. I can send a full quote with delivery and VAT for any of these.\n\nWhich would you like: matte 170 gsm, gloss 130 gsm, or wait for the gloss 170 gsm?",
     "decision": "no_exact_match",
     "items": [
      "PL-PR-A4-MT-170-44",
@@ -1147,8 +1147,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 1,
-    "latency_s": 5.8,
-    "reply": "Nothing matches exactly. The A4 gloss 170gsm double-sided full-colour flyer is out of stock.\n\nOut of stock, so it can't be ordered now:\n- PL-PR-A4-GL-170-44, Digital Flyers A4 – Gloss. Expected back in stock on 2026-11-12.\n\nIn-stock alternatives (10 packs, each pack is 100 sheets, all double-sided full colour):\n1. PL-PR-A4-MT-170-44, Digital Flyers A4 – Matte, 343.10 per pack (tier:5 price, list 365.00). It differs only in finish: matte instead of gloss, still 170 gsm.\n2. PL-PR-A4-GL-130-44, Digital Flyers A4 – Gloss, 318.66 per pack (tier:5 price, list 339.00). It differs in weight: 130 gsm instead of 170.\n3. PL-PR-A4-GL-100-44, Digital Flyers A4 – Gloss, 281.06 per pack (tier:5 price, list 299.00). It differs in weight: 100 gsm instead of 170.\n\nI haven't run a full quote for any of these. Alone, the first option comes to 3,431.00 before VAT and 3,671.17 with VAT. I can run a full quote with delivery if you want one.\n\nWould you like the matte at 170 gsm, or the gloss at a lighter weight?",
+    "latency_s": 6.2,
+    "reply": "Sorry, we have no A4 gloss 170 gsm double-sided full colour flyers that you can order right now.\n\nThe exact match is Digital Flyers A4 Gloss 170 gsm (PL-PR-A4-GL-170-44). It's temporarily out of stock and should be back on 2026-11-12. We can't take orders for it until then.\n\nThese in-stock options are close. All are A4, double-sided, full colour, 100 sheets per pack, at the 10-pack price:\n\n1. Matte 170 gsm A4 Flyers (PL-PR-A4-MT-170-44): ฿343.10 per pack, normally ฿365.00. The only difference is matte instead of gloss.\n2. Gloss 130 gsm A4 Flyers (PL-PR-A4-GL-130-44): ฿318.66 per pack, normally ฿339.00. It's 40 gsm lighter.\n3. Gloss 100 gsm A4 Flyers (PL-PR-A4-GL-100-44): ฿281.06 per pack, normally ฿299.00. It's 70 gsm lighter.\n\nIf you want the 170 gsm weight, option 1 is the closest. If you want gloss, option 2 is the closest.\n\nPrices exclude VAT. Delivery is free from a ฿3,000.00 subtotal, otherwise ฿150.00.\n\nWhich would you like? I can then give you a full quote for 10 packs. Or would you rather wait for the gloss 170 gsm to come back in stock?",
     "decision": "no_exact_match",
     "items": [
      "PL-PR-A4-MT-170-44",
@@ -1180,16 +1180,18 @@
      "decision": true,
      "criteria": true,
      "selection": true,
-     "reply": true,
+     "reply": false,
      "reply_check": true
     },
-    "notes": [],
+    "notes": [
+     "reply lacks any of ['12 November', '2026-11-12', 'Nov 12', 'November 12']"
+    ],
     "criteria_hits": 7,
     "criteria_total": 7,
-    "pass": true,
+    "pass": false,
     "run": 2,
-    "latency_s": 6.8,
-    "reply": "Nothing matches exactly. The A4 gloss 170 gsm double-sided full-colour flyer is out of stock.\n\nOut of stock, so it can't be ordered now:\n- PL-PR-A4-GL-170-44, Digital Flyers A4 – Gloss. Expected back in stock 2026-11-12.\n\nIn-stock alternatives for 10 packs (100 sheets per pack). All are A4, double-sided, full colour:\n\n1. PL-PR-A4-MT-170-44, Digital Flyers A4 – Matte: 343.10 per pack (tier:5 price, list 365.00). It's 170 gsm, but the finish is matte instead of gloss. Line total 3,431.00, which is 3,671.17 with VAT if ordered alone.\n2. PL-PR-A4-GL-130-44, Digital Flyers A4 – Gloss: 318.66 per pack (tier:5 price, list 339.00). It's gloss, but 130 gsm instead of 170 gsm. Line total 3,186.60.\n3. PL-PR-A4-GL-100-44, Digital Flyers A4 – Gloss: 281.06 per pack (tier:5 price, list 299.00). It's gloss, but 100 gsm instead of 170 gsm. Line total 2,810.60.\n\nFor option 1, PL-PR-A4-MT-170-44:\n- Unit price: 343.10 per pack (tier:5 volume price)\n- Subtotal: 3,431.00\n- Delivery: free, because the subtotal is over 3,000.00\n- Total including 7% VAT: 3,671.17\n\nWhich matters more to you, the gloss finish or the 170 gsm weight?",
+    "latency_s": 5.9,
+    "reply": "Sorry, we have no A4 gloss 170 gsm double-sided full-colour flyers that you can order right now.\n\nThe exact match is Digital Flyers A4 Gloss 170 gsm (PL-PR-A4-GL-170-44). It's temporarily out of stock and is expected back on 12 Nov 2026. We can't take orders for it until then.\n\nThese in-stock alternatives are also A4, double-sided and full colour. Prices are for 10 packs, and each pack has 100 sheets:\n\n1. Digital Flyers A4 Matte 170 gsm (PL-PR-A4-MT-170-44): ฿343.10 per pack at the 10-pack price (normally ฿365.00). It's the same weight, but matte instead of gloss.\n2. Digital Flyers A4 Gloss 130 gsm (PL-PR-A4-GL-130-44): ฿318.66 per pack at the 10-pack price (normally ฿339.00). It's gloss, but 40 gsm lighter.\n3. Digital Flyers A4 Gloss 100 gsm (PL-PR-A4-GL-100-44): ฿281.06 per pack at the 10-pack price (normally ฿299.00). It's gloss, but 70 gsm lighter.\n\nWhich matters more to you: the gloss finish or the 170 gsm weight? I can give you a full quote with delivery and VAT once you've picked one. If you'd rather wait for the gloss 170 gsm, it's back on 12 Nov.\n\nPrices exclude VAT.",
     "decision": "no_exact_match",
     "items": [
      "PL-PR-A4-MT-170-44",
@@ -1220,27 +1222,28 @@
   "E11-out-of-stock-paper": [
    {
     "checks": {
-     "decision": true,
+     "decision": false,
      "selection": true,
      "reply": true,
      "reply_check": true
     },
-    "notes": [],
-    "pass": true,
+    "notes": [
+     "decision matches (expected ['no_exact_match'])"
+    ],
+    "pass": false,
     "run": 0,
-    "latency_s": 10.2,
-    "reply": "Sorry, we can't supply Heritage Ivory A4 right now.\n\nPL-CL-A4-100-IVY, Heritage Ivory A4 100gsm, is temporarily out of stock. It's expected back on 2026-11-20 and can't be ordered until then.\n\nThese in-stock alternatives are the closest, priced for 2 packs:\n\n1. PL-CL-A4-90-CRM, Heritage Cream A4 90gsm: 152.00 per pack, line total 304.00, 485.78 if ordered alone (incl. VAT). It's a 250-sheet pack with a smooth finish. It differs because it's cream, not ivory, and 90gsm, not 100gsm.\n2. PL-CP-A4-70, Siam Office Copy Paper A4 70gsm: 109.00 per ream, line total 218.00, 393.76 if ordered alone (incl. VAT). It's a 500-sheet ream. It differs because it's white, not ivory.\n3. PL-CP-A4-75, Lotus Bright Everyday A4 75gsm: 118.00 per ream, line total 236.00, 413.02 if ordered alone (incl. VAT). It's a 500-sheet ream. It differs because it's white, not ivory.\n\nWould you like one of these, or would you rather wait for the ivory to come back?",
-    "decision": "no_exact_match",
+    "latency_s": 6.4,
+    "reply": "Heritage Ivory A4 100 gsm (PL-CL-A4-100-IVY) is out of stock right now, so I can't take an order for it. It's expected back on 20 Nov 2026.\n\nHere are some in-stock A4 options. None of them is ivory, so they differ in colour and weight:\n\n- Siam Office Copy Paper A4 70 gsm (PL-CP-A4-70): ฿109.00 per ream of 500 sheets, regular price. White, uncoated.\n- Lotus Bright Everyday A4 75 gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. White, uncoated.\n- Nusa Paper Copy A4 80 gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. White, uncoated.\n\nIf you want a cream shade, we also list a coloured A4 90 gsm cream paper (PL-CL-A4-90-CRM). I haven't priced it here, but I can quote it if you like.\n\nMy pick is the Siam Office Copy Paper (PL-CP-A4-70). For 2 packs:\n- Unit price x packs: ฿109.00 x 2\n- Subtotal: ฿218.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿25.76\n- Total: ฿393.76\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like to order one of these, wait for the Heritage Ivory, or have me quote the cream paper? If you stay with the white papers, which finish do you prefer: gloss, matte, smooth or uncoated?",
+    "decision": "matches",
     "items": [
-     "PL-CL-A4-90-CRM",
      "PL-CP-A4-70",
-     "PL-CP-A4-75"
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
     ],
     "criteria": {
      "item1": {
       "product_type": "paper",
       "size_code": "A4",
-      "paper_colour": "ivory",
       "quantity": {
        "value": 2,
        "unit": "packs"
@@ -1251,72 +1254,35 @@
       "size_raw": "A4"
      }
     },
-    "total": null,
-    "template_used": false,
-    "regenerated": true,
-    "error": null
-   },
-   {
-    "checks": {
-     "decision": true,
-     "selection": true,
-     "reply": true,
-     "reply_check": true
-    },
-    "notes": [],
-    "pass": true,
-    "run": 1,
-    "latency_s": 5.7,
-    "reply": "Sorry, we can't supply Heritage Ivory A4 right now.\n\nPL-CL-A4-100-IVY, Heritage Ivory A4 100gsm, is temporarily out of stock. It's expected back on 2026-11-20. You can't order it until then.\n\nThese in-stock alternatives are the closest. Prices are for 2 packs, before VAT:\n\n1. PL-CL-A4-90-CRM, Heritage Cream A4 90gsm: 152.00 per pack, 304.00 for 2.\n   - It's cream, not ivory.\n   - It's 90gsm, not 100gsm.\n   - The finish is smooth, and a pack is 250 sheets.\n   - Total with VAT if ordered alone: 485.78. That includes the 150.00 delivery fee.\n\n2. PL-CP-A4-70, Siam Office Copy Paper A4 70gsm: 109.00 per pack, 218.00 for 2.\n   - It's white, not ivory.\n   - It's 70gsm and uncoated, and a pack is a 500-sheet ream.\n   - Total with VAT if ordered alone: 393.76.\n\n3. PL-CP-A4-75, Lotus Bright Everyday A4 75gsm: 118.00 per pack, 236.00 for 2.\n   - It's white, not ivory.\n   - It's 75gsm and uncoated, and a pack is a 500-sheet ream.\n   - Total with VAT if ordered alone: 413.02.\n\nWould you like one of these, or should I wait for the ivory to come back in stock?",
-    "decision": "no_exact_match",
-    "items": [
-     "PL-CL-A4-90-CRM",
-     "PL-CP-A4-70",
-     "PL-CP-A4-75"
-    ],
-    "criteria": {
-     "item1": {
-      "product_type": "paper",
-      "size_code": "A4",
-      "paper_colour": "ivory",
-      "quantity": {
-       "value": 2,
-       "unit": "packs"
-      },
-      "keywords": [
-       "heritage ivory"
-      ],
-      "size_raw": "A4"
-     }
-    },
-    "total": null,
+    "total": "393.76",
     "template_used": false,
     "regenerated": false,
     "error": null
    },
    {
     "checks": {
-     "decision": true,
+     "decision": false,
      "selection": true,
      "reply": true,
      "reply_check": true
     },
-    "notes": [],
-    "pass": true,
-    "run": 2,
-    "latency_s": 11.6,
-    "reply": "Sorry, we can't supply Heritage Ivory A4 right now.\n\nPL-CL-A4-100-IVY (Heritage Ivory A4 100gsm) is temporarily out of stock. It's expected back on 2026-11-20, and it can't be ordered until then.\n\nThese in-stock alternatives are the closest. All are A4, and the colour is different:\n\n1. PL-CL-A4-90-CRM, Heritage Cream A4 90gsm, smooth finish, pack of 250 sheets: 152.00 per pack. 2 packs come to 304.00 before VAT, and 485.78 including VAT if ordered alone. It's cream, not ivory, and 90gsm instead of 100gsm.\n2. PL-CP-A4-70, Siam Office Copy Paper A4 70gsm, ream of 500 sheets: 109.00 per ream. 2 reams come to 218.00 before VAT, and 393.76 including VAT if ordered alone. It's white, not ivory.\n3. PL-CP-A4-75, Lotus Bright Everyday A4 75gsm, ream of 500 sheets: 118.00 per ream. 2 reams come to 236.00 before VAT, and 413.02 including VAT if ordered alone. It's white, not ivory.\n\nWould you like me to quote one of these?",
-    "decision": "no_exact_match",
+    "notes": [
+     "decision matches (expected ['no_exact_match'])"
+    ],
+    "pass": false,
+    "run": 1,
+    "latency_s": 6.4,
+    "reply": "Heritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock right now, so I can't take an order for it. It should be back on 20 Nov 2026.\n\nI don't have an in-stock paper with the same name. These are the closest A4 options that are in stock, and they differ from Heritage Ivory:\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. It's white, uncoated and lighter at 70 gsm.\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. It's white, uncoated, 75 gsm.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. It's white, uncoated, 80 gsm.\n\nIf you want a similar colour, there is also a cream A4 90gsm coloured paper (PL-CL-A4-90-CRM). Tell me if you'd like me to quote it.\n\nFor reference, here is the quote for 2 reams of the first option (PL-CP-A4-70):\n- Unit price x packs: ฿109.00 x 2\n- Subtotal: ฿218.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿25.76\n- Total: ฿393.76\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like one of these, or should I quote the cream paper? Do you want to wait for the Heritage Ivory restock?",
+    "decision": "matches",
     "items": [
-     "PL-CL-A4-90-CRM",
      "PL-CP-A4-70",
-     "PL-CP-A4-75"
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
     ],
     "criteria": {
      "item1": {
       "product_type": "paper",
       "size_code": "A4",
-      "paper_colour": "ivory",
       "quantity": {
        "value": 2,
        "unit": "packs"
@@ -1327,9 +1293,48 @@
       "size_raw": "A4"
      }
     },
-    "total": null,
+    "total": "393.76",
     "template_used": false,
-    "regenerated": true,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": false,
+     "selection": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [
+     "decision matches (expected ['no_exact_match'])"
+    ],
+    "pass": false,
+    "run": 2,
+    "latency_s": 6.5,
+    "reply": "Heritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock right now, so I can't take an order for it. It's expected back on 20 Nov 2026.\n\nThe matches below are in stock, but none of them is ivory. They are standard white copy paper, and I can't say how close they are to what you want.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream (500 sheets), regular price.\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price.\n\nIf you want a cream shade, our list also has a coloured A4 option called PL-CL-A4-90-CRM (90gsm). I haven't checked its price, so I can look it up if you'd like.\n\nMy pick is the Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). For 2 packs:\n- Unit price: ฿109.00 x 2 packs\n- Subtotal: ฿218.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿25.76\n- Total: ฿393.76\n\nPrices exclude VAT, and the total includes it. They come from our catalog of 3 Nov 2026.\n\nDo you want to wait for the Heritage Ivory, or should I quote the cream option? If you'd rather stay with white copy paper, which finish do you prefer: gloss, matte, smooth or uncoated?",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "quantity": {
+       "value": 2,
+       "unit": "packs"
+      },
+      "keywords": [
+       "heritage ivory"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "393.76",
+    "template_used": false,
+    "regenerated": false,
     "error": null
    }
   ],
@@ -1346,8 +1351,8 @@
     "criteria_total": 6,
     "pass": true,
     "run": 0,
-    "latency_s": 6.2,
-    "reply": "No A5 flyers match your 100 baht per pack limit. That limit is before VAT. For 20 packs, the cheapest A5 flyers are 13.52 baht over it.\n\nThe closest options are all A5, one side, full colour (CMYK) and in stock. Each pack has 100 sheets. The only differences are the price, the paper weight and the finish.\n\n1. PL-PR-A5-MT-100-40, Digital Flyers A5 Matte, 100 gsm: 113.52/pack (20-pack tier price, list 129.00). That's 13.52 over your max.\n2. PL-PR-A5-GL-100-40, Digital Flyers A5 Gloss, 100 gsm: 118.80/pack (list 135.00). That's 18.80 over.\n3. PL-PR-A5-MT-130-40, Digital Flyers A5 Matte, 130 gsm: 127.60/pack (list 145.00). That's 27.60 over.\n\nBreakdown for the first option, PL-PR-A5-MT-100-40, 20 packs:\n- Unit price: 113.52 (20-pack volume tier)\n- Subtotal: 2,270.40\n- Delivery: 150.00, because the subtotal is under 3,000.00\n- Total including 7% VAT: 2,589.83 (the tool's figure for this item ordered alone)\n\nDo you want to go ahead with one of these, or change the quantity or budget?",
+    "latency_s": 6.7,
+    "reply": "Sorry, no A5 one-sided colour flyers fit under ฿100.00 per pack at 20 packs. The cheapest option is ฿113.52 per pack. I read your ฿100.00 limit as a price per pack before VAT.\n\nThe closest in-stock options are below. Each pack has 100 sheets. All three are A5, one side, full colour.\n\n1. Matte 100 gsm A5 Flyers (PL-PR-A5-MT-100-40): ฿113.52 per pack at the 20-pack price (normally ฿129.00). That's ฿13.52 over your max.\n2. Gloss 100 gsm A5 Flyers (PL-PR-A5-GL-100-40): ฿118.80 per pack at the 20-pack price (normally ฿135.00). That's ฿18.80 over your max.\n3. Matte 130 gsm A5 Flyers (PL-PR-A5-MT-130-40): ฿127.60 per pack at the 20-pack price (normally ฿145.00). That's ฿27.60 over your max, but the paper is thicker.\n\nThe closest to your budget is the Matte 100 gsm (PL-PR-A5-MT-100-40). For 20 packs, an order of that alone comes to ฿2,270.40 before VAT, and ฿2,589.83 with 7% VAT. I haven't priced delivery for that order. Delivery is free from a ฿3,000.00 subtotal and ฿150.00 below that.\n\nPrices are from our catalog snapshot. Would you like me to quote one of these, or should I look at a different size or quantity?",
     "decision": "no_exact_match",
     "items": [
      "PL-PR-A5-MT-100-40",
@@ -1385,8 +1390,8 @@
     "criteria_total": 6,
     "pass": true,
     "run": 1,
-    "latency_s": 5.9,
-    "reply": "Nothing matches exactly. No A5 one-sided colour flyer in stock comes in at 100.00 per pack or less at 20 packs. The budget assumption is 100.00 per pack before VAT.\n\nThe closest options all cost more than your max:\n\nPL-PR-A5-MT-100-40, Digital Flyers A5 Matte, 100 gsm: 113.52 per pack (tier price for 20 packs). That's 13.52 over your max.\n\nPL-PR-A5-GL-100-40, Digital Flyers A5 Gloss, 100 gsm: 118.80 per pack. That's 18.80 over your max.\n\nPL-PR-A5-MT-130-40, Digital Flyers A5 Matte, 130 gsm: 127.60 per pack. That's 27.60 over your max.\n\nAll three are one-sided full colour (CMYK), in stock, and sold in packs of 100 sheets.\n\nFor the cheapest one, PL-PR-A5-MT-100-40 at 20 packs (2,000 sheets):\n- Subtotal: 2,270.40\n- Delivery: 150.00, because the subtotal is under 3,000.00\n- VAT 7% and total: 2,589.83 is the total including VAT if ordered alone. I don't have a separate VAT line from the tool.\n\nWould you like to go with one of these, or change the quantity or spec?",
+    "latency_s": 6.2,
+    "reply": "Nothing matches your ฿100 limit exactly. Every one-sided, full-colour A5 flyer costs more than ฿100.00 per pack at 20 packs. Your budget is read as excluding VAT.\n\nThe closest options are all in stock. Each pack has 100 printed sheets.\n\n- Digital Flyers A5 – Matte, 100 gsm (PL-PR-A5-MT-100-40): ฿113.52 per pack at the 20-pack price (normally ฿129.00). That's ฿13.52 over your max.\n- Digital Flyers A5 – Gloss, 100 gsm (PL-PR-A5-GL-100-40): ฿118.80 per pack at the 20-pack price (normally ฿135.00). That's ฿18.80 over your max. It's glossy instead of matte.\n- Digital Flyers A5 – Matte, 130 gsm (PL-PR-A5-MT-130-40): ฿127.60 per pack at the 20-pack price (normally ฿145.00). That's ฿27.60 over your max. The paper is thicker.\n\nThe cheapest is the Matte 100 gsm. For 20 packs it comes to ฿2,270.40 before VAT, and ฿2,589.83 with 7% VAT if you order it alone. Delivery on this subtotal would be ฿150.00 because it's under ฿3,000.00. I haven't added that to the total above.\n\nWould you like me to put together a full quote with delivery for one of these, or do you have some flexibility on the budget?",
     "decision": "no_exact_match",
     "items": [
      "PL-PR-A5-MT-100-40",
@@ -1424,8 +1429,8 @@
     "criteria_total": 6,
     "pass": true,
     "run": 2,
-    "latency_s": 5.9,
-    "reply": "Nothing matches exactly. No A5 one-sided colour flyer is available at 100.00 THB per pack or less for 20 packs. Prices exclude VAT, and I treated your 100 baht budget as excluding VAT.\n\nThe closest options are all in stock. Each pack has 100 sheets, and the 20-pack tier price applies:\n\n1. PL-PR-A5-MT-100-40, Digital Flyers A5 – Matte, 100 gsm: 113.52 per pack. That is 13.52 over your max.\n2. PL-PR-A5-GL-100-40, Digital Flyers A5 – Gloss, 100 gsm: 118.80 per pack. That is 18.80 over your max.\n3. PL-PR-A5-MT-130-40, Digital Flyers A5 – Matte, 130 gsm: 127.60 per pack. That is 27.60 over your max.\n\nAll three are A5, one side, full colour (CMYK). They differ only in price, finish and weight.\n\nThe cheapest option, PL-PR-A5-MT-100-40:\n- 20 packs at 113.52, subtotal 2,270.40\n- Delivery: 150.00, because the subtotal is under 3,000.00\n- Total including 7% VAT: 2,589.83 (the tool's total for this item ordered alone)\n\nWould you like me to quote one of these, or change the quantity?",
+    "latency_s": 6.0,
+    "reply": "Sorry, we have no A5 one-sided colour flyers at ฿100.00 or less per pack at 20 packs. The budget is read as excluding VAT. The closest options are all over that limit, and each pack is 100 sheets:\n\n- Digital Flyers A5 Matte, 100 gsm (PL-PR-A5-MT-100-40): ฿113.52 per pack at the 20-pack price (normally ฿129.00). That is ฿13.52 over your max. In stock.\n- Digital Flyers A5 Gloss, 100 gsm (PL-PR-A5-GL-100-40): ฿118.80 per pack at the 20-pack price (normally ฿135.00). That is ฿18.80 over. It is gloss instead of matte. In stock.\n- Digital Flyers A5 Matte, 130 gsm (PL-PR-A5-MT-130-40): ฿127.60 per pack at the 20-pack price (normally ฿145.00). That is ฿27.60 over. It is a heavier paper. In stock.\n\nThe cheapest is the Matte 100 gsm (PL-PR-A5-MT-100-40). For 20 packs, the line total is ฿2,270.40 before VAT and delivery. Ordered alone, the total with VAT is ฿2,589.83. The line total is under ฿3,000.00, so delivery would be charged at ฿150.00. I haven't run a full quote, so that ฿2,589.83 doesn't include delivery.\n\nWould you like a full quote for one of these, or would you rather change the budget?",
     "decision": "no_exact_match",
     "items": [
      "PL-PR-A5-MT-100-40",
@@ -1464,8 +1469,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 0,
-    "latency_s": 3.1,
-    "reply": "Printed on one side or both sides? (one side 4/0, or both sides 4/4)",
+    "latency_s": 3.3,
+    "reply": "Happy to help with A4 flyers. Do you want them printed on one side (4/0) or both sides (4/4)?",
     "decision": "needs_clarification",
     "items": [],
     "criteria": {
@@ -1495,8 +1500,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 1,
-    "latency_s": 3.0,
-    "reply": "Printed on one side or both sides? (one side 4/0, or both sides 4/4)",
+    "latency_s": 3.9,
+    "reply": "Happy to help with A4 flyers. Do you want them printed on one side (4/0) or both sides (4/4)?",
     "decision": "needs_clarification",
     "items": [],
     "criteria": {
@@ -1526,8 +1531,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 2,
-    "latency_s": 2.9,
-    "reply": "Should the A4 flyers be printed on one side (4/0) or both sides (4/4)?",
+    "latency_s": 4.5,
+    "reply": "Happy to help with A4 flyers. Do you want them printed on one side (4/0) or on both sides (4/4)?",
     "decision": "needs_clarification",
     "items": [],
     "criteria": {
@@ -1556,8 +1561,8 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 3.6,
-    "reply": "Do you mean coloured paper (which colour?), or white paper printed in full colour?\n\nColours we have:\n- Assorted brights (red, orange, yellow, green, blue)\n- Bright red\n- Cream\n- Ivory\n- Pastel pink\n- Pastel yellow\n- Pastel blue\n- Pastel green\n\nOr I can look at white paper printed in full colour (flyer printing).",
+    "latency_s": 3.9,
+    "reply": "Yes, we have A4 coloured paper. Do you mean coloured paper (which colour?), or white paper printed in full colour?\n\nThe colours we have are:\n- Assorted brights (red, orange, yellow, green, blue)\n- Bright red\n- Cream\n- Ivory\n- Pastel pink\n- Pastel yellow\n- Pastel blue\n- Pastel green\n\nOr I can look at white paper printed in full colour (flyer printing) if you want that instead.",
     "decision": "needs_clarification",
     "items": [],
     "criteria": {
@@ -1585,8 +1590,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 3.6,
-    "reply": "Do you mean coloured paper (which colour?), or white paper printed in full colour?\n\nColours we have:\n- Assorted brights (red, orange, yellow, green, blue)\n- Bright red\n- Cream\n- Ivory\n- Pastel pink\n- Pastel yellow\n- Pastel blue\n- Pastel green\n\nOr, if you want white paper printed in full colour, that's our flyer printing.",
+    "latency_s": 3.7,
+    "reply": "Yes, we have A4 coloured paper. Do you mean coloured paper (which colour?), or white paper printed in full colour?\n\nThe colours we have are:\n- Assorted brights (red, orange, yellow, green, blue)\n- Bright red\n- Cream\n- Ivory\n- Pastel pink\n- Pastel yellow\n- Pastel blue\n- Pastel green\n\nOr, if you want white paper printed in full colour, that's our flyer printing.",
     "decision": "needs_clarification",
     "items": [],
     "criteria": {
@@ -1614,8 +1619,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 3.5,
-    "reply": "Do you mean coloured paper (which colour?), or white paper printed in full colour?\n\nColours we have:\n- Assorted brights (red, orange, yellow, green, blue)\n- Bright red\n- Cream\n- Ivory\n- Pastel pink\n- Pastel yellow\n- Pastel blue\n- Pastel green\n\nOr I can look at white paper printed in full colour (flyer printing).",
+    "latency_s": 4.5,
+    "reply": "Yes, we have A4 coloured paper. Do you mean coloured paper (which colour?), or white paper printed in full colour?\n\nThe colours we have are:\n- Assorted brights (red, orange, yellow, green, blue)\n- Bright red\n- Cream\n- Ivory\n- Pastel pink\n- Pastel yellow\n- Pastel blue\n- Pastel green\n\nOr, if you want white paper printed in full colour, that's our flyer printing.",
     "decision": "needs_clarification",
     "items": [],
     "criteria": {
@@ -1649,8 +1654,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 0,
-    "latency_s": 8.6,
-    "reply": "Nothing matches your budget exactly. The Siam Office paper is only slightly over it.\n\nBudget: I treated 1,200.00 as including 7% VAT, as you said.\n\nClosest match:\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, in stock. It's the exact product you asked for. The only difference is that the total is 10.17 over your budget.\n- 9 reams (1 ream = 500 sheets) at 109.00 per ream, list price\n- Subtotal: 981.00\n- Delivery: 150.00 (the subtotal is under the 3,000.00 free-delivery level)\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nOrdering 10 reams would lower the unit price of PL-CP-A4-70 to 104.64. I've quoted 9 reams, as you asked.\n\nThe other options cost more and have a different weight:\n- PL-CP-A4-75, Lotus Bright Everyday A4 75gsm: 118.00 per ream, total 1,296.84 incl. VAT.\n- PL-CP-A4-80-NUSA, Nusa Paper Copy A4 80gsm: 121.50 per ream, total 1,330.55 incl. VAT.\n\nPrices are from the catalog snapshot of 2026-11-03.\n\nWould you like to go ahead with 9 reams of PL-CP-A4-70 at 1,210.17? Or should I check a smaller quantity that fits within 1,200?",
+    "latency_s": 8.4,
+    "reply": "Siam Office A4 70gsm is in stock, but 9 reams comes to just over your budget. Nothing matches it exactly. Your budget is read as including 7% VAT, as you said.\n\nSiam Office Copy Paper A4 70gsm (PL-CP-A4-70) is ฿109.00 per ream at regular price. For 9 reams:\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nThat is ฿10.17 over your ฿1,200.00 budget. The paper itself (฿981.00 plus VAT) is within budget. The ฿150.00 delivery fee is what pushes the total over.\n\nOrdering 10 reams would lower the unit price to ฿104.64. I haven't quoted that, and I can if you'd like.\n\nThe other options cost more and have a different weight, so they are further over budget:\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream. It is 75 gsm instead of 70 gsm, and the total is ฿1,296.84.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream. It is 80 gsm instead of 70 gsm, and the total is ฿1,330.55.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like the 9 reams as quoted, or a quote for 10 reams?",
     "decision": "no_exact_match",
     "items": [
      "PL-CP-A4-70"
@@ -1690,8 +1695,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 1,
-    "latency_s": 8.1,
-    "reply": "Nothing matches your budget exactly. The Siam Office paper is just over it.\n\nBudget assumption: I treated your 1,200 baht as including 7% VAT, as you said.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm\n- It matches your brand, size and weight, and it's in stock.\n- Unit price: 109.00 per ream (500 sheets), list price.\n- 9 reams subtotal: 981.00\n- Delivery: 150.00 (free from a 3,000.00 subtotal)\n- VAT 7%: 79.17\n- Total: 1,210.17\n- That is 10.17 over your budget.\n\nTwo ways to change the order:\n- Ordering 10 reams (one more) drops the unit price to 104.64. I haven't quoted that total. I can quote it if you want.\n- The other in-stock A4 options cost more and are further over budget:\n  - PL-CP-A4-75, Lotus Bright 75gsm: 118.00 per ream, 1,296.84 total.\n  - PL-CP-A4-80-NUSA, Nusa Paper 80gsm: 121.50 per ream, 1,330.55 total.\n\nPrices are from the catalog snapshot dated 2026-11-03.",
+    "latency_s": 7.5,
+    "reply": "Siam Office A4 70gsm is in stock, but it doesn't fit your budget. 9 reams come to ฿1,210.17 including VAT, which is ฿10.17 over your ฿1,200.00. I read your budget as including 7% VAT, as you said.\n\nSiam Office Copy Paper A4 70gsm (PL-CP-A4-70) at ฿109.00 per ream, regular price. One ream is 500 sheets.\n\nFor 9 reams:\n- Unit price: ฿109.00 x 9 reams\n- Subtotal: ฿981.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nTwo ways to get under budget:\n- Order 8 reams instead of 9. I can quote that for you.\n- Order 10 reams. The unit price drops to ฿104.64 per ream, but the total would be higher, so it wouldn't fit your budget.\n\nThe other A4 options cost more (75gsm and 80gsm), so they would be further over budget.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to quote 8 reams?",
     "decision": "no_exact_match",
     "items": [
      "PL-CP-A4-70"
@@ -1731,8 +1736,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 2,
-    "latency_s": 8.2,
-    "reply": "Sorry, nothing fits your budget exactly. The Siam Office A4 70gsm is the right product, but 9 reams comes to 10.17 baht over 1,200.00. I treated the budget as including VAT, as you said.\n\nClosest option:\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream (list price, 500 sheets each). It's in stock.\n\nBreakdown for 9 reams:\n- Subtotal: 981.00\n- Delivery: 150.00 (free from a 3,000.00 subtotal)\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nOther options, both further over budget and different from what you asked:\n- PL-CP-A4-75 – Lotus Bright Everyday A4 75gsm, 118.00 per ream. It's 5 gsm heavier, and 9 reams comes to 1,296.84 with VAT.\n- PL-CP-A4-80-NUSA – Nusa Paper Copy A4 80gsm, 121.50 per ream. It's 10 gsm heavier, and 9 reams comes to 1,330.55 with VAT.\n\nOrdering 10 reams of PL-CP-A4-70 would bring the unit price down to 104.64. I haven't quoted that, so ask me if you'd like the total.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 10.0,
+    "reply": "Nothing fits your budget exactly. Siam Office A4 70gsm is in stock, but 9 reams comes to ฿10.17 over ฿1,200.00. I read your budget as including 7% VAT, as you said.\n\nHere is the Siam Office paper at 9 reams:\n\nSiam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price.\n- Unit price x packs: ฿109.00 x 9 reams (500 sheets each)\n- Subtotal: ฿981.00\n- Delivery: ฿150.00\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nThe ฿150.00 delivery fee is what pushes it over budget. Delivery is free from a ฿3,000.00 subtotal.\n\nThe other A4 options are dearer and further over budget:\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. It is 75 gsm instead of 70 gsm, and 9 reams totals ฿1,296.84.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. It is 80 gsm instead of 70 gsm, and 9 reams totals ฿1,330.55.\n\nOrdering 10 reams of the Siam Office paper would drop the unit price to ฿104.64. I haven't quoted that quantity, and I've kept your order at 9 reams.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 9 reams at ฿1,210.17, or should I quote a different quantity?",
     "decision": "no_exact_match",
     "items": [
      "PL-CP-A4-70"
@@ -1776,8 +1781,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 0,
-    "latency_s": 5.3,
-    "reply": "One option matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream (500 sheets)\n- A4, 70 gsm, uncoated, white, in stock\n- 9 reams = 9 packs, so there's no rounding.\n\nBreakdown:\n- Unit price: 109.00 (list price)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nBudget: I assumed your 1,200 baht excludes VAT. Subtotal plus delivery is 1,131.00, which is within budget. The total with VAT is 1,210.17, which is slightly over 1,200.\n\nTip: 10 packs would drop the unit price to 104.64. Delivery is free from a 3,000.00 subtotal.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 6.0,
+    "reply": "Yes, one option fits your 9 reams of Siam Office A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream (500 sheets), regular price. It's white, uncoated and in stock.\n\nMy pick is Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). For 9 reams:\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nI took your 1,200 baht budget as excluding VAT. The subtotal plus delivery is ฿1,131.00, so it fits. The total with VAT is ฿1,210.17.\n\nDelivery is free from a ฿3,000.00 subtotal. Otherwise it costs ฿150.00.\n\nIf you order 10 reams, the unit price drops to ฿104.64. I've quoted the 9 you asked for.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to quote 10 reams as well?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -1818,8 +1823,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 5.1,
-    "reply": "There is 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm\n- 109.00 THB per ream (500 sheets) at 9 reams\n- It's A4, 70 gsm, white, uncoated and in stock.\n\nQuote for 9 reams (9 packs):\n- Unit price: 109.00 (list price)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total incl. VAT: 1,210.17\n\nBudget: I assumed your 1,200 baht excludes VAT. The subtotal plus delivery is 1,131.00, which is within budget. The total with VAT is 1,210.17, which is a little over 1,200 if you meant it to include VAT.\n\nTip: 10 reams would bring the unit price down to 104.64. Delivery is free from a 3,000.00 subtotal.\n\nPrices are from the catalog snapshot of 2026-11-03.",
+    "latency_s": 5.9,
+    "reply": "Yes, one option fits: Siam Office A4 70gsm is in stock.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream (500 sheets), regular price\n\nMy pick is Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). For 9 reams:\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nI read your budget of ฿1,200 as excluding VAT, so I compared it with the subtotal plus delivery. That comes to ฿1,131.00, which is within budget. The ฿1,210.17 total is higher only because it includes VAT.\n\nIf you order 10 reams, the unit price drops to ฿104.64. I've quoted the 9 reams you asked for.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 9 reams?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -1860,8 +1865,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 5.2,
-    "reply": "There is 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm\n- 109.00 THB per ream (500 sheets). It's in stock.\n- 9 reams = 9 packs, so no rounding was needed.\n\nBreakdown:\n- Unit price: 109.00 (list price)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nBudget: I assumed your 1,200 baht excludes VAT. Subtotal plus delivery is 1,131.00, which is within budget. The total with VAT is 1,210.17, which is slightly over 1,200 if your budget was meant to include VAT.\n\nTip: 10 reams would bring the unit price down to 104.64. I've quoted the 9 reams you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 6.3,
+    "reply": "Yes, one option fits your 9 reams of Siam Office A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream (500 sheets), regular price. It's in stock.\n\nMy pick is the Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). For 9 reams:\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nI read your ฿1,200 budget as excluding VAT, which is how we treat budgets unless you say otherwise. Subtotal plus delivery is ฿1,131.00, so it's within budget. The ฿1,210.17 total is higher only because VAT is added on top.\n\nIf you order 10 reams, the unit price drops to ฿104.64. I've quoted the 9 you asked for.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 9 reams? Where should we deliver?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -1899,8 +1904,8 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 8.9,
-    "reply": "Here is one combined quote. Both items are in stock.\n\n**1. Flyers**\nPL-PR-A5-MT-100-40 – Digital Flyers A5 – Matte, 113.52 per pack\n- It matches on A5, one side, full colour, matte and 100 gsm.\n- 20 packs of 100 sheets each. The price is the 20-pack tier price, down from the 129.00 list price.\n- Line total: 2,270.40\n\n**2. Copy paper**\nPL-CP-A4-80 – Lotus Bright Premium A4 80gsm, 122.55 per ream\n- 10 reams of 500 sheets each. The price is the 10-ream tier price, down from the 129.00 list price.\n- Line total: 1,225.50\n- Two other A4 80gsm copy papers are also available. I haven't quoted them because you asked for Lotus Bright Premium.\n\n**Combined quote**\n- Subtotal: 3,495.90\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 244.71\n- **Total incl. VAT: 3,740.61**\n\nPrices exclude VAT unless stated and come from the catalog snapshot of 2026-11-03.\n\nWhere should we deliver? We deliver in Bangkok and vicinity.",
+    "latency_s": 7.6,
+    "reply": "Each item has one exact match, so here is one combined quote.\n\nFlyers: Matte 100 gsm A5 Flyers, single-sided, full colour (PL-PR-A5-MT-100-40)\n- ฿113.52 per pack of 100 sheets. This is the 20-pack price; normally ฿129.00.\n- 20 packs: ฿2,270.40\n\nCopy paper: Lotus Bright Premium A4 80gsm (PL-CP-A4-80)\n- ฿122.55 per ream of 500 sheets. This is the 10-ream price; normally ฿129.00.\n- 10 reams: ฿1,225.50\n\nCombined quote:\n- Subtotal: ฿3,495.90\n- Delivery: ฿0.00 (free because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿244.71\n- Total: ฿3,740.61\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this order? If so, please send me your delivery location.",
     "decision": "matches",
     "items": [
      "PL-PR-A5-MT-100-40",
@@ -1949,8 +1954,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 6.9,
-    "reply": "Here's one combined quote. Both items are in stock.\n\n**1. Flyers**\nPL-PR-A5-MT-100-40, Digital Flyers A5 – Matte: 113.52 per pack of 100 sheets (volume tier for 20 packs, list price 129.00)\n- Matches: A5, one side, full colour, matte, 100 gsm\n- 20 packs: 2,270.40\n\n**2. Copy paper**\nPL-CP-A4-80, Lotus Bright Premium A4 80gsm: 122.55 per ream of 500 sheets (volume tier for 10 reams, list price 129.00)\n- Matches: A4, 80 gsm, the brand you asked for\n- 10 reams: 1,225.50\n\n**Totals**\n- Subtotal: 3,495.90\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 244.71\n- **Total incl. VAT: 3,740.61**\n\nPrices exclude VAT. The totals include it. They come from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 7.3,
+    "reply": "Here's one quote for both items. Each one has exactly one match for what you described.\n\n1. Digital Flyers A5 Matte, 100 gsm, single-sided, full colour (PL-PR-A5-MT-100-40): ฿113.52 per pack of 100 sheets. This is the 20-pack price; normally ฿129.00.\n2. Lotus Bright Premium A4 80gsm copy paper (PL-CP-A4-80): ฿122.55 per ream of 500 sheets. This is the 10-ream price; normally ฿129.00.\n\nQuote:\n- PL-PR-A5-MT-100-40: ฿113.52 x 20 packs = ฿2,270.40\n- PL-CP-A4-80: ฿122.55 x 10 reams = ฿1,225.50\n- Subtotal: ฿3,495.90\n- Delivery: ฿0.00 (free, because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿244.71\n- Total: ฿3,740.61\n\nPrices exclude VAT, and the total includes it. They come from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this order?",
     "decision": "matches",
     "items": [
      "PL-PR-A5-MT-100-40",
@@ -1999,8 +2004,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 8.2,
-    "reply": "Here's one combined quote. Both items are in stock.\n\n**1. Flyers**\nPL-PR-A5-MT-100-40, Digital Flyers A5 – Matte: 113.52 per pack of 100 sheets (volume tier for 20 packs, list price 129.00)\n- Matches: A5, one side, full colour, matte, 100 gsm\n- 20 packs: 2,270.40\n\n**2. Copy paper**\nPL-CP-A4-80, Lotus Bright Premium A4 80gsm: 122.55 per ream of 500 sheets (volume tier for 10 reams, list price 129.00)\n- Matches: A4, 80 gsm, the brand you asked for\n- 10 reams: 1,225.50\n\n**Totals**\n- Subtotal: 3,495.90\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 244.71\n- **Total incl. VAT: 3,740.61**\n\nPrices exclude VAT unless stated. They come from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 7.5,
+    "reply": "Each item has one exact match, so here is one combined quote.\n\n1. Matte 100 gsm A5 Flyers, one side, full colour (PL-PR-A5-MT-100-40): ฿113.52 per pack of 100 sheets. This is the 20-pack price; normally ฿129.00.\n2. Lotus Bright Premium A4 80gsm Copy Paper (PL-CP-A4-80): ฿122.55 per ream of 500 sheets. This is the 10-ream price; normally ฿129.00.\n\nQuote:\n- PL-PR-A5-MT-100-40: ฿113.52 x 20 packs = ฿2,270.40\n- PL-CP-A4-80: ฿122.55 x 10 reams = ฿1,225.50\n- Subtotal: ฿3,495.90\n- Delivery: ฿0.00 (free because the subtotal is over ฿3,000.00)\n- VAT 7%: ฿244.71\n- Total: ฿3,740.61\n\nBoth items are in stock. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nShould I change anything, or is there a delivery location I should note?",
     "decision": "matches",
     "items": [
      "PL-PR-A5-MT-100-40",
@@ -2051,17 +2056,13 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 3.6,
-    "reply": "Sorry, we don't sell business cards, so I can't quote them.\n\nWe do sell blank paper (A3, A4, A5, Legal and Letter) and printed flyers (A4, A5 and Letter). If you need either of those, tell me the size and quantity and I'll quote it.",
+    "latency_s": 4.8,
+    "reply": "Sorry, we don't sell business cards, so I can't quote them.\n\nWe do sell blank paper in A3, A4, A5, Legal and Letter. We also print flyers in A4, A5 and Letter. If either of those would help, tell me the size, quantity and finish you want and I'll quote it.",
     "decision": "not_sold",
     "items": [],
     "criteria": {
      "item1": {
-      "product_type": "other",
-      "quantity": {
-       "value": 500,
-       "unit": "sheets"
-      }
+      "product_type": "other"
      }
     },
     "total": null,
@@ -2078,8 +2079,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 3.3,
-    "reply": "Sorry, PaperLane doesn't sell business cards, so I can't quote them.\n\nWe sell blank paper in A3, A4, A5, Legal and Letter. We also print flyers in A4, A5 and Letter. If either of those would help, tell me the size, quantity and finish, and I'll quote it.",
+    "latency_s": 4.6,
+    "reply": "Sorry, we don't sell business cards, so I can't quote them.\n\nWe do sell blank paper in A3, A4, A5, Legal and Letter. We also print flyers in A4, A5 and Letter. If either of those would help, tell me the size and quantity and I'll quote it.",
     "decision": "not_sold",
     "items": [],
     "criteria": {
@@ -2105,8 +2106,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 4.3,
-    "reply": "Sorry, PaperLane doesn't sell business cards, so I can't quote them.\n\nWe sell blank paper (A3, A4, A5, Legal, Letter) and printed flyers (A4, A5, Letter). If you'd like either of those, tell me the size and quantity and I'll quote it.",
+    "latency_s": 4.2,
+    "reply": "Sorry, we don't sell business cards, so I can't quote them.\n\nWe do sell blank paper (A3, A4, A5, Legal and Letter) and printed flyers (A4, A5 and Letter). If you need either of those, tell me the size and quantity and I'll quote it.",
     "decision": "not_sold",
     "items": [],
     "criteria": {
@@ -2138,8 +2139,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 0,
-    "latency_s": 9.2,
-    "reply": "1 option matches.\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte, unit price 192.70 per pack of 100 sheets (5 packs)\nWhy it matches: A4, one side, full colour, matte, 100 gsm, in stock.\n\nBreakdown:\n- Unit price: 192.70 per pack (5-pack volume tier). The list price is 205.00.\n- Subtotal: 963.50\n- Delivery: 150.00\n- VAT 7%: 77.95\n- Total: 1,191.45\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,036.50 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 8.6,
+    "reply": "Yes, one option fits your A4 one-side, full-colour, matte 100 gsm flyers.\n\n1. Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 5-pack price, normally ฿205.00. Each pack has 100 sheets, and it's in stock.\n\nMy pick is the Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40). For 5 packs:\n- Unit price x packs: ฿192.70 x 5\n- Subtotal: ฿963.50\n- Delivery: ฿150.00\n- VAT 7%: ฿77.95\n- Total: ฿1,191.45\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is below that, so delivery is ฿150.00.\n\nPrices from our catalog of 3 Nov 2026.\n\nDo you want to go ahead with 5 packs? Tell me if you'd like a different quantity.",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -2177,8 +2178,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 1,
-    "latency_s": 7.7,
-    "reply": "There is 1 option that matches.\n\nPL-PR-A4-MT-100-40, Digital Flyers A4 – Matte: 192.70 per pack of 100 sheets\nIt matches because it is A4, one side, full colour, matte, 100 gsm, and in stock.\n\nBreakdown for 5 packs (500 flyers):\n- Unit price: 192.70 per pack. This is the 5-pack volume tier, down from the 205.00 list price.\n- Subtotal: 963.50\n- Delivery: 150.00\n- VAT 7%: 77.95\n- Total: 1,191.45\n\nDelivery is free once the subtotal reaches 3,000.00. This order's subtotal is 2,036.50 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 8.0,
+    "reply": "Yes, one option fits your A4, one-side, full-colour, matte, 100 gsm flyers.\n\n- Digital Flyers A4 – Matte (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 5-pack price (normally ฿205.00). Each pack has 100 sheets, and it's in stock.\n\nMy pick is the Digital Flyers A4 – Matte (PL-PR-A4-MT-100-40). For 5 packs:\n- Unit price x packs: ฿192.70 x 5\n- Subtotal: ฿963.50\n- Delivery: ฿150.00\n- VAT 7%: ฿77.95\n- Total: ฿1,191.45\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿2,036.50 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 5 packs, or should I check a different quantity?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -2216,8 +2217,8 @@
     "criteria_total": 7,
     "pass": true,
     "run": 2,
-    "latency_s": 7.6,
-    "reply": "One option matches.\n\nPL-PR-A4-MT-100-40, Digital Flyers A4 – Matte: 192.70 per pack of 100 sheets\n- It matches your request: A4, one side, full colour, matte, 100 gsm, in stock.\n\nBreakdown for 5 packs (500 sheets):\n- Unit price: 192.70 per pack. This is the 5-pack volume tier, down from the list price of 205.00.\n- Subtotal: 963.50\n- Delivery: 150.00\n- VAT 7%: 77.95\n- Total: 1,191.45\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,036.50 below that.\n\nPrices exclude VAT and come from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 8.2,
+    "reply": "Yes, we have one option that fits your A4, one-side, full-colour, matte, 100 gsm flyers.\n\n1. Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40): ฿192.70 per pack at the 5-pack price. Normally ฿205.00. A pack is 100 sheets, and it's in stock.\n\nMy pick is the Matte 100 gsm A4 Flyers (PL-PR-A4-MT-100-40). For 5 packs:\n- Unit price x packs: ฿192.70 x 5\n- Subtotal: ฿963.50\n- Delivery: ฿150.00\n- VAT 7%: ฿77.95\n- Total: ฿1,191.45\n\nPrices exclude VAT, but the total includes it. Delivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,036.50 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like to go ahead with 5 packs, or do you want a quote for a different quantity?",
     "decision": "matches",
     "items": [
      "PL-PR-A4-MT-100-40"
@@ -2257,8 +2258,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 0,
-    "latency_s": 4.2,
-    "reply": "We have 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream\nWhy it matches: A4, 70 gsm, white uncoated, in stock.\n\nQuantity: 2,000 sheets = 4 reams of 500 sheets. No rounding was needed.\n\nBreakdown:\n- Unit price: 109.00 per ream (list price)\n- Subtotal: 436.00\n- Delivery: 150.00\n- VAT 7%: 41.02\n- Total: 627.02\n\nDelivery is free once the subtotal reaches 3,000.00. This order is 2,564.00 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.5,
+    "reply": "We have one option for 2,000 sheets of A4 70 gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. It's white, uncoated and in stock.\n\nMy pick is the Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). 2,000 sheets is exactly 4 reams of 500 sheets, so nothing was rounded up. For 4 reams:\n- Unit price x packs: ฿109.00 x 4\n- Subtotal: ฿436.00\n- Delivery: ฿150.00\n- VAT 7%: ฿41.02\n- Total: ฿627.02\n\nDelivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,564.00 short of that. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this, or change the quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2294,8 +2295,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 4.7,
-    "reply": "We have 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream (500 sheets)\nWhy it matches: A4, 70 gsm, white, uncoated, in stock.\n\nYour 2,000 sheets come to exactly 4 reams of 500 sheets, so nothing was rounded up.\n\nBreakdown:\n- Unit price: 109.00 per ream (list price, no volume discount)\n- Subtotal: 436.00\n- Delivery: 150.00\n- VAT 7%: 41.02\n- Total: 627.02\n\nDelivery is free once the subtotal reaches 3,000.00. This order's subtotal is 2,564.00 below that threshold.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.8,
+    "reply": "We have 1 option that fits your 2,000 sheets of A4 70 gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream at regular price. It's white, uncoated and in stock.\n\nMy pick is PL-CP-A4-70. 2,000 sheets is 4 reams, because each ream has 500 sheets. No rounding was needed. For 4 reams:\n- Unit price x packs: ฿109.00 x 4\n- Subtotal: ฿436.00\n- Delivery: ฿150.00\n- VAT 7%: ฿41.02\n- Total: ฿627.02\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿2,564.00 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to confirm this order, or should I check a different quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2331,8 +2332,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 4.6,
-    "reply": "We have 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream\nWhy it matches: A4, 70 gsm, white uncoated copy paper, in stock.\n\nQuantity: 2,000 sheets = 4 reams of 500 sheets. That's an exact fit, so nothing was rounded up.\n\nBreakdown:\n- Unit price: 109.00 per ream (list price, no volume discount)\n- Subtotal: 436.00\n- Delivery: 150.00\n- VAT 7%: 41.02\n- Total: 627.02\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,564.00 short of that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.9,
+    "reply": "Good news: we have one A4 70 gsm copy paper that fits your request.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. It's white, uncoated and in stock. A ream is 500 sheets.\n\nMy pick is PL-CP-A4-70. Your 2,000 sheets come to exactly 4 reams of 500 sheets, so nothing is rounded up. For 4 packs:\n- Unit price x packs: ฿109.00 x 4\n- Subtotal: ฿436.00\n- Delivery: ฿150.00\n- VAT 7%: ฿41.02\n- Total: ฿627.02\n\nDelivery is free once the subtotal reaches ฿3,000.00. Your subtotal is below that, so delivery is ฿150.00. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this order, and should I check delivery to your location?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2368,8 +2369,8 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 4.5,
-    "reply": "Yes, it's in stock today. One option matches.\n\nPL-PH-A4-230-MT, PhotoPro Matte A4 230gsm, 229.00 per pack of 50 sheets. It matches on A4, matte, 230 gsm, and it's in stock.\n\nBreakdown for 2 packs:\n- Unit price: 229.00 (list price, no volume discount)\n- Subtotal: 458.00\n- Delivery: 150.00\n- VAT 7%: 42.56\n- Total: 650.56\n\nDelivery is free from a 3,000.00 subtotal. Your subtotal is 2,542.00 short of that.\n\nPrices are from the catalog snapshot crawled 2026-11-03.",
+    "latency_s": 5.5,
+    "reply": "Yes, it's in stock today. We have one option that fits: the PhotoPro Matte A4 230gsm.\n\n1. PhotoPro Matte A4 230gsm, 50 sheets per pack (PL-PH-A4-230-MT): ฿229.00 per pack, regular price.\n\nMy pick is the PhotoPro Matte A4 230gsm (PL-PH-A4-230-MT). For 2 packs:\n- Unit price x packs: ฿229.00 x 2\n- Subtotal: ฿458.00\n- Delivery: ฿150.00\n- VAT 7%: ฿42.56\n- Total: ฿650.56\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Below that it's ฿150.00.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to change the quantity, or do you need delivery somewhere specific?",
     "decision": "matches",
     "items": [
      "PL-PH-A4-230-MT"
@@ -2386,7 +2387,7 @@
        "unit": "packs"
       },
       "keywords": [
-       "photopro matte"
+       "photopro"
       ],
       "size_raw": "A4"
      }
@@ -2407,8 +2408,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 3.8,
-    "reply": "Yes, it's in stock today. One option matches.\n\nPL-PH-A4-230-MT – PhotoPro Matte A4 230gsm\n- 229.00 per pack of 50 sheets, list price\n- Why it matches: A4, matte, 230 gsm, in stock\n\nYour quote for 2 packs:\n- Subtotal: 458.00\n- Delivery: 150.00\n- VAT 7%: 42.56\n- Total: 650.56\n\nYou're 2,542.00 short of the 3,000.00 subtotal that gets free delivery.\n\nPrices exclude VAT and come from the catalog snapshot of 2026-11-03.",
+    "latency_s": 4.7,
+    "reply": "Yes, it's in stock today. Only one option fits your request.\n\n- PhotoPro Matte A4 230gsm (PL-PH-A4-230-MT): ฿229.00 per pack of 50 sheets, regular price.\n\nMy pick is PL-PH-A4-230-MT. For 2 packs:\n- Unit price x packs: ฿229.00 x 2\n- Subtotal: ฿458.00\n- Delivery: ฿150.00\n- VAT 7%: ฿42.56\n- Total: ฿650.56\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,542.00 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like to order 2 packs, or change the quantity?",
     "decision": "matches",
     "items": [
      "PL-PH-A4-230-MT"
@@ -2416,6 +2417,7 @@
     "criteria": {
      "item1": {
       "product_type": "paper",
+      "paper_kind": "photo",
       "size_code": "A4",
       "finish": "matte",
       "weight_gsm": 230,
@@ -2424,7 +2426,7 @@
        "unit": "packs"
       },
       "keywords": [
-       "photopro matte"
+       "photopro"
       ],
       "size_raw": "A4"
      }
@@ -2445,8 +2447,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 3.9,
-    "reply": "Yes, it's in stock today. One option matches.\n\nPL-PH-A4-230-MT – PhotoPro Matte A4 230gsm (pack of 50 sheets)\nUnit price: 229.00 per pack (list price, no volume discount)\nWhy it matches: A4, matte, 230 gsm, in stock.\n\nYour quote for 2 packs:\nSubtotal: 458.00\nDelivery: 150.00\nVAT 7%: 42.56\nTotal: 650.56\n\nDelivery is free once the subtotal reaches 3,000.00. Yours is below that, so the 150.00 applies.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhere should we deliver it? Delivery is within Bangkok and vicinity.",
+    "latency_s": 4.6,
+    "reply": "Yes, it's in stock today, and it's the only PhotoPro Matte A4 230 gsm option.\n\n- PhotoPro Matte A4 230gsm (PL-PH-A4-230-MT): ฿229.00 per pack of 50 sheets. This is the regular price.\n\nMy pick is PL-PH-A4-230-MT. For 2 packs:\n- Unit price x packs: ฿229.00 x 2\n- Subtotal: ฿458.00\n- Delivery: ฿150.00\n- VAT 7%: ฿42.56\n- Total: ฿650.56\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿2,542.00 short of that.\n\nPrices are from our catalog of 3 Nov 2026.\n\nWould you like me to quote a different quantity?",
     "decision": "matches",
     "items": [
      "PL-PH-A4-230-MT"
@@ -2463,7 +2465,7 @@
        "unit": "packs"
       },
       "keywords": [
-       "photopro matte"
+       "photopro"
       ],
       "size_raw": "A4"
      }
@@ -2489,8 +2491,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 0,
-    "latency_s": 5.9,
-    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream\n- A4, 70 gsm, white, uncoated, in stock\n\nQuantity: 1,200 sheets isn't a whole number of 500-sheet reams, so I rounded up to 3 reams (1,500 sheets).\n\nBreakdown:\n- Unit price: 109.00 per ream (list price, no volume discount)\n- Subtotal: 327.00\n- Delivery: 150.00\n- VAT 7%: 33.39\n- Total: 510.39\n\nDelivery is free from a 3,000.00 subtotal. Your subtotal is 2,673.00 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.0,
+    "reply": "We have one option for Siam Office A4 70gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream of 500 sheets, regular price. White, uncoated, in stock.\n\n1,200 sheets isn't a whole number of reams of 500, so I rounded up to 3 reams (1,500 sheets).\n\nMy pick is PL-CP-A4-70. For 3 reams:\n- Unit price x packs: ฿109.00 x 3\n- Subtotal: ฿327.00\n- Delivery: ฿150.00\n- VAT 7%: ฿33.39\n- Total: ฿510.39\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,673.00 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 3 reams, or change the quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2530,8 +2532,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 1,
-    "latency_s": 5.9,
-    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream (list price)\n- A4, 70 gsm, white, uncoated, in stock\n\nQuantity: 1,200 sheets isn't a whole number of 500-sheet reams. I rounded it up to 3 reams (1,500 sheets).\n\nBreakdown:\n- Unit price: 109.00 per ream (list price, no volume discount)\n- Subtotal: 327.00\n- Delivery: 150.00\n- VAT 7%: 33.39\n- Total: 510.39\n\nDelivery is free once the subtotal reaches 3,000.00. This order is 2,673.00 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhere should we deliver it? I can check that it's in our delivery area.",
+    "latency_s": 5.2,
+    "reply": "We have exactly one option for Siam Office A4 70gsm copy paper.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream of 500 sheets, regular price. It's in stock.\n\nMy pick is PL-CP-A4-70. You asked for 1,200 sheets. Reams come in 500 sheets, so I rounded up to 3 reams (1,500 sheets). For 3 reams:\n- Unit price x packs: ฿109.00 x 3 = ฿327.00\n- Subtotal: ฿327.00\n- Delivery: ฿150.00\n- VAT 7%: ฿33.39\n- Total: ฿510.39\n\nDelivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,673.00 short of that. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 3 reams? Where should we deliver?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2571,8 +2573,8 @@
     "criteria_total": 4,
     "pass": true,
     "run": 2,
-    "latency_s": 4.9,
-    "reply": "One option matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream (list price)\n- A4, 70 gsm, white, uncoated, in stock\n\nQuantity: 1,200 sheets isn't a whole number of 500-sheet reams, so I rounded up to 3 reams (1,500 sheets).\n\nBreakdown:\n- Unit price: 109.00 per ream (list price, no volume discount)\n- Subtotal: 327.00\n- Delivery: 150.00\n- VAT 7%: 33.39\n- Total: 510.39\n\nDelivery is free once the subtotal reaches 3,000.00. This order is 2,673.00 short of that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.5,
+    "reply": "Yes, we have exactly one option that fits.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream of 500 sheets, regular price. White, uncoated, in stock.\n\nMy pick is Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). 1,200 sheets isn't a whole number of reams, so I rounded up to 3 reams (1,500 sheets). For 3 reams:\n- Unit price x packs: ฿109.00 x 3\n- Subtotal: ฿327.00\n- Delivery: ฿150.00\n- VAT 7%: ฿33.39\n- Total: ฿510.39\n\nDelivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿2,673.00 below that. Prices exclude VAT, but the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 3 reams?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2612,8 +2614,8 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 5.6,
-    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, unit price 104.64 per ream\n- A4, 70 gsm, white, uncoated\n- In stock\n- 10 reams of 500 sheets each\n\nQuote:\n- Unit price: 104.64 per ream. This is the 10-ream volume tier. List price is 109.00.\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team. PaperLane delivers in Bangkok and vicinity, so the delivery fee above is the standard rate and may change.\n\nDelivery is free from a 3,000.00 subtotal, and this order is below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.9,
+    "reply": "Yes, we have one option that fits: Siam Office Copy Paper A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-pack price (normally ฿109.00). It's in stock, and each ream is 500 sheets.\n\nMy pick is PL-CP-A4-70. For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nYou're in Chiang Mai, and we deliver in Bangkok and vicinity. Our sales team will need to confirm delivery there. The quote uses our standard delivery terms. Delivery is free from a ฿3,000.00 subtotal, and this order is below that.\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like me to change the quantity, or pass this to the sales team to confirm delivery?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2650,8 +2652,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 5.4,
-    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, unit price 104.64 per ream (500 sheets)\n- A4, 70 gsm, white, uncoated, in stock\n- 10 reams = 10 packs, so no rounding was needed.\n\nQuote for 10 reams:\n- Unit price: 104.64 (10-pack volume tier; list price 109.00)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team. We normally deliver only in Bangkok and nearby areas. The delivery fee above is our standard fee, not a confirmed one for Chiang Mai.\n\nDelivery is free once the subtotal reaches 3,000.00. Yours is 1,953.60 short of that.\n\nPrices exclude VAT and come from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 5.2,
+    "reply": "One option fits your request: Siam Office Copy Paper A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price, normally ฿109.00. It's white, uncoated, and in stock.\n\nMy pick is PL-CP-A4-70. For 10 reams (500 sheets each):\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team, because we deliver in Bangkok and vicinity. The quote uses our standard delivery terms.\n\nDelivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿1,953.60 short of that. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this, or change the quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2688,8 +2690,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 6.7,
-    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm\n- Unit price: 104.64 per ream (500 sheets). This is the 10-ream volume tier, down from the list price of 109.00.\n- It's white, uncoated and in stock.\n\nQuote for 10 reams:\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team. We normally deliver only in Bangkok and the surrounding area. The quote uses our standard delivery terms.\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 1,953.60 below that.\n\nPrices come from our catalog snapshot dated 2026-11-03.",
+    "latency_s": 5.1,
+    "reply": "One option fits your request: Siam Office Copy Paper A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price, normally ฿109.00. White, uncoated, 500 sheets per ream, in stock.\n\nMy pick is PL-CP-A4-70. For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nWe deliver in Bangkok and vicinity. Delivery to Chiang Mai needs confirmation from our sales team, so the delivery fee above is the standard rate and may change.\n\nDelivery is free from a ฿3,000.00 subtotal. Prices exclude VAT, and the total includes 7% VAT.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to adjust the quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2727,8 +2729,8 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 5.1,
-    "reply": "One option matches. Nonthaburi is inside our delivery area.\n\nPL-CP-A4-70: Siam Office Copy Paper A4 70gsm, 104.64 per ream. It's white, uncoated and in stock. It matches on A4, 70 gsm and the Siam Office name.\n\nQuantity: 10 reams, which is 10 packs of 500 sheets each.\n\nBreakdown:\n- Unit price: 104.64 per ream (10-ream volume tier, down from the 109.00 list price)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free once the subtotal reaches 3,000.00. This order is below that.\n\nPrices are from the catalog snapshot crawled 2026-11-03.",
+    "latency_s": 5.3,
+    "reply": "Yes, we have exactly one option for Siam Office A4 70gsm, and it's in stock.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price (normally ฿109.00). Each ream is 500 sheets, white, uncoated.\n\nMy pick is PL-CP-A4-70. For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery to Nonthaburi: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nDelivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿1,953.60 short of that. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 10 reams?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2764,8 +2766,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 5.4,
-    "reply": "We found 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 104.64 per ream\n- It's A4, 70 gsm, white, uncoated, and in stock.\n- A ream is 500 sheets. You asked for 10 reams, which is 10 packs, so no rounding was needed.\n\nBreakdown:\n- Unit price: 104.64 per ream. The 10-ream volume tier applies (list price 109.00).\n- Subtotal: 1,046.40\n- Delivery to Nonthaburi: 150.00. Nonthaburi is in our delivery area.\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free once the subtotal reaches 3,000.00, and this order is below that. I've quoted exactly the 10 reams you asked for.\n\nPrices are from our catalog snapshot of 2026-11-03.",
+    "latency_s": 4.7,
+    "reply": "Yes, we have one option for 10 reams of Siam Office A4 70gsm.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price (normally ฿109.00). Each ream is 500 sheets, and it's in stock.\n\nMy pick is PL-CP-A4-70. For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery to Nonthaburi: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Your subtotal is ฿1,953.60 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with 10 reams, or change the quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2801,8 +2803,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 4.8,
-    "reply": "One option matches. Nonthaburi is inside our delivery area.\n\nPL-CP-A4-70, Siam Office Copy Paper A4 70gsm, 104.64 per ream\n- A4, 70 gsm, white, uncoated\n- In stock\n- 10 reams of 500 sheets each\n\nQuote:\n- Unit price: 104.64 per ream (10-ream volume tier, down from the list price of 109.00)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 1,953.60 short of that.\n\nPrices are from the catalog snapshot of 2026-11-03.",
+    "latency_s": 4.2,
+    "reply": "We have one option for Siam Office A4 70gsm, and it's in stock.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream at the 10-ream price (normally ฿109.00). Each ream is 500 sheets.\n\nMy pick is Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nNonthaburi is within our delivery area. Delivery is free once the subtotal reaches ฿3,000.00. Prices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to go ahead with this quantity?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70"
@@ -2842,8 +2844,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 0,
-    "latency_s": 4.8,
-    "reply": "There is 1 option that matches.\n\nPL-PR-A5-MT-100-40 – Digital Flyers A5 – Matte\n- Unit price: 121.26 per pack of 100 sheets\n- Why it matches: A5, matte, 100 gsm, one side, full colour, in stock\n\nQuote:\n- Quantity: 500 sheets = 5 packs of 100. No rounding was needed.\n- Price rule: volume tier at 5 packs, 121.26 per pack. The list price is 129.00.\n- Subtotal: 606.30\n- Delivery: 150.00\n- VAT 7%: 52.94\n- Total: 809.24\n\nFree delivery starts at a 3,000.00 subtotal. Your subtotal is 2,393.70 below that.\n\nPrices exclude VAT, and the totals include it. They come from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 4.4,
+    "reply": "Yes, one option fits your A5 matte flyers.\n\n- Matte 100 gsm A5 Flyers (PL-PR-A5-MT-100-40): ฿121.26 per pack at the 5-pack price; normally ฿129.00. It's one side, full colour, and in stock.\n\nMy pick is the Matte 100 gsm A5 Flyers (PL-PR-A5-MT-100-40). For 500 sheets, which is 5 packs of 100 (no rounding needed):\n- Unit price x packs: ฿121.26 x 5\n- Subtotal: ฿606.30\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿52.94\n- Total: ฿809.24\n\nPrices exclude VAT; the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nShould I quote a different quantity, or do you need delivery outside Bangkok?",
     "decision": "matches",
     "items": [
      "PL-PR-A5-MT-100-40"
@@ -2881,8 +2883,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 1,
-    "latency_s": 5.0,
-    "reply": "One option matches.\n\nPL-PR-A5-MT-100-40 – Digital Flyers A5 – Matte\n- Unit price: 121.26 per pack of 100 sheets (list price 129.00)\n- Why it matches: A5, matte, 100 gsm, one side, full colour, in stock\n\nConversion: 500 sheets = 5 packs of 100, with no rounding.\n\nBreakdown:\n- Price rule: volume tier at 5 packs, 121.26 per pack\n- Subtotal: 606.30\n- Delivery: 150.00\n- VAT 7%: 52.94\n- Total: 809.24\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,393.70 below that.\n\nPrices are from the catalog snapshot crawled 2026-11-03.",
+    "latency_s": 4.9,
+    "reply": "One option fits your A5 matte flyers.\n\n- Digital Flyers A5 – Matte (PL-PR-A5-MT-100-40): ฿121.26 per pack at the 5-pack price (normally ฿129.00). It's 100 gsm, one side, full colour, and in stock.\n\nMy pick is PL-PR-A5-MT-100-40. 500 sheets is 5 packs of 100 sheets, so no rounding was needed. For 5 packs:\n- Unit price x packs: ฿121.26 x 5\n- Subtotal: ฿606.30\n- Delivery: ฿150.00\n- VAT 7%: ฿52.94\n- Total: ฿809.24\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Yours is ฿2,393.70 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nIs the delivery in Bangkok?",
     "decision": "matches",
     "items": [
      "PL-PR-A5-MT-100-40"
@@ -2920,8 +2922,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 2,
-    "latency_s": 5.0,
-    "reply": "There is 1 option that matches.\n\nPL-PR-A5-MT-100-40 – Digital Flyers A5 – Matte\n- Unit price: 121.26 per pack of 100 sheets\n- Why it matches: A5, matte, 100 gsm, one side, full colour, in stock\n\nQuantity: 500 flyers is 5 packs of 100 sheets. No rounding was needed.\n\nBreakdown:\n- Unit price: 121.26 per pack. This is the 5-pack volume tier. The list price is 129.00.\n- Subtotal: 606.30\n- Delivery: 150.00\n- VAT 7%: 52.94\n- Total: 809.24\n\nFree delivery starts at a 3,000.00 subtotal. Your subtotal is 2,393.70 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Where should we deliver this order?",
+    "latency_s": 5.1,
+    "reply": "Yes, one option fits your A5 matte flyers.\n\n- Matte 100 gsm A5 Flyers, one side, full colour (PL-PR-A5-MT-100-40): ฿121.26 per pack at the 5-pack price (normally ฿129.00). In stock.\n\nMy pick is PL-PR-A5-MT-100-40. For 5 packs:\n- Unit price x packs: ฿121.26 x 5\n- Subtotal: ฿606.30\n- Delivery: ฿150.00\n- VAT 7%: ฿52.94\n- Total: ฿809.24\n\nYou asked for 500 sheets. A pack is 100 sheets, so that is exactly 5 packs, with no rounding.\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿2,393.70 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhere should we deliver this? I can check that it's within our delivery area.",
     "decision": "matches",
     "items": [
      "PL-PR-A5-MT-100-40"
@@ -2961,8 +2963,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 0,
-    "latency_s": 5.5,
-    "reply": "2 options match for 5 reams of A3 paper.\n\n1. PL-CP-A3-80, Lotus Bright A3 80gsm: 259.00 per ream (500 sheets). It's white and uncoated, and it's in stock.\n2. PL-CL-A3-80-PBL, Rainbow Pastel A3 80gsm Pastel Blue: 210.00 per pack. It's uncoated and in stock. Packs hold 250 sheets, so 5 reams (2,500 sheets) comes to 10 packs, which is 2,100.00.\n\nFull breakdown for PL-CP-A3-80 (5 reams):\n- Unit price: 259.00 per ream (list price)\n- Subtotal: 1,295.00\n- Delivery: 150.00\n- VAT 7%: 101.15\n- Total: 1,546.15\n\nDelivery is free from a 3,000.00 subtotal. This order's subtotal is 1,705.00 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nDo you want white, or a coloured paper (blue)?",
+    "latency_s": 5.9,
+    "reply": "We have 2 A3 options that fit 5 reams.\n\n- Lotus Bright A3 80gsm white, uncoated (PL-CP-A3-80): ฿259.00 per ream of 500 sheets, regular price. In stock.\n- Rainbow Pastel A3 80gsm Pastel Blue (PL-CL-A3-80-PBL): ฿210.00 per pack of 250 sheets, regular price. In stock. This one is sold in 250-sheet packs, so 5 reams (2,500 sheets) is 10 packs.\n\nMy pick is the Lotus Bright A3 80gsm (PL-CP-A3-80). For 5 reams:\n- Unit price x packs: ฿259.00 x 5\n- Subtotal: ฿1,295.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿101.15\n- Total: ฿1,546.15\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nDo you want white paper, or a coloured one (blue)?",
     "decision": "matches",
     "items": [
      "PL-CP-A3-80",
@@ -2997,8 +2999,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 1,
-    "latency_s": 4.8,
-    "reply": "2 options match 5 reams of A3 paper.\n\n1. PL-CP-A3-80, Lotus Bright A3 80gsm: 259.00 per ream (500 sheets). It's white, uncoated and in stock. 5 reams is 5 packs.\n2. PL-CL-A3-80-PBL, Rainbow Pastel A3 80gsm Pastel Blue: 210.00 per pack. It's uncoated and in stock. It comes in packs of 250 sheets, so 5 reams (2,500 sheets) converts to 10 packs.\n\nFull breakdown for PL-CP-A3-80 (5 packs):\nUnit price: 259.00 (list price, no volume discount)\nSubtotal: 1,295.00\nDelivery: 150.00\nVAT 7%: 101.15\nTotal: 1,546.15\n\nFree delivery starts at a 3,000.00 subtotal. This order is below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nDo you want white, or coloured paper (blue)?",
+    "latency_s": 7.2,
+    "reply": "Two A3 papers fit your 5 reams.\n\n1. Lotus Bright A3 80gsm white (PL-CP-A3-80): ฿259.00 per ream, regular price. A ream is 500 sheets, so 5 reams is 5 packs.\n2. Rainbow Pastel A3 80gsm Pastel Blue (PL-CL-A3-80-PBL): ฿210.00 per pack, regular price. This comes in packs of 250 sheets, so 5 reams (2,500 sheets) is 10 packs.\n\nMy pick is the Lotus Bright A3 80gsm (PL-CP-A3-80). For 5 packs:\n- Unit price x packs: ฿259.00 x 5\n- Subtotal: ฿1,295.00\n- Delivery: ฿150.00 (delivery is free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿101.15\n- Total: ฿1,546.15\n\nPrices exclude VAT, and the total includes it. They are from our catalog of 3 Nov 2026.\n\nWould you like white, or a coloured paper (blue)?",
     "decision": "matches",
     "items": [
      "PL-CP-A3-80",
@@ -3033,8 +3035,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 2,
-    "latency_s": 5.1,
-    "reply": "2 options match for 5 reams of A3 paper.\n\n1. PL-CP-A3-80, Lotus Bright A3 80gsm: 259.00 per ream (500 sheets). It's white, uncoated and in stock. 5 reams is 5 packs.\n2. PL-CL-A3-80-PBL, Rainbow Pastel A3 80gsm Pastel Blue: 210.00 per pack. It's uncoated and in stock. This one comes in packs of 250 sheets, so 5 reams (2,500 sheets) would be 10 packs, for a line total of 2,100.00.\n\nFull breakdown for PL-CP-A3-80:\n- Unit price: 259.00 per ream (list price, no volume discount)\n- Subtotal: 1,295.00\n- Delivery: 150.00\n- VAT 7%: 101.15\n- Total: 1,546.15\n\nThe subtotal is 1,705.00 short of the 3,000.00 free-delivery threshold. I've quoted exactly the quantity you asked for.\n\nPrices exclude VAT, and the total includes it. They come from the catalog snapshot crawled on 2026-11-03.\n\nDo you want white, or a coloured paper (blue)?",
+    "latency_s": 7.2,
+    "reply": "Two A3 papers fit 5 reams.\n\n1. Lotus Bright A3 80gsm white, uncoated (PL-CP-A3-80): ฿259.00 per ream of 500 sheets, regular price.\n2. Rainbow Pastel A3 80gsm Pastel Blue (PL-CL-A3-80-PBL): ฿210.00 per pack of 250 sheets, regular price. This comes in 250-sheet packs, so 5 reams (2,500 sheets) is 10 packs.\n\nMy pick is Lotus Bright A3 80gsm (PL-CP-A3-80). For 5 reams (2,500 sheets):\n- Unit price x packs: ฿259.00 x 5\n- Subtotal: ฿1,295.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿101.15\n- Total: ฿1,546.15\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nDo you want white, or a coloured paper (blue)?",
     "decision": "matches",
     "items": [
      "PL-CP-A3-80",
@@ -3068,8 +3070,8 @@
     "notes": [],
     "pass": true,
     "run": 0,
-    "latency_s": 5.2,
-    "reply": "We have 7 coloured A4 options in stock. 1,000 sheets = 2 reams of 500 sheets, so there's no rounding.\n\nTop 3:\n1. PL-CL-A4-80-PBL – Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream\n2. PL-CL-A4-80-PGR – Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream\n3. PL-CL-A4-80-PPK – Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream\n\nAll three are A4, uncoated and in stock.\n\nBreakdown for PL-CL-A4-80-PBL (2 reams, list price):\n- Unit price: 195.00 per ream\n- Subtotal: 390.00\n- Delivery: 150.00\n- VAT 7%: 37.80\n- Total: 577.80\n\nYour subtotal is 2,610.00 below the 3,000.00 free-delivery threshold.\n\nAlso available, but not shown in full: PL-CL-A4-80-PYL, PL-CL-A4-80-RED, PL-CL-A4-80-BRT and PL-CL-A4-90-CRM.\n\nPL-CL-A4-100-IVY (Heritage Ivory A4 100gsm) is out of stock until 2026-11-20, so it can't be ordered now.\n\nPrices are from the catalog snapshot of 2026-11-03.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "latency_s": 6.0,
+    "reply": "We have 7 coloured A4 options in stock for 1,000 sheets. Here are the first three:\n\n- Rainbow Pastel A4 80gsm, pastel blue (PL-CL-A4-80-PBL): ฿195.00 per ream, regular price\n- Rainbow Pastel A4 80gsm, pastel green (PL-CL-A4-80-PGR): ฿195.00 per ream, regular price\n- Rainbow Pastel A4 80gsm, pastel pink (PL-CL-A4-80-PPK): ฿195.00 per ream, regular price\n\nMy pick is the pastel blue (PL-CL-A4-80-PBL). 1,000 sheets is 2 reams of 500 sheets, so no rounding was needed. For 2 reams:\n- Unit price x packs: ฿195.00 x 2\n- Subtotal: ฿390.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿37.80\n- Total: ฿577.80\n\nPrices exclude VAT, but the total includes it.\n\nFour more are also available: yellow, red, bright and cream (PL-CL-A4-80-PYL, PL-CL-A4-80-RED, PL-CL-A4-80-BRT, PL-CL-A4-90-CRM). The Heritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock until 20 Nov 2026, so it can't be ordered now.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhich finish do you prefer: smooth or uncoated?",
     "decision": "matches",
     "items": [
      "PL-CL-A4-80-PBL",
@@ -3103,8 +3105,8 @@
     "notes": [],
     "pass": true,
     "run": 1,
-    "latency_s": 5.3,
-    "reply": "7 coloured A4 options match. 1,000 sheets = 2 reams of 500 sheets, with no rounding.\n\n1. PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream. Uncoated, in stock.\n2. PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream. Uncoated, in stock.\n3. PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream. Uncoated, in stock.\n\nBreakdown for PL-CL-A4-80-PBL (list price, 2 reams × 195.00):\nSubtotal: 390.00\nDelivery: 150.00\nVAT 7%: 37.80\nTotal: 577.80\n\nDelivery is free once the subtotal reaches 3,000.00. This order is 2,610.00 short of that.\n\nPL-CL-A4-100-IVY (Heritage Ivory A4 100gsm) is out of stock until 2026-11-20, so it can't be ordered now.\n\nWhich finish do you prefer: smooth or uncoated?\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "latency_s": 7.0,
+    "reply": "We have 7 coloured A4 options in stock for 1,000 sheets. I've shown the first three below.\n\n1,000 sheets is 2 reams of 500 sheets, so there's no rounding.\n\n- Rainbow Pastel A4 80gsm, pastel blue (PL-CL-A4-80-PBL): ฿195.00 per ream, regular price\n- Rainbow Pastel A4 80gsm, pastel green (PL-CL-A4-80-PGR): ฿195.00 per ream, regular price\n- Rainbow Pastel A4 80gsm, pastel pink (PL-CL-A4-80-PPK): ฿195.00 per ream, regular price\n\nMy pick is the pastel blue (PL-CL-A4-80-PBL). For 2 reams:\n- Unit price x packs: ฿195.00 x 2\n- Subtotal: ฿390.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿37.80\n- Total: ฿577.80\n\nPrices exclude VAT, and the total includes it.\n\nFour more colours are also available: yellow, red, bright, and a cream 90gsm. Heritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock until 20 Nov 2026, so it can't be ordered now.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhich finish do you prefer, smooth or uncoated? Do you also have a colour in mind?",
     "decision": "matches",
     "items": [
      "PL-CL-A4-80-PBL",
@@ -3138,8 +3140,8 @@
     "notes": [],
     "pass": true,
     "run": 2,
-    "latency_s": 6.7,
-    "reply": "7 coloured A4 options match. 1,000 sheets = 2 reams of 500 sheets, with no rounding.\n\n1. PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream (list price)\n2. PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream (list price)\n3. PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream (list price)\n\nAll three are uncoated and in stock.\n\nBreakdown for PL-CL-A4-80-PBL (2 reams):\n- Unit price: 195.00 per ream (list price)\n- Subtotal: 390.00\n- Delivery: 150.00\n- VAT 7%: 37.80\n- Total: 577.80\n\nDelivery is free from a 3,000.00 subtotal. This order is 2,610.00 short of that.\n\nHeritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock until 2026-11-20, so it can't be ordered now.\n\nFour more options are available: PL-CL-A4-80-PYL, PL-CL-A4-80-RED, PL-CL-A4-80-BRT and PL-CL-A4-90-CRM.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "latency_s": 6.5,
+    "reply": "Good news: 7 coloured A4 options fit your 1,000 sheets. A ream is 500 sheets, so 1,000 sheets = 2 reams, with no rounding needed.\n\nTop options:\n- Rainbow Pastel A4 80gsm, pastel blue (PL-CL-A4-80-PBL): ฿195.00 per ream, regular price\n- Rainbow Pastel A4 80gsm, pastel green (PL-CL-A4-80-PGR): ฿195.00 per ream, regular price\n- Rainbow Pastel A4 80gsm, pastel pink (PL-CL-A4-80-PPK): ฿195.00 per ream, regular price\n\nMy pick is the pastel blue (PL-CL-A4-80-PBL). For 2 reams:\n- Unit price x packs: ฿195.00 x 2\n- Subtotal: ฿390.00\n- Delivery: ฿150.00\n- VAT 7%: ฿37.80\n- Total: ฿577.80\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal. Yours is below that, so delivery is ฿150.00.\n\nHeritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock until 20 Nov 2026, so it can't be ordered now.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhich finish do you prefer, smooth or uncoated? Do you have a colour in mind? Other options include yellow, red, bright and cream.",
     "decision": "matches",
     "items": [
      "PL-CL-A4-80-PBL",
@@ -3178,8 +3180,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 0,
-    "latency_s": 4.8,
-    "reply": "6 options match your request (Letter 8.5×11 in, one side, full colour, 10 packs of 100 sheets). Here are the first 3:\n\n1. PL-PR-LTR-MT-100-40: Letter Flyers, Matte, 100 gsm. Price is 211.50 per pack.\n2. PL-PR-LTR-GL-100-40: Letter Flyers, Gloss, 100 gsm. Price is 220.90 per pack.\n3. PL-PR-LTR-MT-130-40: Letter Flyers, Matte, 130 gsm. Price is 234.06 per pack.\n\nAll three are in stock.\n\nBreakdown for PL-PR-LTR-MT-100-40:\nUnit price: 211.50 per pack (volume tier for 5+ packs; list price 225.00)\nSubtotal: 2,115.00\nDelivery: 150.00\nVAT 7%: 158.55\nTotal: 2,423.55\n\nYour subtotal is 885.00 below the 3,000.00 free-delivery threshold.\n\nPrices exclude VAT. The totals include it.\n\nDo you want matte or gloss?",
+    "latency_s": 5.4,
+    "reply": "We have 6 one-sided, full-colour Letter flyer options for 10 packs. Here are the top 3:\n\n1. Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40): ฿211.50 per pack. This is the 10-pack price; normally ฿225.00.\n2. Gloss 100 gsm Letter Flyers (PL-PR-LTR-GL-100-40): ฿220.90 per pack. This is the 10-pack price; normally ฿235.00.\n3. Matte 130 gsm Letter Flyers (PL-PR-LTR-MT-130-40): ฿234.06 per pack. This is the 10-pack price; normally ฿249.00. It's a heavier paper.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40). For 10 packs (100 sheets per pack):\n- Unit price x packs: ฿211.50 x 10\n- Subtotal: ฿2,115.00\n- Delivery: ฿150.00\n- VAT 7%: ฿158.55\n- Total: ฿2,423.55\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal, and this order is ฿885.00 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like matte or gloss?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-40",
@@ -3217,8 +3219,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 1,
-    "latency_s": 4.9,
-    "reply": "6 options match: Letter (8.5 × 11 in), one side, full colour, 10 packs (100 sheets each). Here are the first 3:\n\n1. PL-PR-LTR-MT-100-40, Letter Flyers Matte, 100 gsm: 211.50 per pack. In stock.\n2. PL-PR-LTR-GL-100-40, Letter Flyers Gloss, 100 gsm: 220.90 per pack. In stock.\n3. PL-PR-LTR-MT-130-40, Letter Flyers Matte, 130 gsm: 234.06 per pack. In stock.\n\nFull quote for the first one, PL-PR-LTR-MT-100-40:\n- Unit price: 211.50 per pack. This is the 5+ pack tier price, down from the 225.00 list price.\n- Subtotal: 2,115.00\n- Delivery: 150.00\n- VAT 7%: 158.55\n- Total: 2,423.55\n\nDelivery is free from a 3,000.00 subtotal. Your subtotal is 885.00 below that.\n\nPrices are from the catalog snapshot crawled 2026-11-03.\n\nMatte or gloss?",
+    "latency_s": 5.5,
+    "reply": "We have 6 full-colour, one-sided Letter (8.5\"x11\") flyer options for 10 packs. Here are the top 3:\n\n- Letter Flyers, Matte 100 gsm (PL-PR-LTR-MT-100-40): ฿211.50 per pack, the 10-pack price. Normally ฿225.00.\n- Letter Flyers, Gloss 100 gsm (PL-PR-LTR-GL-100-40): ฿220.90 per pack, the 10-pack price. Normally ฿235.00.\n- Letter Flyers, Matte 130 gsm (PL-PR-LTR-MT-130-40): ฿234.06 per pack, the 10-pack price. Normally ฿249.00. It's a thicker paper.\n\nMy pick is the Matte 100 gsm (PL-PR-LTR-MT-100-40). For 10 packs (100 sheets per pack):\n- Unit price x packs: ฿211.50 x 10\n- Subtotal: ฿2,115.00\n- Delivery: ฿150.00\n- VAT 7%: ฿158.55\n- Total: ฿2,423.55\n\nPrices exclude VAT. Delivery is free from a ฿3,000.00 subtotal, and this order is ฿885.00 short of that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like matte or gloss?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-40",
@@ -3256,8 +3258,8 @@
     "criteria_total": 5,
     "pass": true,
     "run": 2,
-    "latency_s": 5.5,
-    "reply": "6 options match: Letter (8.5 × 11 in), one side, full colour, 10 packs (100 sheets per pack). The first three are below.\n\n1. PL-PR-LTR-MT-100-40: Letter Flyers, Matte, 100 gsm. 211.50 per pack (5-pack volume tier, list 225.00).\n2. PL-PR-LTR-GL-100-40: Letter Flyers, Gloss, 100 gsm. 220.90 per pack (volume tier, list 235.00).\n3. PL-PR-LTR-MT-130-40: Letter Flyers, Matte, 130 gsm. 234.06 per pack (volume tier, list 249.00).\n\nAll three are in stock.\n\nBreakdown for PL-PR-LTR-MT-100-40:\n- Unit price: 211.50 × 10 packs (tier price)\n- Subtotal: 2,115.00\n- Delivery: 150.00\n- VAT 7%: 158.55\n- Total: 2,423.55\n\nAdding 885.00 more to the subtotal would qualify for free delivery (from 3,000.00).\n\nPrices exclude VAT and come from the catalog snapshot of 2026-11-03.\n\nMatte or gloss?",
+    "latency_s": 5.4,
+    "reply": "We have 6 one-sided, full-colour Letter flyers (8.5×11 in) that fit your 10 packs. Here are the first three. Each pack has 100 sheets.\n\n- Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40): ฿211.50 per pack. This is the 10-pack price, normally ฿225.00.\n- Gloss 100 gsm Letter Flyers (PL-PR-LTR-GL-100-40): ฿220.90 per pack. This is the 10-pack price, normally ฿235.00.\n- Matte 130 gsm Letter Flyers (PL-PR-LTR-MT-130-40): ฿234.06 per pack. This is the 10-pack price, normally ฿249.00. It is a heavier paper.\n\nMy pick is the Matte 100 gsm Letter Flyers (PL-PR-LTR-MT-100-40). For 10 packs:\n- Unit price x packs: ฿211.50 x 10\n- Subtotal: ฿2,115.00\n- Delivery: ฿150.00\n- VAT 7%: ฿158.55\n- Total: ฿2,423.55\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00. Your subtotal is ฿885.00 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nDo you prefer matte or gloss?",
     "decision": "matches",
     "items": [
      "PL-PR-LTR-MT-100-40",
@@ -3351,8 +3353,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 0,
-    "latency_s": 5.3,
-    "reply": "5 options fit plain white A4. These are the top 3, cheapest first:\n\n1. PL-CP-A4-70, Siam Office Copy Paper A4 70gsm: 104.64 per ream. This is the cheapest.\n2. PL-CP-A4-75, Lotus Bright Everyday A4 75gsm: 112.10 per ream.\n3. PL-CP-A4-80-NUSA, Nusa Paper Copy A4 80gsm: 117.00 per ream.\n\nAll three are white, uncoated, 500 sheets per ream and in stock.\n\nBreakdown for PL-CP-A4-70 (10 reams):\n- Unit price: 104.64 (10-ream volume tier, list price 109.00)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free once the subtotal reaches 3,000.00. This order is below that.\n\nPrices come from the catalog snapshot of 2026-11-03.\n\nWhich paper weight would you like: 70, 75 or 80 gsm? For an office printer, 70 gsm is usually fine.",
+    "latency_s": 5.2,
+    "reply": "Yes, we have 5 white A4 copy papers that fit 10 reams, and these are the 3 cheapest:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream, 10-ream price; normally ฿109.00. Cheapest.\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿112.10 per ream, 10-ream price; normally ฿118.00.\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿117.00 per ream, 10-ream price; normally ฿121.50.\n\nMy pick is the Siam Office Copy Paper A4 70gsm (PL-CP-A4-70), since you asked for the cheapest. Each ream has 500 sheets. For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nPrices exclude VAT, and the total includes it. Delivery is free once the subtotal reaches ฿3,000.00.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhich paper weight would you like: 70, 75 or 80 gsm?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70",
@@ -3391,8 +3393,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 1,
-    "latency_s": 5.5,
-    "reply": "We have 5 white A4 options. These are the 3 cheapest, at 10 reams (500 sheets each):\n\n1. PL-CP-A4-70, Siam Office Copy Paper A4 70gsm: 104.64 per ream. This is the cheapest.\n2. PL-CP-A4-75, Lotus Bright Everyday A4 75gsm: 112.10 per ream.\n3. PL-CP-A4-80-NUSA, Nusa Paper Copy A4 80gsm: 117.00 per ream.\n\nAll three are in stock, white and uncoated.\n\nQuote for PL-CP-A4-70 (10 reams):\n- Unit price: 104.64 (10-ream volume tier, down from the 109.00 list price)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free once the subtotal reaches 3,000.00. This order is below that.\n\nPrices are from the catalog snapshot of 2026-11-03.\n\nWhich weight would you like: 70, 75 or 80 gsm? For an office printer, 70 gsm is usually fine.",
+    "latency_s": 4.7,
+    "reply": "Yes, we have 5 plain white A4 options in stock. Here are the 3 cheapest:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream, 10-ream price; normally ฿109.00\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿112.10 per ream, 10-ream price; normally ฿118.00\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿117.00 per ream, 10-ream price; normally ฿121.50\n\nMy pick is the cheapest, Siam Office Copy Paper A4 70gsm (PL-CP-A4-70). Each ream has 500 sheets. For 10 reams:\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nPrices exclude VAT, and the total includes it. Delivery is free from a ฿3,000.00 subtotal, and yours is ฿1,953.60 below that.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhich paper weight would you like: 70 gsm, 75 gsm or 80 gsm? Most office printers run 70 gsm fine.",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70",
@@ -3431,8 +3433,8 @@
     "criteria_total": 3,
     "pass": true,
     "run": 2,
-    "latency_s": 5.1,
-    "reply": "5 options fit plain white A4. These are the first 3 (10 reams = 10 packs of 500 sheets each):\n\n1. PL-CP-A4-70, Siam Office Copy Paper A4 70gsm: 104.64 per ream. This is the cheapest. It's white, uncoated and in stock.\n2. PL-CP-A4-75, Lotus Bright Everyday A4 75gsm: 112.10 per ream.\n3. PL-CP-A4-80-NUSA, Nusa Paper Copy A4 80gsm: 117.00 per ream.\n\nQuote for PL-CP-A4-70 (10 reams):\n- Unit price: 104.64 (10-pack volume tier, list price 109.00)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery is free from a 3,000.00 subtotal. Your subtotal is below that.\n\nPrices are from the catalog snapshot of 2026-11-03.\n\nWhich paper weight do you want: 70, 75 or 80 gsm? For an office printer, 70 gsm is usually fine.",
+    "latency_s": 4.7,
+    "reply": "Yes, we have 5 white A4 copy papers that fit. Here are the 3 cheapest, at the 10-ream price:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿104.64 per ream, the 10-ream price (normally ฿109.00). It's the cheapest.\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿112.10 per ream, the 10-ream price (normally ฿118.00).\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿117.00 per ream, the 10-ream price (normally ฿121.50).\n\nMy pick is the Siam Office Copy Paper A4 70gsm (PL-CP-A4-70), since you want the cheapest. For 10 reams (500 sheets each):\n- Unit price x packs: ฿104.64 x 10\n- Subtotal: ฿1,046.40\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿83.75\n- Total: ฿1,280.15\n\nPrices exclude VAT, and the total includes it.\n\nPrices from our catalog of 3 Nov 2026.\n\nWhich paper weight would you like: 70 gsm, 75 gsm or 80 gsm?",
     "decision": "matches",
     "items": [
      "PL-CP-A4-70",

@@ -20,12 +20,15 @@ AI assistants to say the item is free.
 
 - **Every price and total was exact to the satang** in all 90 conversations, and it picked the right product in
   every case where the request was clear.
-- **All 90 conversations did everything right**: the right decision (quote, question, or "we don't sell that"),
-  the right products, the right wording checks. An earlier run found a few problems, including "Do you have A4
-  colour paper?" being quoted as coloured paper instead of asking whether the customer meant colour printing;
-  all were fixed before this final run.
+- **86 of 90 conversations did everything right.** Three of the misses are the same request, "2 packs of the
+  Heritage Ivory A4 paper": the assistant correctly said it's out of stock until 20 November, but then offered
+  white copy paper as if it matched, with a quote, instead of presenting it clearly as an alternative. We know
+  the cause. The fourth miss is our test's fault: the reply gave the right date, written "12 Nov 2026", in a form
+  the test didn't recognise.
+- **Replies now read like a salesperson wrote them**: a friendly first line, product names before item codes,
+  a clear recommendation with its quote, and plain text that suits LINE.
 - **It gives the same answer every time** to the same request.
-- **About 0.33 baht and 5 seconds per message.**
+- **About 0.35 baht and 5 seconds per message.**
 
 We also checked that it keeps working when the website changes: on a copy of your site with changed prices, a
 stock change, a discontinued item, a new product, a broken link and 16 extra products, it picked up every change,
