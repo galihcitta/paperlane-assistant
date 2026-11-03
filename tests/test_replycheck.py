@@ -30,6 +30,10 @@ def test_stated_total_must_equal_quote_total():
     assert any("stated total 2250.00" in p for p in probs)
 
 
+def test_delivery_threshold_is_not_a_wrong_subtotal():
+    assert check("Delivery: free (subtotal over ฿3,000.00)\nTotal: ฿1,546.15", [json.dumps(_S)]) == []
+
+
 def test_price_must_belong_to_its_sku():
     probs = check("PL-CP-A3-80: 450.00 per ream", [json.dumps(_S)])
     assert probs == ["450.00 is stated for PL-CP-A3-80 but is not that SKU's figure"]

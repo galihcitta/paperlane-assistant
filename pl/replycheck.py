@@ -100,7 +100,7 @@ def check(reply: str, results: list[str], customer: str = "", catalog_names=()) 
             for m in _TOTAL.finditer(line):
                 figs, want = money_figures(line[m.end():]), (q_subs if m.group(1) else q_totals)
                 v = figs[0] if figs else None
-                if want and v is not None and v not in want:
+                if want and v is not None and v not in want and v not in POLICY:   # "free from a 3,000 subtotal"
                     label = "subtotal" if m.group(1) else "total"
                     problems.append(f"stated {label} {v} does not match the quote ({', '.join(map(str, sorted(want)))})")
     return problems

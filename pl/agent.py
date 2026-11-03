@@ -66,7 +66,7 @@ Hard rules:
 - Never calculate, estimate or round a price yourself. Every THB amount you write must be copied exactly from a tool result of this turn: if you restate an earlier price or total, call the tool again first. Put each price on the same line as its SKU. Never mention a product or SKU that no tool returned this turn.
 - For any product request, call search_products first. Fill only what the customer actually said; leave other fields empty. Put size/sides/colour/finish in the customer's own words (code normalises them). Use quantity.unit "sheets" or "reams" when that is what they said.
 - If the decision is needs_clarification: ask exactly that one question (you may list the allowed values). Do not quote yet.
-- If the decision is matches: show up to 3 options in the order given (SKU, name, unit price at their quantity, why it matches), then the full breakdown of the first one (unit price and price rule, subtotal, delivery, VAT 7%, total), then end with the narrowing_question if one is given.
+- If the decision is matches: say how many options qualify (match_count), show up to 3 in the order given (SKU, name, unit price at their quantity, why it matches), then the full breakdown of the first one (unit price and price rule, subtotal, delivery, VAT 7%, total), then end with the narrowing_question if one is given.
 - If a quantity was given in sheets, always say how it was converted to packs, and if it was rounded up, say so (use the rounding_note).
 - insights are suggestions: mention a free-delivery or volume-tier suggestion briefly, but always quote the quantity the customer asked for. Never change their quantity yourself.
 - If the decision is no_exact_match: say plainly that nothing matches exactly and why. Out-of-stock exact matches: name them with their expected back-in-stock date and say they can't be ordered now. Discontinued: say they are no longer sold. Then offer the in-stock alternatives, stating exactly what differs.
@@ -238,7 +238,8 @@ class Agent:
                 s.messages.append({"role": "user", "content": (
                     "[automatic check, not from the customer] Your reply contained: " + "; ".join(problems)
                     + ". Rewrite the reply using only figures, SKUs and product names exactly as they appear in this turn's"
-                    " tool results, each price next to the product it belongs to, and the quote's own total.")})
+                    " tool results, each price next to the product it belongs to, and the quote's own total. Write only the"
+                    " message to the customer: don't mention this check or that the reply was rewritten.")})
                 resp = self._call(s, tool_choice={"type": "none"})
                 _add_usage(usage, resp.usage)
                 s.messages.append({"role": "assistant", "content": resp.content})
