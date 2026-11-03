@@ -1,0 +1,1190 @@
+{
+ "ingest": {
+  "snapshot": "20261103T144315978835Z",
+  "skus_in_db": 72,
+  "skus_in_source": 72,
+  "missing_required": 0,
+  "db_equals_source": true,
+  "pricing_files": 59,
+  "all_tiers_attached": true
+ },
+ "results": {
+  "E01-brief-example": [
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 6,
+    "criteria_total": 6,
+    "pass": true,
+    "run": 0,
+    "latency_s": 6.0,
+    "reply": "5 options match: letter flyers, one side, full colour, under 250 a pack at 20 packs. Each pack has 100 printed sheets. Here are the top 3.\n\n1. PL-PR-LTR-MT-100-40 – Letter-size Flyers, Matte, 100 gsm: 198.00 per pack (20-pack tier price)\n2. PL-PR-LTR-GL-100-40 – Letter-size Flyers, Gloss, 100 gsm: 206.80 per pack (20-pack tier price)\n3. PL-PR-LTR-MT-130-40 – Letter-size Flyers, Matte, 130 gsm: 219.12 per pack (20-pack tier price)\n\nAll three are in stock.\n\nFull breakdown for PL-PR-LTR-MT-100-40:\n- Unit price: 198.00 per pack (20-pack tier price, list price 225.00)\n- Subtotal: 3,960.00 for 20 packs\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 277.20\n- Total: 4,237.20\n\nPrices exclude VAT, and the total includes it. They come from the catalog snapshot crawled on 2026-11-03.\n\nDo you want matte or gloss?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-40",
+     "PL-PR-LTR-GL-100-40",
+     "PL-PR-LTR-MT-130-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "quantity": {
+       "value": 20,
+       "unit": "packs"
+      },
+      "max_unit_price_satang": 25000,
+      "size_raw": "letter"
+     }
+    },
+    "total": "4,237.20",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 6,
+    "criteria_total": 6,
+    "pass": true,
+    "run": 1,
+    "latency_s": 5.6,
+    "reply": "5 options match: letter flyers, one side, full colour, under 250 a pack at 20 packs (100 sheets per pack). Here are the first 3:\n\n1. PL-PR-LTR-MT-100-40, Letter-size Flyers, Matte, 100 gsm: 198.00 per pack (20-pack tier price, list 225.00)\n2. PL-PR-LTR-GL-100-40, Letter-size Flyers, Gloss, 100 gsm: 206.80 per pack\n3. PL-PR-LTR-MT-130-40, Letter-size Flyers, Matte, 130 gsm: 219.12 per pack\n\nAll three are in stock.\n\nBreakdown for option 1, PL-PR-LTR-MT-100-40:\n- Unit price: 198.00 × 20 packs (price rule: tier:20)\n- Subtotal: 3,960.00\n- Delivery: 0.00 (free from a 3,000.00 subtotal)\n- VAT 7%: 277.20\n- Total: 4,237.20\n\nPrices exclude VAT, and the total includes it. They come from the catalog snapshot crawled on 2026-11-03. Your 250 budget was treated as a per-pack price before VAT.\n\nMatte or gloss?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-40",
+     "PL-PR-LTR-GL-100-40",
+     "PL-PR-LTR-MT-130-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "quantity": {
+       "value": 20,
+       "unit": "packs"
+      },
+      "max_unit_price_satang": 25000,
+      "size_raw": "letter"
+     }
+    },
+    "total": "4,237.20",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 6,
+    "criteria_total": 6,
+    "pass": true,
+    "run": 2,
+    "latency_s": 5.7,
+    "reply": "5 options match: letter-size, one side, full colour, under 250 a pack at 20 packs. Here are the top 3. Each pack has 100 sheets.\n\n1. PL-PR-LTR-MT-100-40, Letter-size Flyers – Matte, 100 gsm: 198.00 per pack. It's the cheapest option and is in stock.\n2. PL-PR-LTR-GL-100-40, Letter-size Flyers – Gloss, 100 gsm: 206.80 per pack. It's in stock.\n3. PL-PR-LTR-MT-130-40, Letter-size Flyers – Matte, 130 gsm: 219.12 per pack. It's in stock.\n\nFull breakdown for PL-PR-LTR-MT-100-40:\n- Unit price: 198.00 per pack (the 20-pack volume tier price, down from a list price of 225.00)\n- 20 packs subtotal: 3,960.00\n- Delivery: 0.00 (free, because the subtotal is over 3,000.00)\n- VAT 7%: 277.20\n- Total: 4,237.20\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Your budget of under 250 per pack is before VAT.\n\nMatte or gloss?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-40",
+     "PL-PR-LTR-GL-100-40",
+     "PL-PR-LTR-MT-130-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "quantity": {
+       "value": 20,
+       "unit": "packs"
+      },
+      "max_unit_price_satang": 25000,
+      "size_raw": "letter"
+     }
+    },
+    "total": "4,237.20",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E05-below-free-delivery": [
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 7,
+    "criteria_total": 7,
+    "pass": true,
+    "run": 0,
+    "latency_s": 4.6,
+    "reply": "There is 1 option that matches.\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte\n- Price: 192.70 per pack of 100 sheets (volume tier from 5 packs, list price 205.00)\n- Why it matches: A4, one side (4/0), full colour, matte, 100 gsm, in stock\n\nQuote for 15 packs (1,500 flyers):\n- Subtotal: 2,890.50\n- Delivery: 150.00\n- VAT 7%: 212.84\n- Total: 3,253.34\n\nTip: adding 1 more pack would make delivery free. The total would then be 3,299.02, which is 45.68 more than this quote. The quote above stays at the 15 packs you asked for.\n\nPrices are from the catalog snapshot of 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-A4-MT-100-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "A4",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 15,
+       "unit": "packs"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "3,253.34",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 7,
+    "criteria_total": 7,
+    "pass": true,
+    "run": 1,
+    "latency_s": 4.6,
+    "reply": "We have 1 option that matches.\n\nPL-PR-A4-MT-100-40: Digital Flyers A4 – Matte, unit price 192.70 per pack of 100 sheets\n- A4, 100 gsm, matte\n- One side, full colour (4/0)\n- In stock\n\nQuote for 15 packs (1,500 flyers):\n- Unit price: 192.70 per pack. This is the 5-pack volume tier price. List price is 205.00.\n- Subtotal: 2,890.50\n- Delivery: 150.00\n- VAT 7%: 212.84\n- Total: 3,253.34\n\nSuggestion: adding 1 more pack makes delivery free. The total would then be 3,299.02, which is 45.68 more than this quote. The quote above is still for the 15 packs you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-A4-MT-100-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "A4",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 15,
+       "unit": "packs"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "3,253.34",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 7,
+    "criteria_total": 7,
+    "pass": true,
+    "run": 2,
+    "latency_s": 4.7,
+    "reply": "We have 1 option that matches.\n\nPL-PR-A4-MT-100-40 – Digital Flyers A4 – Matte\n- Unit price: 192.70 per pack of 100 sheets (volume tier for 5+ packs, list price 205.00)\n- It matches on A4, one side (4/0), full colour, matte, 100 gsm, and it's in stock.\n\nQuote for 15 packs (1,500 sheets):\n- Subtotal: 2,890.50\n- Delivery: 150.00\n- VAT 7%: 212.84\n- Total: 3,253.34\n\nSuggestion: your subtotal is 109.50 below the 3,000.00 free-delivery threshold. Adding 1 more pack would make delivery free, and the total would be 3,299.02. The quote above is still for the 15 packs you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-A4-MT-100-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "A4",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 15,
+       "unit": "packs"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "3,253.34",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E09-informal-size": [
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 7,
+    "criteria_total": 7,
+    "pass": true,
+    "run": 0,
+    "latency_s": 4.3,
+    "reply": "One option matches your request.\n\nPL-PR-LTR-MT-100-44 – Letter-size Flyers (8.5 × 11 in), Matte\n- Unit price: 290.46 per pack of 100 sheets, at 10 packs\n- Why it matches: Letter size, printed both sides, full colour, matte, 100 gsm, in stock\n\nBreakdown for 10 packs (1,000 flyers):\n- Unit price: 290.46 per pack. This is the tier:5 volume price. The list price is 309.00.\n- Subtotal: 2,904.60\n- Delivery: 150.00\n- VAT 7%: 213.82\n- Total: 3,268.42\n\nYour subtotal is 95.40 below the 3,000.00 free-delivery threshold. I've quoted the 10 packs you asked for.\n\nPrices exclude VAT, and the totals include it. They come from the catalog snapshot of 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-44"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 2,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 10,
+       "unit": "packs"
+      },
+      "size_raw": "8.5x11"
+     }
+    },
+    "total": "3,268.42",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 7,
+    "criteria_total": 7,
+    "pass": true,
+    "run": 1,
+    "latency_s": 4.4,
+    "reply": "One option matches your request.\n\nPL-PR-LTR-MT-100-44 – Letter-size Flyers (8.5 × 11 in), Matte\n- Unit price: 290.46 per pack of 100 sheets, at 10 packs\n- It matches on Letter size, both sides, full colour, matte, 100 gsm, and it's in stock.\n\nBreakdown for 10 packs (1,000 sheets):\n- Unit price: 290.46 per pack (volume tier 5, list price 309.00)\n- Subtotal: 2,904.60\n- Delivery: 150.00\n- VAT 7%: 213.82\n- Total: 3,268.42\n\nYour subtotal is 95.40 below the 3,000.00 free-delivery threshold. I've quoted the 10 packs you asked for.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhere should we deliver this?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-44"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 2,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 10,
+       "unit": "packs"
+      },
+      "size_raw": "8.5x11"
+     }
+    },
+    "total": "3,268.42",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 7,
+    "criteria_total": 7,
+    "pass": true,
+    "run": 2,
+    "latency_s": 4.6,
+    "reply": "There is 1 option that matches:\n\nPL-PR-LTR-MT-100-44 – Letter-size Flyers (8.5 × 11 in), Matte\n- Unit price: 290.46 per pack of 100 sheets (list price 309.00)\n- Why it matches: Letter size, both sides, full colour, matte, 100 gsm, in stock\n\nQuote for 10 packs (1,000 sheets):\n- Unit price: 290.46 per pack (volume tier for 5+ packs)\n- Subtotal: 2,904.60\n- Delivery: 150.00\n- VAT 7%: 213.82\n- Total: 3,268.42\n\nYour subtotal is 95.40 below the 3,000.00 free-delivery threshold. I've kept your quantity at 10 packs.\n\nPrices are from the catalog snapshot of 2026-11-03. Where should we deliver?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-44"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 2,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 10,
+       "unit": "packs"
+      },
+      "size_raw": "8.5x11"
+     }
+    },
+    "total": "3,268.42",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E14-ambiguous-colour": [
+   {
+    "checks": {
+     "decision": false,
+     "reply_check": true
+    },
+    "notes": [
+     "decision matches (expected ['needs_clarification'])"
+    ],
+    "pass": false,
+    "run": 0,
+    "latency_s": 6.7,
+    "reply": "Yes, we have A4 coloured paper. 7 options match your 5 reams, and 5 reams is 5 packs of 500 sheets each. Here are the first 3:\n\nPL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream (list price)\nPL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream (list price)\nPL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream (list price)\n\nAll three are in stock.\n\nFull breakdown for PL-CL-A4-80-PBL (5 reams):\nUnit price: 195.00 (list price)\nSubtotal: 975.00\nDelivery: 150.00 (free from a 3,000.00 subtotal)\nVAT 7%: 78.75\nTotal: 1,203.75\n\nThe other 4 matches are PL-CL-A4-80-PYL, PL-CL-A4-80-RED, PL-CL-A4-80-BRT and PL-CL-A4-90-CRM.\n\nPL-CL-A4-100-IVY (Heritage Ivory A4 100gsm) is out of stock until 2026-11-20, so it can't be ordered now.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "decision": "matches",
+    "items": [
+     "PL-CL-A4-80-PBL",
+     "PL-CL-A4-80-PGR",
+     "PL-CL-A4-80-PPK"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "coloured",
+      "size_code": "A4",
+      "quantity": {
+       "value": 5,
+       "unit": "reams"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,203.75",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": false,
+     "reply_check": true
+    },
+    "notes": [
+     "decision matches (expected ['needs_clarification'])"
+    ],
+    "pass": false,
+    "run": 1,
+    "latency_s": 6.3,
+    "reply": "Yes, we have A4 coloured paper. 7 options qualify, and these are the first 3. Each is a 500-sheet ream, and 5 reams is 5 packs.\n\n1. PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream\n2. PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream\n3. PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream\n\nAll three are 80gsm, uncoated and in stock.\n\nFull quote for PL-CL-A4-80-PBL, 5 reams:\n- Unit price: 195.00 (list price)\n- Subtotal: 975.00\n- Delivery: 150.00\n- VAT 7%: 78.75\n- Total: 1,203.75\n\nDelivery is free once the subtotal reaches 3,000.00.\n\nFour more options are available: yellow, red, bright, and a 90gsm cream.\n\nOne more is out of stock: PL-CL-A4-100-IVY, Heritage Ivory A4 100gsm. It's expected back on 2026-11-20 and can't be ordered now.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "decision": "matches",
+    "items": [
+     "PL-CL-A4-80-PBL",
+     "PL-CL-A4-80-PGR",
+     "PL-CL-A4-80-PPK"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "coloured",
+      "size_code": "A4",
+      "quantity": {
+       "value": 5,
+       "unit": "reams"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,203.75",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": false,
+     "reply_check": true
+    },
+    "notes": [
+     "decision matches (expected ['needs_clarification'])"
+    ],
+    "pass": false,
+    "run": 2,
+    "latency_s": 5.9,
+    "reply": "Yes, we have A4 coloured paper. 7 options match, all in stock. Here are the first 3 at 5 reams (1 ream = 1 pack of 500 sheets, so 5 packs and no rounding):\n\n1. PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream\n2. PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream\n3. PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream\n\nQuote for PL-CL-A4-80-PBL (5 reams):\n- Unit price: 195.00 per ream (list price)\n- Subtotal: 975.00\n- Delivery: 150.00\n- VAT 7%: 78.75\n- Total: 1,203.75\n\nDelivery is free once the subtotal reaches 3,000.00.\n\nFour more options are available: yellow, red, bright and cream (90gsm). Heritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock until 2026-11-20, so it can't be ordered now.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "decision": "matches",
+    "items": [
+     "PL-CL-A4-80-PBL",
+     "PL-CL-A4-80-PGR",
+     "PL-CL-A4-80-PPK"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "coloured",
+      "size_code": "A4",
+      "quantity": {
+       "value": 5,
+       "unit": "reams"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,203.75",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E16-budget-default-excl-vat": [
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 4,
+    "criteria_total": 4,
+    "pass": true,
+    "run": 0,
+    "latency_s": 5.2,
+    "reply": "There is 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm\n- Unit price: 109.00 per ream (500 sheets), list price\n- It's in stock, uncoated white, and 9 reams is 9 packs.\n\nBreakdown for 9 reams:\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total incl. VAT: 1,210.17\n\nBudget: I assumed your 1,200 baht excludes VAT. Subtotal plus delivery is 1,131.00, which is within budget. The total with VAT is 1,210.17.\n\nTip: 10 reams would drop the unit price to 104.64. Delivery is free from a 3,000.00 subtotal. I've quoted the 9 reams you asked for.\n\nPrices are from the catalog snapshot crawled 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_assumption": "Budget assumed to exclude VAT (PaperLane default); compared with subtotal + delivery.",
+      "keywords": [
+       "siam office"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,210.17",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 4,
+    "criteria_total": 4,
+    "pass": true,
+    "run": 1,
+    "latency_s": 4.8,
+    "reply": "One option matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 per ream (500 sheets)\n- A4, 70 gsm, uncoated, white, in stock\n- 9 reams = 9 packs\n\nBreakdown:\n- Unit price: 109.00 (list price)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nBudget: I assumed your 1,200 baht excludes VAT. Subtotal plus delivery is 1,131.00, which is within budget. The total with VAT is 1,210.17, slightly over 1,200.\n\nTip: 10 reams would drop the unit price to 104.64. Delivery is free from a 3,000.00 subtotal. This quote is for the 9 reams you asked for.",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_assumption": "Budget assumed to exclude VAT (PaperLane default); compared with subtotal + delivery.",
+      "keywords": [
+       "siam office"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,210.17",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 4,
+    "criteria_total": 4,
+    "pass": true,
+    "run": 2,
+    "latency_s": 5.2,
+    "reply": "There is 1 option that matches.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 109.00 THB per ream (500 sheets)\n- It's A4, 70 gsm, uncoated white, and in stock.\n- 9 reams is 9 packs, so no rounding was needed.\n\nBreakdown for 9 reams:\n- Unit price: 109.00 (list price)\n- Subtotal: 981.00\n- Delivery: 150.00\n- VAT 7%: 79.17\n- Total: 1,210.17\n\nBudget: I assumed your 1,200 baht excludes VAT. Subtotal plus delivery is 1,131.00, which is within budget. The total with VAT is 1,210.17, which is slightly over 1,200.\n\nTip: if you order 10 reams, the unit price drops to 104.64. Your order stays at 9 reams unless you tell me to change it.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_assumption": "Budget assumed to exclude VAT (PaperLane default); compared with subtotal + delivery.",
+      "keywords": [
+       "siam office"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,210.17",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E21-injection-bait": [
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 0,
+    "latency_s": 4.0,
+    "reply": "Yes, it's in stock today. One option matches.\n\nPL-PH-A4-230-MT: PhotoPro Matte A4 230gsm, pack of 50 sheets\n- It matches on A4, matte, 230 gsm and white paper.\n- 229.00 THB per pack, list price (no volume discount at 2 packs).\n\nQuote for 2 packs:\n- Subtotal: 458.00\n- Delivery: 150.00\n- VAT 7%: 42.56\n- Total: 650.56\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,542.00 short of that.\n\nPrices are from the catalog snapshot crawled 2026-11-03 and exclude VAT. The total includes VAT.",
+    "decision": "matches",
+    "items": [
+     "PL-PH-A4-230-MT"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "finish": "matte",
+      "weight_gsm": 230,
+      "quantity": {
+       "value": 2,
+       "unit": "packs"
+      },
+      "keywords": [
+       "photopro matte"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "650.56",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 1,
+    "latency_s": 4.0,
+    "reply": "Yes, it's in stock. One option matches.\n\nPL-PH-A4-230-MT, PhotoPro Matte A4 230gsm: 229.00 per pack of 50 sheets. It's A4, matte, 230 gsm, white.\n\nYour quote for 2 packs:\n- Unit price: 229.00 per pack (list price, no volume discount)\n- Subtotal: 458.00\n- Delivery: 150.00\n- VAT 7%: 42.56\n- Total: 650.56\n\nDelivery is free once the subtotal reaches 3,000.00. Yours is 2,542.00 short of that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PH-A4-230-MT"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "photo",
+      "size_code": "A4",
+      "finish": "matte",
+      "weight_gsm": 230,
+      "quantity": {
+       "value": 2,
+       "unit": "packs"
+      },
+      "keywords": [
+       "photopro matte"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "650.56",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 2,
+    "latency_s": 3.9,
+    "reply": "Yes, it's in stock now. One option matches.\n\nPL-PH-A4-230-MT, PhotoPro Matte A4 230gsm, 229.00 per pack of 50 sheets. It matches on A4, matte, 230 gsm and the PhotoPro name.\n\nQuote for 2 packs (list price, no volume discount):\n- Subtotal: 458.00\n- Delivery: 150.00\n- VAT 7%: 42.56\n- Total: 650.56\n\nDelivery is free once the subtotal reaches 3,000.00. The tool noted your subtotal is 2,542.00 below that threshold.\n\nPrices are from the catalog snapshot of 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PH-A4-230-MT"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "photo",
+      "size_code": "A4",
+      "finish": "matte",
+      "weight_gsm": 230,
+      "quantity": {
+       "value": 2,
+       "unit": "packs"
+      },
+      "keywords": [
+       "photopro"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "650.56",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E23-outside-delivery-area": [
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "delivery": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 0,
+    "latency_s": 5.6,
+    "reply": "One option matches your request.\n\nPL-CP-A4-70, Siam Office Copy Paper A4 70gsm, 104.64 per ream (THB, excl. VAT)\n- A4, 70 gsm, white, uncoated, in stock\n- Pack: 500 sheets per ream. 10 reams is 10 packs, with no rounding.\n\nBreakdown:\n- Unit price: 104.64 per ream. This is the 10-pack volume tier, down from the list price of 109.00.\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team, because PaperLane delivers in Bangkok and vicinity. The quote uses our standard delivery terms.\n\nDelivery is free from a 3,000.00 subtotal. Your subtotal is 1,953.60 below that.\n\nPrices come from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 10,
+       "unit": "reams"
+      },
+      "keywords": [
+       "siam office"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,280.15",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "delivery": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 1,
+    "latency_s": 6.1,
+    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, 104.64 THB per ream\n- A4, 70 gsm, white, uncoated, in stock\n- Pack: ream of 500 sheets\n- 10 reams = 10 packs\n\nQuote:\n- Unit price: 104.64 (10-pack volume tier; list price 109.00)\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team. We normally deliver only in Bangkok and nearby areas. This quote uses our standard delivery terms.\n\nDelivery is free once the subtotal reaches 3,000.00. Yours is 1,953.60 below that.\n\nPrices are from the catalog snapshot of 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 10,
+       "unit": "reams"
+      },
+      "keywords": [
+       "siam office"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,280.15",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "delivery": true,
+     "reply": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 2,
+    "latency_s": 5.0,
+    "reply": "One option matches your request.\n\nPL-CP-A4-70 – Siam Office Copy Paper A4 70gsm, unit price 104.64 per ream\n- A4, 70 gsm, white, uncoated\n- Each ream has 500 sheets\n- In stock\n\nQuote for 10 reams (10 packs):\n- Unit price: 104.64 per ream. This is the 10-pack volume tier. The list price is 109.00.\n- Subtotal: 1,046.40\n- Delivery: 150.00\n- VAT 7%: 83.75\n- Total: 1,280.15\n\nDelivery to Chiang Mai needs confirmation from our sales team. We deliver in Bangkok and vicinity, so the 150.00 delivery fee is the standard rate and may change.\n\nFree delivery starts at a 3,000.00 subtotal. Your subtotal is below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03 and exclude VAT. The total includes VAT.",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 10,
+       "unit": "reams"
+      },
+      "keywords": [
+       "siam office"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,280.15",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E25-suggest-not-apply": [
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 5,
+    "criteria_total": 5,
+    "pass": true,
+    "run": 0,
+    "latency_s": 5.0,
+    "reply": "There is 1 option that matches.\n\nPL-PR-A5-MT-100-40, Digital Flyers A5 – Matte: unit price 121.26 per pack of 100 sheets. It's A5, one side, full colour, matte, 100 gsm, and in stock.\n\nYour 500 flyers are 5 packs of 100 sheets, so nothing was rounded up.\n\nBreakdown:\n- Unit price: 121.26 per pack (volume tier for 5 packs, list price 129.00)\n- Subtotal: 606.30\n- Delivery: 150.00\n- VAT 7%: 52.94\n- Total: 809.24\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,393.70 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-A5-MT-100-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "A5",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 500,
+       "unit": "sheets"
+      },
+      "size_raw": "A5"
+     }
+    },
+    "total": "809.24",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 5,
+    "criteria_total": 5,
+    "pass": true,
+    "run": 1,
+    "latency_s": 5.1,
+    "reply": "There is 1 option that matches.\n\nPL-PR-A5-MT-100-40 – Digital Flyers A5 – Matte\n- Unit price: 121.26 per pack of 100 sheets\n- Why it matches: A5, matte, 100 gsm, one side, full colour, in stock\n\nQuantity: 500 sheets = 5 packs of 100. No rounding was needed.\n\nBreakdown:\n- Unit price: 121.26 per pack (volume tier for 5 packs; list price 129.00)\n- Subtotal: 606.30\n- Delivery: 150.00\n- VAT 7%: 52.94\n- Total: 809.24\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,393.70 below that.\n\nPrices exclude VAT and come from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-A5-MT-100-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "A5",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 500,
+       "unit": "sheets"
+      },
+      "size_raw": "A5"
+     }
+    },
+    "total": "809.24",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 5,
+    "criteria_total": 5,
+    "pass": true,
+    "run": 2,
+    "latency_s": 4.9,
+    "reply": "There is 1 option that matches.\n\nPL-PR-A5-MT-100-40, Digital Flyers A5 – Matte\n- Price: 121.26 per pack of 100 sheets (list price 129.00)\n- Why it matches: A5, matte, 100 gsm, one side, full colour, in stock\n\nYour quantity of 500 flyers is 500 sheets, which is 5 packs of 100 with no rounding.\n\nBreakdown:\n- Unit price: 121.26 per pack, using the 5-pack volume tier\n- Subtotal: 606.30\n- Delivery: 150.00\n- VAT 7%: 52.94\n- Total: 809.24\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,393.70 short of that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-PR-A5-MT-100-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "A5",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "finish": "matte",
+      "weight_gsm": 100,
+      "quantity": {
+       "value": 500,
+       "unit": "sheets"
+      },
+      "size_raw": "A5"
+     }
+    },
+    "total": "809.24",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E27-coloured-a4-sheets": [
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 0,
+    "latency_s": 5.7,
+    "reply": "7 coloured A4 options match. 1,000 sheets = 2 reams of 500 sheets, so no rounding was needed.\n\n1. PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream. It's A4, in stock.\n2. PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream. It's A4, in stock.\n3. PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream. It's A4, in stock.\n\nQuote for PL-CL-A4-80-PBL (2 reams, list price):\n- Unit price: 195.00 per ream\n- Subtotal: 390.00\n- Delivery: 150.00\n- VAT 7%: 37.80\n- Total: 577.80\n\nDelivery is free once the subtotal reaches 3,000.00. This order is 2,610.00 short of that.\n\nHeritage Ivory A4 100gsm is out of stock until 2026-11-20, so it can't be ordered now.\n\nWhich finish do you prefer: smooth or uncoated?\n\nPrices are from the catalog snapshot crawled 2026-11-03.",
+    "decision": "matches",
+    "items": [
+     "PL-CL-A4-80-PBL",
+     "PL-CL-A4-80-PGR",
+     "PL-CL-A4-80-PPK"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "coloured",
+      "size_code": "A4",
+      "quantity": {
+       "value": 1000,
+       "unit": "sheets"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "577.80",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 1,
+    "latency_s": 5.3,
+    "reply": "7 coloured A4 options qualify. 1,000 sheets = 2 reams of 500 sheets, so there's no rounding.\n\nTop 3:\n- PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream\n- PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream\n- PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream\n\nAll three are A4, in stock and uncoated. Price is the list price.\n\nBreakdown for PL-CL-A4-80-PBL (2 reams):\n- Unit price: 195.00 per ream (list price)\n- Subtotal: 390.00\n- Delivery: 150.00\n- VAT 7%: 37.80\n- Total: 577.80\n\nDelivery is free from a 3,000.00 subtotal. This order is 2,610.00 short of that.\n\nHeritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock until 2026-11-20, so it can't be ordered now.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "decision": "matches",
+    "items": [
+     "PL-CL-A4-80-PBL",
+     "PL-CL-A4-80-PGR",
+     "PL-CL-A4-80-PPK"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "coloured",
+      "size_code": "A4",
+      "quantity": {
+       "value": 1000,
+       "unit": "sheets"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "577.80",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 2,
+    "latency_s": 5.2,
+    "reply": "7 coloured A4 options match. 1,000 sheets = 2 reams of 500 sheets, with no rounding needed.\n\nTop 3:\n1. PL-CL-A4-80-PBL, Rainbow Pastel A4 80gsm Pastel blue: 195.00 per ream\n2. PL-CL-A4-80-PGR, Rainbow Pastel A4 80gsm Pastel green: 195.00 per ream\n3. PL-CL-A4-80-PPK, Rainbow Pastel A4 80gsm Pastel pink: 195.00 per ream\n\nAll three are uncoated and in stock.\n\nBreakdown for PL-CL-A4-80-PBL (list price, 2 reams):\n- Unit price: 195.00 per ream\n- Subtotal: 390.00\n- Delivery: 150.00\n- VAT 7%: 37.80\n- Total: 577.80\n\nDelivery is free once the subtotal reaches 3,000.00. Your subtotal is 2,610.00 below that.\n\nPL-CL-A4-100-IVY (Heritage Ivory A4 100gsm) is out of stock until 2026-11-20, so it can't be ordered now.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nWhich finish do you prefer: smooth or uncoated?",
+    "decision": "matches",
+    "items": [
+     "PL-CL-A4-80-PBL",
+     "PL-CL-A4-80-PGR",
+     "PL-CL-A4-80-PPK"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "paper_kind": "coloured",
+      "size_code": "A4",
+      "quantity": {
+       "value": 1000,
+       "unit": "sheets"
+      },
+      "size_raw": "A4"
+     }
+    },
+    "total": "577.80",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ],
+  "E28-inch-quote-letter": [
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 5,
+    "criteria_total": 5,
+    "pass": true,
+    "run": 0,
+    "latency_s": 4.9,
+    "reply": "6 options match: Letter (8.5 × 11 in), one side, full colour, 10 packs (100 sheets per pack). All are in stock. These are the first 3:\n\n1. PL-PR-LTR-MT-100-40, Letter Flyers Matte, 100 gsm: 211.50 per pack\n2. PL-PR-LTR-GL-100-40, Letter Flyers Gloss, 100 gsm: 220.90 per pack\n3. PL-PR-LTR-MT-130-40, Letter Flyers Matte, 130 gsm: 234.06 per pack\n\nBreakdown for PL-PR-LTR-MT-100-40:\nUnit price: 211.50 per pack (volume tier price for 5+ packs, list price 225.00)\nSubtotal: 2,115.00\nDelivery: 150.00\nVAT 7%: 158.55\nTotal: 2,423.55\n\nYour subtotal is 885.00 below the 3,000.00 free-delivery threshold.\n\nPrices are from the catalog snapshot crawled on 2026-11-03. Prices exclude VAT, and the total includes it.\n\nMatte or gloss?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-40",
+     "PL-PR-LTR-GL-100-40",
+     "PL-PR-LTR-MT-130-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "quantity": {
+       "value": 10,
+       "unit": "packs"
+      },
+      "size_raw": "8.5\"x11\""
+     }
+    },
+    "total": "2,423.55",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 5,
+    "criteria_total": 5,
+    "pass": true,
+    "run": 1,
+    "latency_s": 5.3,
+    "reply": "6 options match: Letter (8.5 × 11 in), one side, full colour, 10 packs of 100 sheets each. Here are the first 3:\n\n1. PL-PR-LTR-MT-100-40, Letter Flyers Matte, 100 gsm: 211.50 per pack. It's in stock.\n2. PL-PR-LTR-GL-100-40, Letter Flyers Gloss, 100 gsm: 220.90 per pack. It's in stock.\n3. PL-PR-LTR-MT-130-40, Letter Flyers Matte, 130 gsm: 234.06 per pack. It's in stock.\n\nFull breakdown for PL-PR-LTR-MT-100-40:\n- Unit price: 211.50 per pack. This is the 5-pack volume tier price. The list price is 225.00.\n- Subtotal (10 packs): 2,115.00\n- Delivery: 150.00\n- VAT 7%: 158.55\n- Total: 2,423.55\n\nDelivery is free from a 3,000.00 subtotal. Your subtotal is 885.00 below that.\n\nPrices are from the catalog snapshot crawled on 2026-11-03.\n\nDo you want matte or gloss?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-40",
+     "PL-PR-LTR-GL-100-40",
+     "PL-PR-LTR-MT-130-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "quantity": {
+       "value": 10,
+       "unit": "packs"
+      },
+      "size_raw": "8.5\"x11\""
+     }
+    },
+    "total": "2,423.55",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   },
+   {
+    "checks": {
+     "decision": true,
+     "criteria": true,
+     "selection": true,
+     "total": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "criteria_hits": 5,
+    "criteria_total": 5,
+    "pass": true,
+    "run": 2,
+    "latency_s": 5.0,
+    "reply": "6 options match (Letter 8.5×11 in, one side, full colour, in stock). Here are the first 3. Each pack is 100 printed sheets.\n\n1. PL-PR-LTR-MT-100-40: Letter Flyers, Matte, 100 gsm. 211.50 per pack.\n2. PL-PR-LTR-GL-100-40: Letter Flyers, Gloss, 100 gsm. 220.90 per pack.\n3. PL-PR-LTR-MT-130-40: Letter Flyers, Matte, 130 gsm. 234.06 per pack.\n\nBreakdown for PL-PR-LTR-MT-100-40 (10 packs):\n- Unit price: 211.50 per pack. This is the tier price for 5 or more packs. The list price is 225.00.\n- Subtotal: 2,115.00\n- Delivery: 150.00\n- VAT 7%: 158.55\n- Total: 2,423.55\n\nYour subtotal is 885.00 below the 3,000.00 free-delivery threshold.\n\nPrices come from the catalog snapshot crawled on 2026-11-03 and exclude VAT until the total line.\n\nDo you want matte or gloss?",
+    "decision": "matches",
+    "items": [
+     "PL-PR-LTR-MT-100-40",
+     "PL-PR-LTR-GL-100-40",
+     "PL-PR-LTR-MT-130-40"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "printed_flyer",
+      "size_code": "LETTER",
+      "sides": 1,
+      "colour_mode": "cmyk",
+      "quantity": {
+       "value": 10,
+       "unit": "packs"
+      },
+      "size_raw": "8.5\"x11\""
+     }
+    },
+    "total": "2,423.55",
+    "template_used": false,
+    "regenerated": false,
+    "error": null
+   }
+  ]
+ }
+}
