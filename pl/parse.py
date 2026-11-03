@@ -54,6 +54,7 @@ class PageResult:
     notes: list[tuple[str, str]] = field(default_factory=list)  # (sku, text), untrusted
     tier_skus: list[str] = field(default_factory=list)          # data-sku without data-sale
     sale_skus: list[str] = field(default_factory=list)          # data-sale='1': must have a sale price
+    category: str | None = None
     errors: list[str] = field(default_factory=list)
     main_text: str = ""
 
@@ -115,7 +116,7 @@ def parse_page(html: str, url: str, crawled_at: str) -> PageResult:
         return res
 
     title = _text(main.find("h1"))
-    category = _category(soup, url)
+    category = res.category = _category(soup, url)
     common = dict(product_url=url, source_url=url, crawled_at=crawled_at, category=category)
 
     variant_table = None

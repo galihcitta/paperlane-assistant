@@ -19,11 +19,13 @@ export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 Other entry points: `pl chat` (terminal REPL), `pl quote PL-CP-A4-70:10` (pricing only, no model), `pytest`
-(no key needed), `python eval/refresh_rehearsal.py ../paperlane <tmpdir>` (re-ingest a mutated copy of the site).
+(no key needed; reads the catalog site from `../paperlane`, as in the take-home layout), `python eval/refresh_rehearsal.py ../paperlane <tmpdir>` (re-ingest a mutated copy of the site).
 
-For the demo's updated site: `pl ingest --base-url <new url>`. A running server picks up the new snapshot on the
-next message. If the new site fails validation, the previous snapshot stays live and the command exits non-zero
-with a report in `data/reports/`.
+For the demo's updated site: `pl ingest --base-url <new url>`, then read the report it prints (also in
+`data/reports/`). Items whose data fails a check are stored not quotable and listed; everything else goes live,
+and a running server picks up the new snapshot on the next message. **If the run has warnings (dead links, SKU
+count changed by more than 20%), it is held: the previous snapshot stays live and the command exits 3 until you
+run `pl promote <run_id>` (or re-run with `--accept`).** It is rejected (exit 2) only if nothing usable was parsed.
 
 ## Architecture
 

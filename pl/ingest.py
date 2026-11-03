@@ -85,8 +85,7 @@ def run_ingest(base_url: str, data_dir: Path = Path("data"), min_delay: float = 
                 page_problem = f"page failed to parse ({'; '.join(res.errors[:3])}) and no API key for the LLM fallback"
             else:
                 try:
-                    cat = page_items[0].category if page_items else None
-                    page_items = llm_extract.extract(res.main_text, page.url, page.fetched_at, cat)
+                    page_items = llm_extract.extract(res.main_text, page.url, page.fetched_at, res.category)
                     llm_pages.append(page.url)
                 except Exception as e:
                     page_problem = f"page failed to parse and LLM fallback errored: {e!r}"
