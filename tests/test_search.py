@@ -154,3 +154,18 @@ def test_vague_colour_wording_asks_even_if_kind_coloured(v1_items, text, asks):
         r = search(Criteria(product_type="paper", paper_kind="coloured", paper_colour=colour, size="A4",
                             quantity={"value": 5, "unit": "reams"}), v1_items, customer_text=text)
         assert (r["decision"] == "needs_clarification" and r["missing_or_ambiguous"] == "paper_colour") == asks, (text, colour)
+
+
+def test_catalog_brand_and_colour_keywords_are_filters(v1_items):
+    r = S(v1_items, product_type="paper", size="A4", keywords=["Heritage Ivory"], quantity={"value": 2})
+    assert r["decision"] == "no_exact_match"                                    # ivory is out of stock
+    assert r["unavailable"][0]["sku"] == "PL-CL-A4-100-IVY" and r["unavailable"][0]["back_in_stock"] == "2026-11-20"
+    assert r["alternatives"][0]["sku"] == "PL-CL-A4-90-CRM"                   # same line, nearest colour
+    r = S(v1_items, product_type="paper", size="A4", keywords=["pastel blue"], quantity={"value": 2})
+    assert [m["sku"] for m in r["matches"]] == ["PL-CL-A4-80-PBL"]
+
+
+@pytest.mark.parametrize("kw", ["recycled", "bright"])
+def test_generic_keywords_only_rank(v1_items, kw):
+    r = S(v1_items, product_type="paper", size="A4", keywords=[kw], quantity={"value": 2})
+    assert r["decision"] == "matches" and r["match_count"] > 3

@@ -83,6 +83,7 @@ class Norm(BaseModel):
     budget_includes_vat: bool = False
     budget_assumption: str | None = None
     keywords: list[str] = []
+    brand: str | None = None
     ambiguous: list[str] = []
     size_raw: str | None = None
 
@@ -214,6 +215,7 @@ def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None
     n, errs = normalise(c, customer_text)
     if errs:
         return {"error": "invalid criteria", "details": errs}
+    _promote_keywords(n, items)
     base = {"criteria_used": _criteria_view(n)}
     if n.budget_assumption:
         base["budget_assumption"] = n.budget_assumption
@@ -301,7 +303,7 @@ def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None
     relaxed: list[str] = []
     seen: set[str] = set()
     n2 = n.model_copy()
-    for step in ["price", "finish", "weight", "paper_colour"]:
+    for step in ["price", "finish", "weight", "paper_colour", "brand"]:
         if step == "price":
             if n2.max_unit_price_satang is None and n2.budget_satang is None:
                 continue
@@ -318,6 +320,10 @@ def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None
             if n2.paper_colour is None:
                 continue
             n2.paper_colour = None
+        elif step == "brand":
+            if n2.brand is None:
+                continue
+            n2.brand = None
         relaxed.append(step)
         cands = [_priced(it, n2) for it in hard if soft_ok(it, n2) and it.stock_status == "in_stock" and it.quotable]
         cands = [p for p in cands if _price_ok(p, n2) and p["it"].sku not in seen]
@@ -332,6 +338,18 @@ def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None
                    else "nothing in stock meets every requirement",
                    "unavailable": unavailable, "relaxed": relaxed, "alternatives": alts,
                    "never_relaxed": ["size", "product type", "sides", "colour mode"]}
+
+
+def _promote_keywords(n: Norm, items: dict[str, Item]) -> None:
+    """A keyword that names a catalog brand or paper colour ("Heritage Ivory", "pastel blue") becomes a filter on
+    that attribute; anything else ("recycled", "bright") stays a ranking preference."""
+    brands = {it.brand.lower() for it in items.values() if it.brand}
+    colours = {it.colour for it in items.values() if it.colour}
+    for k in n.keywords:
+        if n.brand is None:
+            n.brand = next((b for b in sorted(brands, key=len, reverse=True) if re.search(rf"\b{re.escape(b)}\b", k)), None)
+        if n.paper_colour is None and "paper_colour" not in n.ambiguous:
+            n.paper_colour = next((c for c in sorted(colours) if re.search(rf"\b{re.escape(c)}\b", k)), None)
 
 
 def _missing(n: Norm, f: str) -> bool:
@@ -366,6 +384,8 @@ def _soft_fail(it: Item, n: Norm) -> list[str]:
         fails.append("weight")
     if n.paper_colour and it.colour != n.paper_colour and not (n.product_type == "printed_flyer" and n.paper_colour == "white"):
         fails.append("paper_colour")
+    if n.brand and (it.brand or "").lower() != n.brand:
+        fails.append("brand")
     return fails
 
 
@@ -422,6 +442,8 @@ def _differs(p: dict, n: Norm) -> list[str]:
         out.append(f"weight {it.weight_gsm} gsm is outside {n.min_gsm or 0}-{n.max_gsm or '∞'} gsm")
     if n.paper_colour and it.colour != n.paper_colour:
         out.append(f"colour {it.colour_raw} instead of {n.paper_colour}")
+    if n.brand and (it.brand or "").lower() != n.brand:
+        out.append(f"brand {it.brand} instead of {n.brand}")
     return out
 
 
