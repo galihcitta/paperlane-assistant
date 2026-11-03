@@ -158,3 +158,19 @@ Git repo (no keys), README (≤5 commands to run, architecture diagram, schema d
 5. Eval 3× runs, refresh rehearsal, README, customer summary (1 h).
 
 Stop at about 6 hours. Anything unfinished goes in README "Known limitations", not in extra hours.
+
+## 12. Working assumptions (not confirmed with devx)
+
+We chose not to send clarifying questions; these are our calls instead. Put them in the README under
+"Assumptions", each with one line of reasoning, and make the code behave exactly this way.
+
+1. Several qualifying items with all required attributes given → rank cheapest effective unit price at the requested qty first, show top 3, full breakdown for #1, end with one narrowing question.
+2. Quantities given in sheets → round up to whole packs and say so in the reply.
+3. If adding packs would cross the ฿3,000 free-delivery threshold for little extra cost, mention it as a suggestion; never change the quoted quantity on the customer's behalf.
+4. Out-of-stock items → mention with their expected return date, never quote as available, offer in-stock alternatives. Discontinued → say it is no longer sold, offer alternatives.
+5. Delivery area: the site states "Bangkok and vicinity". A request naming a location outside that → still quote, and flag that delivery there needs confirmation by sales.
+6. Budgets exclude VAT (PR7); "including VAT" or "all-in" wording flips it. The reply always states which was used.
+7. A flyer "pack" is 100 printed sheets. Artwork, turnaround and custom sizes are out of scope; say so if asked.
+8. Prices are those of the snapshot the quote was built from; the quote shows `crawled_at`.
+9. The updated demo site may change page layouts; handled by label-driven parsers plus LLM fallback, and an unsafe snapshot is rejected rather than promoted.
+10. Crawl at 1 request/second, following `robots.txt` (stricter than the brief's 2/s).

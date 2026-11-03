@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaperLane Assistant</title>
+<style>
+  :root { --bg:#f6f5f2; --panel:#fff; --ink:#1d1d1b; --muted:#6b6a66; --line:#e3e1dc; --accent:#2f5d50; --warn:#9a3b1f; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:14px 20px; border-bottom:1px solid var(--line); background:var(--panel); display:flex; justify-content:space-between; align-items:baseline; }
+  header b { font-size:17px; } header span { color:var(--muted); font-size:13px; }
+  main { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:16px; padding:16px 20px; max-width:1200px; margin:auto; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; padding:12px 16px; } }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:8px; display:flex; flex-direction:column; min-height:70vh; }
+  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:0; padding:12px 14px; border-bottom:1px solid var(--line); }
+  #log { flex:1; overflow-y:auto; padding:14px; }
+  .msg { margin:0 0 12px; white-space:pre-wrap; }
+  .you { color:var(--muted); } .you::before { content:"You: "; font-weight:600; }
+  .bot::before { content:"Assistant: "; font-weight:600; color:var(--accent); }
+  .meta { font-size:12px; color:var(--muted); margin-top:-8px; margin-bottom:12px; }
+  form { display:flex; gap:8px; padding:12px; border-top:1px solid var(--line); }
+  input { flex:1; padding:10px; border:1px solid var(--line); border-radius:6px; font:inherit; min-width:0; }
+  button { padding:10px 16px; border:0; border-radius:6px; background:var(--accent); color:#fff; font:inherit; cursor:pointer; }
+  button:disabled { opacity:.5; }
+  #quote { padding:14px; overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td.n, th.n { text-align:right; font-variant-numeric: tabular-nums; white-space:nowrap; }
+  tr.total td { font-weight:700; border-bottom:0; }
+  .refused { color:var(--warn); margin-top:10px; }
+  .empty { color:var(--muted); }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<header><b>PaperLane sales assistant</b><span id="snap"></span></header>
+<main>
+  <section>
+    <h2>Chat</h2>
+    <div id="log"><p class="empty">Try: “We need letter-size flyers, one side, colour, under 250 a pack, 20 packs”</p></div>
+    <form id="f"><input id="m" autocomplete="off" placeholder="Type a request…" aria-label="Message"><button id="b">Send</button></form>
+  </section>
+  <section>
+    <h2>Quote (computed by code, THB)</h2>
+    <div id="quote"><p class="empty">No quote yet.</p></div>
+  </section>
+</main>
+<script>
+const sid = "web-" + Math.random().toString(36).slice(2, 10);
+const log = document.getElementById("log"), q = document.getElementById("quote");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function add(cls, text) { const p = document.createElement("p"); p.className = "msg " + cls; p.textContent = text; log.appendChild(p); log.scrollTop = log.scrollHeight; return p; }
+function renderQuote(d) {
+  if (!d || !d.lines || !d.lines.length) return;
+  let h = "<table><tr><th>Item</th><th class=n>Packs</th><th class=n>Unit</th><th>Rule</th><th class=n>Line</th></tr>";
+  for (const l of d.lines) h += `<tr><td><a href="${esc(l.source_url)}" target="_blank" rel="noopener">${esc(l.sku)}</a><br><small>${esc(l.product_name)} · ${esc(l.pack)}</small></td><td class=n>${l.qty_packs}</td><td class=n>${esc(l.unit_price)}</td><td>${esc(l.price_rule)}</td><td class=n>${esc(l.line_total)}</td></tr>`;
+  h += `<tr><td colspan=4>Subtotal</td><td class=n>${esc(d.subtotal)}</td></tr><tr><td colspan=4>Delivery</td><td class=n>${esc(d.delivery)}</td></tr><tr><td colspan=4>VAT 7%</td><td class=n>${esc(d.vat_7pct)}</td></tr><tr class=total><td colspan=4>Total incl. VAT</td><td class=n>${esc(d.total_incl_vat)}</td></tr></table>`;
+  for (const r of d.refused || []) h += `<p class=refused>Not quotable: ${esc(r.sku)} (${esc(r.reason)})</p>`;
+  q.innerHTML = h;
+}
+document.getElementById("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  const m = document.getElementById("m"), b = document.getElementById("b"), text = m.value.trim();
+  if (!text) return;
+  if (log.querySelector(".empty")) log.innerHTML = "";
+  add("you", text); m.value = ""; b.disabled = true;
+  const wait = add("bot", "…");
+  try {
+    const r = await fetch("/chat", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({session_id: sid, message: text})});
+    const d = await r.json();
+    wait.textContent = d.reply ?? JSON.stringify(d);
+    const meta = document.createElement("p"); meta.className = "meta";
+    meta.textContent = `decision: ${d.decision} · reply check: ${d.reply_check_passed ? "passed" : "failed"}${d.template_used ? " (template reply)" : ""}`;
+    log.appendChild(meta);
+    renderQuote(d.quote);
+    if (d.snapshot) document.getElementById("snap").textContent = "catalog snapshot " + d.snapshot;
+  } catch (err) { wait.textContent = "Error: " + err; }
+  b.disabled = false; m.focus();
+});
+</script>
+</body>
+</html>
