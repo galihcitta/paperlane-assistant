@@ -9,9 +9,10 @@ from pathlib import Path
 
 import yaml
 
-from . import db, llm
+from . import db, llm, replycheck
 from .agent import Agent
 from .replycheck import allowed_numbers
+from .search import Criteria, search
 
 ROOT = Path("eval")
 
@@ -113,6 +114,17 @@ def score(case: dict, out: dict) -> dict:
     return r
 
 
+def score_replycheck(case: dict, items: dict) -> dict:
+    """Offline case: run the search tool, then the reply check on a scripted reply; it must flag expect_problem."""
+    rc = case["replycheck"]
+    res = search(Criteria(**rc["criteria"]), items)
+    probs = replycheck.check(rc["reply"], [json.dumps(res, ensure_ascii=False, default=str)], "",
+                             [i.product_name for i in items.values()])
+    ok = any(re.search(rc["expect_problem"], p) for p in probs)
+    return {"checks": {"reply_check_catches": ok}, "pass": ok, "reply": rc["reply"], "decision": res["decision"],
+            "notes": [] if ok else [f"reply check did not flag {rc['expect_problem']!r} (problems: {probs})"]}
+
+
 def main(runs: int = 3, only: list[str] | None = None) -> int:
     if not llm.available():
         print("ANTHROPIC_API_KEY is not set; the eval needs the model.")
@@ -128,6 +140,12 @@ def main(runs: int = 3, only: list[str] | None = None) -> int:
         for c in cases:
             sid = f"eval-{c['id']}-{run}-{int(time.time())}"
             t0 = time.monotonic()
+            if c.get("offline"):
+                s = score_replycheck(c, agent.items) | {"run": run, "latency_s": 0.0, "items": [], "criteria": {},
+                                                        "total": None, "template_used": False, "regenerated": False, "error": None}
+                results[c["id"]].append(s)
+                print(f"run {run} {c['id']}: {'PASS' if s['pass'] else 'FAIL'} {'; '.join(s['notes'])}", flush=True)
+                continue
             for msg in c["turns"]:
                 out = agent.chat(sid, msg)
             s = score(c, out)
@@ -168,6 +186,7 @@ def report(cases, results, ing, runs) -> str:
         f"| Reply content checks | {rate('reply')} |",
         f"| Delivery-area flag | {rate('delivery')} |",
         f"| Reply post-check passed first or second try | {rate('reply_check')} |",
+        f"| Reply check catches a planted wrong total (offline) | {rate('reply_check_catches')} |",
         f"| **Overall pass** | {sum(r['pass'] for r in allr)}/{len(allr)} |", "",
         f"Latency per conversation: median {lat[len(lat) // 2]}s, max {lat[-1]}s.", "",
         "## Per request (stability over runs)", "", "| Request | Passes | Notes (failed runs) |", "|---|---|---|",
@@ -176,7 +195,7 @@ def report(cases, results, ing, runs) -> str:
         rs = results[c["id"]]
         notes = "; ".join(sorted({n for r in rs if not r["pass"] for n in r["notes"]})) or ""
         lines.append(f"| {c['id']} | {sum(r['pass'] for r in rs)}/{len(rs)} | {notes} |")
-    fails = [(cid, r) for cid, rs in results.items() for r in rs if not r["pass"] or not r["checks"]["reply_check"]]
+    fails = [(cid, r) for cid, rs in results.items() for r in rs if not r["pass"] or not r["checks"].get("reply_check", True)]
     lines += ["", "## Failures (every failing run)", ""]
     if not fails:
         lines.append("None.")

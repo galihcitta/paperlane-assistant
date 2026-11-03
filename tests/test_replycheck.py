@@ -132,3 +132,10 @@ def test_chat_from_two_threads(monkeypatch, tmp_path):
     [t.start() for t in ts]
     [t.join() for t in ts]
     assert errors == []
+
+
+def test_eval_offline_replycheck_cases(v1_items):
+    import yaml
+    from pl.evaluate import ROOT, score_replycheck
+    cases = [c for c in yaml.safe_load((ROOT / "requests.yaml").read_text()) if c.get("offline")]
+    assert cases and all(score_replycheck(c, v1_items)["pass"] for c in cases)

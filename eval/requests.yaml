@@ -199,3 +199,45 @@
   top1: PL-PR-A5-MT-100-40
   total: "809.24"
   notes: Assumptions 2 and 7. 500 flyers = 5 packs of 100 (exact); far below 3,000 so no free-delivery upsell, quantity unchanged.
+
+# --- Adversarial cases added after review: each would have caught a shipped bug ---
+
+- id: E26-a3-reams-white
+  turns: ["5 reams of A3 paper"]
+  decision: matches
+  criteria: {product_type: paper, size_code: A3, quantity: {value: 5, unit: reams}}
+  top1: PL-CP-A3-80
+  total: "1546.15"
+  notes: Ranking by price per pack picked Pastel Blue (2,407.50). No colour given -> white; cheapest line total.
+
+- id: E27-coloured-a4-sheets
+  turns: ["1,000 sheets of coloured A4"]
+  decision: matches
+  absent: [PL-CL-A4-80-BRT]
+  total: "577.80"
+  notes: 1,000 sheets = 2 x 500-sheet pastel packs (390.00) vs 4 x 250-sheet brights (596.00). Pastel colours tie; any is right.
+
+- id: E28-inch-quote-letter
+  turns: ['Need 8.5"x11" flyers, one side, colour, 10 packs']
+  decision: matches
+  criteria: {product_type: printed_flyer, size_code: LETTER, sides: 1, colour_mode: cmyk, quantity: {value: 10}}
+  top1: PL-PR-LTR-MT-100-40
+  total: "2423.55"
+  notes: The inch mark used to make the size unparseable ("custom size").
+
+- id: E29-replycheck-wrong-total
+  offline: true
+  replycheck:
+    criteria: {product_type: paper, size: A3, quantity: {value: 5, unit: reams}}
+    reply: "PL-CP-A3-80 x 5 reams @ 259.00 = 1,295.00\nSubtotal 1,295.00\nDelivery 150.00\nVAT 7% 101.15\nTotal ฿2,407.50"
+    expect_problem: "stated total 2407.50"
+  notes: No model call. 2,407.50 is a real figure in the tool output (another product's total), so the old any-number check passed it.
+
+- id: E30-real-chat-message
+  turns: ["hi! can u do 10 reams of plain white A4 for our office printer? nothing fancy, cheapest is fine thx"]
+  decision: matches
+  criteria: {product_type: paper, size_code: A4, quantity: {value: 10}}
+  top1: PL-CP-A4-70
+  total: "1280.15"
+  reply_not_regex: "(?i)which (size|product)"
+  notes: Informal wording, no SKU or product name.

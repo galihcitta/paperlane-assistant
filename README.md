@@ -15,7 +15,7 @@ python3 -m venv .venv && .venv/bin/pip install -q -e '.[dev]'
 .venv/bin/pl ingest --base-url http://localhost:8000/paperlane/
 export ANTHROPIC_API_KEY=sk-ant-...
 .venv/bin/pl serve        # UI + API on http://127.0.0.1:8080
-.venv/bin/pl eval         # 25 requests x 3 runs -> eval/results.md
+.venv/bin/pl eval         # 30 requests (29 model + 1 offline) x 3 runs -> eval/results.md
 ```
 
 Other entry points: `pl chat` (terminal REPL), `pl quote PL-CP-A4-70:10` (pricing only, no model), `pytest`
