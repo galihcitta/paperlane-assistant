@@ -158,7 +158,11 @@ def parse_finish(text: str | None) -> str | None:
 def parse_sides(text: str | None) -> int | None:
     if not text:
         return None
-    t = text.lower()
+    t = text.lower().strip()
+    if t in ("1", "one", "single", "front", "front only"):
+        return 1
+    if t in ("2", "two", "both", "double"):
+        return 2
     if re.search(r"double|both sides|two.sided|duplex|4/4|1/1", t):
         return 2
     if re.search(r"single|one side|one.sided|simplex|4/0|1/0", t):
