@@ -1,4 +1,8 @@
-"""Live LLM-fallback exercise: one product page rewritten into a layout the parser doesn't know."""
+"""Live LLM-fallback exercise: one product page rewritten into a layout the parser doesn't know.
+
+usage (needs ANTHROPIC_API_KEY): mkdir -p W/www && cp -R ../paperlane W/www/ && cp data/paperlane.db W/fb.db
+       python eval/llm_fallback_run.py W
+"""
 import json, subprocess, sys, time
 from pathlib import Path
 import httpx
