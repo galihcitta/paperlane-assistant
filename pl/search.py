@@ -100,7 +100,7 @@ def normalise(c: Criteria) -> tuple[Norm, list[str]]:
              min_gsm=c.min_gsm, max_gsm=c.max_gsm, quantity=c.quantity)
     if c.size:
         code, _, _ = N.parse_size(c.size)
-        n.size_code = "CUSTOM" if code in (None, "OTHER") else code
+        n.size_code = None if code is None else "CUSTOM" if code == "OTHER" else code   # None -> ask which size
         n.size_raw = c.size
     if c.sides:
         n.sides = N.parse_sides(c.sides) or ({"1": 1, "2": 2}.get(c.sides.strip()))
@@ -226,9 +226,12 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
 
     def clarify(field: str, allowed: list) -> dict:
         missing = [f for f in REQUIRED.get(n.product_type or "", []) if _missing(n, f)]
-        return base | {"decision": "needs_clarification", "missing_or_ambiguous": field,
-                       "question": QUESTIONS[field], "allowed_values": allowed,
-                       "also_missing": [m for m in missing if m != field]}
+        out = base | {"decision": "needs_clarification", "missing_or_ambiguous": field,
+                      "question": QUESTIONS[field], "allowed_values": allowed,
+                      "also_missing": [m for m in missing if m != field]}
+        if field == "size" and n.size_raw:
+            out["size_not_recognised"] = n.size_raw
+        return out
 
     if n.product_type is None:
         return clarify("product_type", ["paper", "printed_flyer"])

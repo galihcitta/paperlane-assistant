@@ -19,7 +19,8 @@ def test_brief_example(v1_items):
     assert r["narrowing_question"] == "Matte or gloss?"
 
 
-@pytest.mark.parametrize("size", ["8.5x11", "8½ × 11", "US letter", "Letter"])
+@pytest.mark.parametrize("size", ["8.5x11", "8½ × 11", "US letter", "Letter", '8.5"x11"', "8 1/2 x 11", "8.5 by 11",
+                                  "8.5 in x 11 in", "21.6 x 27.9 cm"])
 def test_informal_letter(v1_items, size):
     r = S(v1_items, product_type="paper", size=size, weight_lb=20, quantity={"value": 5, "unit": "reams"})
     assert r["matches"][0]["sku"] == "PL-CP-LTR-20" and r["best_quote"]["total_incl_vat"] == "882.75"
@@ -71,6 +72,19 @@ def test_budget_assumption_stated(v1_items):
 
 def test_not_sold(v1_items):
     assert S(v1_items, product_type="other", requested_item="envelopes")["decision"] == "not_sold"
+
+
+@pytest.mark.parametrize("size,code", [("A-4", "A4"), ("a 3", "A3"), ("A-5", "A5"), ('8.5" x 14"', "LEGAL"),
+                                       ("8 1/2 by 14", "LEGAL"), ("297 x 420 mm", "A3")])
+def test_informal_sizes(size, code):
+    from pl.normalise import parse_size
+    assert parse_size(size)[0] == code
+
+
+def test_unparseable_size_asks_with_sizes_we_sell(v1_items):
+    r = S(v1_items, product_type="paper", size="the usual size", quantity={"value": 5})
+    assert r["decision"] == "needs_clarification" and r["missing_or_ambiguous"] == "size"
+    assert r["size_not_recognised"] == "the usual size" and "A4" in r["allowed_values"]
 
 
 def test_custom_size_is_out_of_scope(v1_items):

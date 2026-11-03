@@ -22,14 +22,17 @@ SIZES = {
 }
 
 _SIZE_WORDS = [
-    (re.compile(r"\bA3\b", re.I), "A3"),
-    (re.compile(r"\bA4\b", re.I), "A4"),
-    (re.compile(r"\bA5\b", re.I), "A5"),
+    (re.compile(r"\bA[-\s]?3\b", re.I), "A3"),
+    (re.compile(r"\bA[-\s]?4\b", re.I), "A4"),
+    (re.compile(r"\bA[-\s]?5\b", re.I), "A5"),
     (re.compile(r"\blegal\b", re.I), "LEGAL"),
     (re.compile(r"\bletter\b", re.I), "LETTER"),
 ]
 
-_DIMS = re.compile(r"(\d+(?:\.\d+)?|\d*½)\s*[×x]\s*(\d+(?:\.\d+)?|\d*½)\s*(mm|in|inch|inches|\")?", re.I)
+_D = r"(\d+(?:\.\d+)?|\d*½)"
+_U = r"(mm|cm|in\b|inch|inches|\"|'')?"
+_DIMS = re.compile(_D + r"\s*" + _U + r"\s*(?:[×x*]|by)\s*" + _D + r"\s*" + _U, re.I)
+_HALF = re.compile(r"(\d+)[\s-]+1/2\b")   # "8 1/2" / "8-1/2" -> "8.5"
 
 
 def _num(s: str) -> float:
@@ -43,12 +46,14 @@ def parse_dims(text: str | None) -> tuple[int, int] | None:
     """'210 × 297 mm' -> (210, 297); '8.5 × 11 in' -> (216, 279). Returns portrait (w<=h)."""
     if not text:
         return None
-    m = _DIMS.search(text)
+    m = _DIMS.search(_HALF.sub(lambda h: h.group(1) + ".5", text))
     if not m:
         return None
-    a, b, unit = _num(m.group(1)), _num(m.group(2)), (m.group(3) or "").lower()
-    if unit in ("in", "inch", "inches", '"') or (not unit and max(a, b) < 30):
+    a, b, unit = _num(m.group(1)), _num(m.group(3)), (m.group(4) or m.group(2) or "").lower()
+    if unit in ("in", "inch", "inches", '"', "''") or (not unit and max(a, b) < 30):
         a, b = a * 25.4, b * 25.4
+    elif unit == "cm":
+        a, b = a * 10, b * 10
     w, h = sorted((int(Decimal(a).quantize(0, ROUND_HALF_UP)), int(Decimal(b).quantize(0, ROUND_HALF_UP))))
     return w, h
 
