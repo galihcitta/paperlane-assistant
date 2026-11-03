@@ -61,14 +61,69 @@ def test_relabelled_columns_still_parse():
     assert not r.errors and len(r.items) == 8
 
 
-def test_reject_keeps_previous_snapshot(site_copy, con, tmp_path):
-    first = run_ingest(BASE, data_dir=tmp_path, con=con, log=lambda *_: None, fetcher=FileFetcher(site_copy))
-    for f in list((site_copy / "product").glob("pl-c*.html")):   # remove most single-SKU pages
-        f.unlink()
-    second = run_ingest(BASE, data_dir=tmp_path, con=con, log=lambda *_: None, fetcher=FileFetcher(site_copy))
-    assert second.status == "rejected"
+def _ingest(site, con, tmp_path, **kw):
+    return run_ingest(BASE, data_dir=tmp_path, con=con, log=lambda *_: None, fetcher=FileFetcher(site), **kw)
+
+
+def _edit(path, old, new):
+    t = path.read_text()
+    assert old in t
+    path.write_text(t.replace(old, new))
+
+
+def test_count_swing_and_dead_link_hold_until_accepted(site_copy, con, tmp_path):
     from pl import db
-    assert db.current_run_id(con) == first.run_id
+    first = _ingest(site_copy, con, tmp_path)
+    for f in list((site_copy / "product").glob("pl-c*.html")):   # drop most single-SKU pages (> 20% swing)
+        f.unlink()
+    held = _ingest(site_copy, con, tmp_path)
+    assert held.status == "held" and db.current_run_id(con) == first.run_id
+    assert any("SKU count" in w for w in held.warnings) and any("dead link" in w for w in held.warnings)
+    accepted = _ingest(site_copy, con, tmp_path, accept=True)
+    assert accepted.status == "promoted" and db.current_run_id(con) == accepted.run_id
+    db.promote(con, held.run_id)                                  # `pl promote` path
+    assert db.current_run_id(con) == held.run_id
+
+
+def test_bad_sku_quarantined_rest_promoted(site_copy, con, tmp_path):
+    _ingest(site_copy, con, tmp_path)
+    _edit(site_copy / "api/pricing/PL-CP-A4-70.json", '"vat_included": false', '"vat_included": true')
+    _edit(site_copy / "api/pricing/PL-CP-A4-80.json", "122.55", "999.0")          # tier above list price
+    _edit(site_copy / "product/pl-cp-a5-80.html", '<span class="stock-in">In stock</span>', "<span>Ask us</span>")  # unknown
+    res = _ingest(site_copy, con, tmp_path)
+    assert res.status == "promoted"
+    assert set(res.quarantined) == {"PL-CP-A4-70", "PL-CP-A4-80", "PL-CP-A5-80"}
+    assert "vat_included" in res.quarantined["PL-CP-A4-70"]
+    assert sum(it.quotable for it in res.items.values()) == 69
+    from pl.pricing import quote
+    q = quote([("PL-CP-A4-70", 10)], res.items)
+    assert not q.lines and "not quotable" in q.refused[0]["reason"]
+    assert "NOT quotable" in res.report
+
+
+def test_unparseable_page_keeps_last_known_rows_unquotable(site_copy, con, tmp_path):
+    _ingest(site_copy, con, tmp_path)
+    _edit(site_copy / "product/flyers-a5-matte.html", "<th>Printing</th>", "<th>Print process</th>")
+    res = _ingest(site_copy, con, tmp_path)                       # no API key -> no LLM fallback
+    assert res.status == "promoted" and len(res.items) == 72
+    a5 = [s for s in res.quarantined if s.startswith("PL-PR-A5-MT")]
+    assert len(a5) == 8 and all("failed to parse" in res.quarantined[s] for s in a5)
+
+
+def test_low_stock_wording_is_in_stock(site_copy, con, tmp_path):
+    _edit(site_copy / "product/pl-cp-a4-75.html", '<span class="stock-in">In stock</span>', '<span class="stock-in">Low stock</span>')
+    _edit(site_copy / "product/pl-cp-a4-70.html", '<span class="stock-in">In stock</span>', '<span class="stock-in">Only 3 left</span>')
+    res = _ingest(site_copy, con, tmp_path)
+    assert res.items["PL-CP-A4-75"].stock_status == res.items["PL-CP-A4-70"].stock_status == "in_stock"
+    from pl.normalise import parse_stock
+    assert parse_stock("Only 3 left")[0] == "in_stock"          # LLM fallback path has no CSS class
+
+
+def test_rejected_only_when_nothing_usable(site_copy, con, tmp_path):
+    for f in (site_copy / "product").glob("*.html"):
+        f.write_text("<html><body><main><h1>Moved</h1><div class='pricebox'>See our new shop</div></main></body></html>")
+    res = _ingest(site_copy, con, tmp_path)
+    assert res.status == "rejected"
 
 
 def test_diff_detects_changes(site_copy, con, tmp_path):

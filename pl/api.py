@@ -36,6 +36,7 @@ class QuoteIn(BaseModel):
 
 class IngestIn(BaseModel):
     base_url: str
+    accept: bool = False
 
 
 @app.get("/")
@@ -60,8 +61,9 @@ def post_quote(body: QuoteIn):
 @app.post("/ingest")
 def post_ingest(body: IngestIn):
     # Blocking on purpose: a crawl is ~2 minutes at 1 req/s and this is an operator action.
-    res = run_ingest(body.base_url)
-    return {"run_id": res.run_id, "status": res.status, "report": res.report, "problems": res.problems}
+    res = run_ingest(body.base_url, accept=body.accept)
+    return {"run_id": res.run_id, "status": res.status, "report": res.report, "warnings": res.warnings,
+            "not_quotable": res.quarantined}
 
 
 @app.get("/items")

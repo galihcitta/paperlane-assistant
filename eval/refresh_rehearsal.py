@@ -51,6 +51,21 @@ def mutate(site: Path):
         '<span class="stock-out">Discontinued</span>')
 
 
+def mutate_round2(site: Path):
+    """Run-level noise: wording change, a dead link, +16 SKUs (>20% swing). Should hold, then promote on accept."""
+    sub(site / "product/pl-cp-a4-80-nusa.html", '<span class="stock-in">In stock</span>', '<span class="stock-in">Only 3 left</span>')
+    sub(site / "index.html", "<a href=\"delivery.html\">", "<a href=\"promo/black-friday.html\">Sale</a><a href=\"delivery.html\">")
+    tpl = (site / "product/pl-cs-a4-200-wh.html").read_text()
+    cards = []
+    for i in range(16):
+        sku = f"PL-CS-A4-{300 + i}-WH"
+        page = tpl.replace("PL-CS-A4-200-WH", sku).replace("200gsm", f"{300 + i}gsm").replace("200 gsm", f"{300 + i} gsm")
+        page = page.replace("<span data-sku='" + sku + "'>Loading volume pricing&hellip;</span>", "none")
+        (site / "product" / f"{sku.lower()}.html").write_text(page)
+        cards.append(f"<div class='card'><h3><a href='../../product/{sku.lower()}.html'>Card {300 + i}gsm</a></h3></div>")
+    sub(site / "category/card-photo/page-2.html", "<div class='grid'>", "<div class='grid'>" + "".join(cards))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("site")
@@ -76,8 +91,18 @@ def main():
         shutil.copy(db.db_path(), work / "rehearsal.db")
         con = db.connect(work / "rehearsal.db")
         res = run_ingest(base, data_dir=work / "data", con=con)
+        mutate_round2(site)
+        res2 = run_ingest(base, data_dir=work / "data", con=con)
+        held_live = db.current_run_id(con)
+        db.promote(con, res2.run_id)
     finally:
         srv.terminate()
+    _, live = db.load_current(con)
+    new16 = [s for s in live if s.startswith("PL-CS-A4-3")]
+    r2_ok = (res2.status == "held" and held_live == res.run_id
+             and any("dead link" in w for w in res2.warnings) and any("SKU count" in w for w in res2.warnings)
+             and live["PL-CP-A4-80-NUSA"].stock_status == "in_stock" and live["PL-CP-A4-80-NUSA"].quotable
+             and len(new16) == 16 and all(live[s].quotable for s in new16))
 
     got = {k: v for k, v in res.changes.items() if v}
     diff_ok = got == EXPECTED and change_count(res.changes) == 5
@@ -93,11 +118,16 @@ def main():
            f"- Diff lists exactly the 5 planted changes: **{'PASS' if diff_ok else 'FAIL'}**",
            f"- Quote for discontinued PL-CS-A4-160-AST refused: **{'PASS' if refused_ok else 'FAIL'}** ({q.refused})",
            f"- Discontinued item not offered by search (A4 160gsm card): **{'PASS' if not_offered else 'FAIL'}** (offered: {offered})",
+           "", "## Round 2: 'Only 3 left' wording, a dead link, +16 SKUs",
+           f"- First ingest status: **{res2.status}** (previous snapshot still live: {held_live == res.run_id}); "
+           f"warnings: {res2.warnings}",
+           f"- After `pl promote {res2.run_id}`: 'Only 3 left' item in stock and quotable, 16 new SKUs quotable: "
+           f"**{'PASS' if r2_ok else 'FAIL'}** ({len(live)} SKUs live)",
            "", "## Expected", "", "```", *[f"{k}: {v}" for k, v in EXPECTED.items()], "```",
            "", "## Ingest report produced by the pipeline", "", res.report]
     Path("eval/refresh_rehearsal.md").write_text("\n".join(out) + "\n")
-    print("\n".join(out[:8]))
-    sys.exit(0 if res.status == "promoted" and diff_ok and refused_ok and not_offered else 1)
+    print("\n".join(out[:12]))
+    sys.exit(0 if res.status == "promoted" and diff_ok and refused_ok and not_offered and r2_ok else 1)
 
 
 if __name__ == "__main__":

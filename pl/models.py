@@ -46,6 +46,12 @@ class Item(BaseModel):
     crawled_at: str
     tiers: list[Tier] = Field(default_factory=list)
     tiers_url: str | None = None
+    quotable: bool = True                  # False = data problem found at ingest; never priced
+    quarantine_reason: str | None = None
+
+    def quarantine(self, reason: str):
+        self.quotable = False
+        self.quarantine_reason = "; ".join(x for x in (self.quarantine_reason, reason) if x)
 
     def missing_required(self) -> list[str]:
         return [f for f in REQUIRED if getattr(self, f) in (None, "", "unknown")]

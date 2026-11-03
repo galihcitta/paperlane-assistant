@@ -100,6 +100,8 @@ def quote(req: list[tuple[str, int]], items: dict[str, Item], insights: bool = T
             q.refused.append({"sku": sku, "reason": "unknown SKU (not in the current catalog)"})
         elif qty < 1:
             q.refused.append({"sku": sku, "reason": f"quantity must be at least 1 pack (got {qty})"})
+        elif not it.quotable:
+            q.refused.append({"sku": sku, "reason": "not quotable: the catalog data for this item failed checks; sales will confirm the price"})
         elif it.stock_status != "in_stock":
             reason = it.stock_status.replace("_", " ")
             if it.back_in_stock:

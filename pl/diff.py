@@ -11,7 +11,7 @@ def _tiers(it: Item) -> str:
 
 
 def diff(old: dict[str, Item], new: dict[str, Item]) -> dict[str, list[str]]:
-    out: dict[str, list[str]] = {k: [] for k in ["new", "removed", "price", "sale", "tiers", "stock", "other"]}
+    out: dict[str, list[str]] = {k: [] for k in ["new", "removed", "price", "sale", "tiers", "stock", "quotable", "other"]}
     for sku in sorted(new.keys() - old.keys()):
         it = new[sku]
         out["new"].append(f"{sku} {it.product_name} @ {s(it.list_price_satang)} ({it.stock_status})")
@@ -30,6 +30,8 @@ def diff(old: dict[str, Item], new: dict[str, Item]) -> dict[str, list[str]]:
         if (a.stock_status, a.back_in_stock) != (b.stock_status, b.back_in_stock):
             out["stock"].append(f"{sku}: {a.stock_status} -> {b.stock_status}"
                                 + (f" (back {b.back_in_stock})" if b.back_in_stock else ""))
+        if a.quotable != b.quotable:
+            out["quotable"].append(f"{sku}: " + ("now quotable" if b.quotable else f"NOT quotable ({b.quarantine_reason})"))
         for f in _OTHER:
             if getattr(a, f) != getattr(b, f):
                 out["other"].append(f"{sku}: {f} {getattr(a, f)!r} -> {getattr(b, f)!r}")

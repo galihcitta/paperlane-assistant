@@ -208,8 +208,9 @@ def parse_stock(text: str | None, css_class: str | None = None) -> tuple[str, da
             back = None
     if "discontinued" in t or "no longer" in t:
         return "discontinued", None
-    if "out of stock" in t or "sold out" in t or css_class == "stock-out":
+    if re.search(r"out of stock|sold out|not available|unavailable|back ?order", t) or css_class == "stock-out":
         return "out_of_stock", back
-    if re.fullmatch(r"\s*in stock\s*\.?\s*", t) or (css_class == "stock-in" and "in stock" in t):
+    if back is None and (css_class == "stock-in" or re.search(
+            r"\bin stock\b|low stock|limited stock|only \d+ left|\d+ left|few left|last \d+|ready to ship|^\s*available\s*\.?$", t)):
         return "in_stock", None
     return "unknown", back

@@ -251,13 +251,14 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
     hard = [it for it in sized if _fixed_ok(it, n)]
     soft_ok = lambda it, n_: _soft_fail(it, n_) == []
     exact = [it for it in hard if soft_ok(it, n)]
-    in_stock = [_priced(it, n) for it in exact if it.stock_status == "in_stock"]
+    in_stock = [_priced(it, n) for it in exact if it.stock_status == "in_stock" and it.quotable]
     in_stock = [p for p in in_stock if _price_ok(p, n)]
     unavailable = [{"sku": it.sku, "product_name": it.product_name, "stock": it.stock_status,
                     "back_in_stock": it.back_in_stock.isoformat() if it.back_in_stock else None,
-                    "note": ("no longer sold (discontinued)" if it.stock_status == "discontinued"
+                    "note": ("price/details need confirmation by sales (catalog data problem)" if not it.quotable
+                             else "no longer sold (discontinued)" if it.stock_status == "discontinued"
                              else "temporarily out of stock; cannot be quoted until it is back")}
-                   for it in exact if it.stock_status != "in_stock"]
+                   for it in exact if it.stock_status != "in_stock" or not it.quotable]
 
     if in_stock:
         # Assumption 1: stated preferences first, then cheapest effective unit price (per pack) at the requested qty.
@@ -300,7 +301,7 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
                 continue
             n2.paper_colour = None
         relaxed.append(step)
-        cands = [_priced(it, n2) for it in hard if soft_ok(it, n2) and it.stock_status == "in_stock"]
+        cands = [_priced(it, n2) for it in hard if soft_ok(it, n2) and it.stock_status == "in_stock" and it.quotable]
         cands = [p for p in cands if _price_ok(p, n2) and p["it"].sku not in seen]
         cands.sort(key=lambda p: (len(_differs(p, n)), _distance(p, n), p["unit"] / p["it"].sheets_per_pack))
         for p in cands[:3 - len(alts)]:

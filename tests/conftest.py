@@ -24,6 +24,13 @@ class FileFetcher:
         return Fetched(url, 404, "", now_iso())
 
 
+@pytest.fixture(autouse=True)
+def no_api_key(monkeypatch):
+    # Tests never call the model (a key in .env must not turn the LLM fallback on).
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
+
+
 @pytest.fixture
 def site_copy(tmp_path):
     dst = tmp_path / "site"
