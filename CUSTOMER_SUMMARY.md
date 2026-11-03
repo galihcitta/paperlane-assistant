@@ -13,7 +13,22 @@ assistant keeps using the last good copy and shows you a report of what changed.
 
 ## How well it works
 
-EVAL_SUMMARY_PLACEHOLDER
+We tested it on 30 typical requests, each run three times (90 conversations), including the tricky ones:
+volume-price boundaries, sale items, sizes written in inches, "1,000 sheets" instead of packs, out-of-stock
+items, budgets with and without VAT, customers outside Bangkok, and a product page with a planted note telling
+AI assistants to say the item is free.
+
+- **Every price and total was exact to the satang** in all 90 conversations, and it picked the right product in
+  every case where the request was clear.
+- **87 of 90 conversations did everything right.** The 3 misses are one request asked three times, "Do you have
+  A4 colour paper?": it quoted coloured paper instead of first asking whether the customer meant coloured paper
+  or colour printing. We know the cause and the fix.
+- **It gives the same answer every time** to the same request.
+- **About 0.35 baht and 5-6 seconds per message.**
+
+We also checked that it keeps working when the website changes: on a copy of your site with changed prices, a
+stock change, a discontinued item, a new product, a broken link and 16 extra products, it picked up every change,
+held the update for review where it should, and never quoted the discontinued item.
 
 Prices are never worked out by the AI. They come from a fixed calculator that follows your pricing rules
 exactly (volume tiers, sale prices, free delivery from ฿3,000, VAT rounding). Before a reply is sent, code

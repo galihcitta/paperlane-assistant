@@ -148,7 +148,16 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 - **Two requests on the same chat session at once aren't serialised.** Different sessions are safe (the shared
   DB connection is locked); simultaneous messages in one session can interleave its history.
 
-KNOWN_LIMITATIONS_PLACEHOLDER
+- **"Colour paper" no longer triggers the clarifying question** (eval E14, 0/3). "Do you have A4 colour paper?"
+  can mean coloured stock or printing in colour; since the line-total ranking fix it is read as coloured stock and
+  quoted. The quote is correct for coloured paper, but the assistant should ask first. Cause and fix in
+  `eval/results.md`; not fixed because the eval was to run once on the reviewed code.
+- **Eval scope.** 30 requests x 3 runs on the v1 catalog: 87/90 pass, totals exact in every run. That is a
+  designed test set, not real customer traffic; real messages will be messier (Thai, typos, several questions in
+  one message).
+- **Narrowing questions can be weak**, e.g. "smooth or uncoated?" for coloured paper, where both are plain
+  finishes.
+- **Cost and speed:** about $0.01 and 5-6 seconds per message (p95 about 9 seconds) on Claude Sonnet 5.5.
 
 ## With another week
 
@@ -171,4 +180,16 @@ KNOWN_LIMITATIONS_PLACEHOLDER
 
 ## How I used AI tools
 
-AI_TOOLS_PLACEHOLDER
+Built with Claude Code (Claude Opus 5.5). One session turned the brief into `SPEC.md` (decisions, golden totals,
+the §12 working assumptions); a second built the code from that spec; a third ran an independent
+adversarial review of the code and found the seven bugs fixed in the "Fix" commits (all-or-nothing refresh, ranking by price
+per pack, a reply check that accepted any number from the session, and so on). Inside the product, Claude
+Sonnet 5.5 reads the customer's words into structured criteria, writes the reply, and re-reads a product page
+only when the deterministic parser can't (`eval/llm_fallback.md`).
+
+What I didn't take on trust: the golden totals were recomputed by `eval/independent_quote.py`, a separate
+regex-and-Decimal calculator that shares no code with `pl/`; ingest completeness is checked against an
+independent count of SKUs in the raw HTML; the refresh path was rehearsed on a mutated copy of the site; and the
+live eval exposed four bugs the unit tests had passed (reply-check false positives, a rewrite that told the
+customer it was "the corrected reply", the template dropping the delivery caveat, the fallback losing the
+category). Each is fixed in its own commit with the before/after recorded in `eval/results.md`.
