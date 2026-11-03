@@ -137,3 +137,8 @@ def test_delivery_area(v1_items, loc, inside):
     assert r["decision"] == "matches" and r["best_quote"]["total_incl_vat"] == "1,280.15"   # still quoted
     assert r["delivery_area"]["in_service_area"] is inside
     assert ("needs confirmation" in r["delivery_area"].get("note", "")) is (not inside)
+
+
+def test_no_narrowing_question_when_product_named(v1_items):
+    r = S(v1_items, product_type="paper", size="A4", weight_gsm=80, keywords=["lotus bright premium"], quantity={"value": 10})
+    assert r["matches"][0]["sku"] == "PL-CP-A4-80" and "narrowing_question" not in r

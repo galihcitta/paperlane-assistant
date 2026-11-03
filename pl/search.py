@@ -438,7 +438,11 @@ def _kw_score(it: Item, n: Norm) -> int:
 
 
 def _narrowing_question(ranked: list[dict], n: Norm) -> str | None:
-    its = [p["it"] for p in ranked]
+    # Only narrow among the products that fit what they named (e.g. a product name in keywords).
+    top = max(_kw_score(p["it"], n) for p in ranked)
+    its = [p["it"] for p in ranked if _kw_score(p["it"], n) == top]
+    if len(its) < 2:
+        return None
     if n.finish is None and len({i.finish for i in its}) > 1:
         return "Matte or gloss?" if {i.finish for i in its} <= {"matte", "gloss"} else \
             "Which finish do you prefer: " + ", ".join(sorted({i.finish for i in its})) + "?"

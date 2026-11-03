@@ -136,6 +136,16 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 
 ## Known limitations
 
+- **Restated prices need a fresh tool call.** The reply check trusts only the current turn's tool output, so a
+  follow-up like "what was the total again?" must call the tool again (the system prompt says so). If the model
+  doesn't, the reply fails the check and the customer gets the template reply.
+- **The reply check is about numbers and names, not prose.** It can't tell that "matte" was said of a gloss item,
+  misses paraphrased product names, and only ties a price to a product when the SKU is on the same line.
+- **One bad row holds its whole page without an API key.** A row missing a required field (e.g. a flyer with no
+  sides) sends the page to the LLM fallback; with no key every SKU on that page is stored not quotable.
+- **Two requests on the same chat session at once aren't serialised.** Different sessions are safe (the shared
+  DB connection is locked); simultaneous messages in one session can interleave its history.
+
 KNOWN_LIMITATIONS_PLACEHOLDER
 
 ## With another week
