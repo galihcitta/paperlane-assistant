@@ -7,7 +7,8 @@ import yaml
 
 from conftest import SITE
 from pl import ops
-from pl.trace import mask
+from pl.search import Criteria, search
+from pl.trace import mask, summarise
 
 NOW = datetime(2026, 11, 4, 12, 0, tzinfo=timezone.utc)
 
@@ -117,3 +118,20 @@ def test_readme_renders_the_threshold_table():
 def test_mask_pii():
     assert mask("call 081-234-5678 or +66 81 234 5678, a@b.co; 1,000 sheets, 20 packs") == \
         "call [phone] or [phone], [email]; 1,000 sheets, 20 packs"
+
+
+def test_trace_logs_why_a_candidate_failed(v1_items):
+    """req_bb661e69ca69 (E16 with a VAT-included budget): the trace itself must show the 10.17 gap."""
+    args = {"size": "A4", "weight_gsm": 70, "quantity": {"value": 9, "unit": "reams"}, "product_type": "paper",
+            "budget_total": {"amount": 1200, "includes_vat": True}, "keywords": ["Siam Office"]}
+    diag = {}
+    out = search(Criteria(**args), v1_items, diag=diag)
+    assert out == search(Criteria(**args), v1_items) and "candidates" not in out    # the model sees the same result
+    c = diag["candidates"][0]
+    assert (c["sku"], c["subtotal"], c["delivery"], c["vat"], c["total_incl_vat"]) == \
+        ("PL-CP-A4-70", "981.00", "150.00", "79.17", "1210.17")
+    assert c["failed"] == [{"requirement": "budget_total_incl_vat", "limit": "1200.00", "actual": "1210.17", "over_by": "10.17"}]
+    assert diag["alternatives"][0]["sku"] == "PL-CP-A4-70" and diag["alternatives"][0]["relaxed"] == ["price"]
+    span = {"name": "execute_tool search_products", "attributes": {"gen_ai.tool.call.result": summarise("search_products", out) | diag}}
+    page = ops.render_trace([_rec(0, request_id="req_bb661e69ca69", decision=out["decision"], spans=[span])], "req_bb661e69ca69")
+    assert page.index("Search step") < page.index("Spans") and "over by 10.17" in page

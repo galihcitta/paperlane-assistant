@@ -34,12 +34,13 @@ def chat_span(resp, request_model: str, started: float, purpose: str) -> dict:
                 "gen_ai.usage.cache_read.input_tokens": cr, "gen_ai.usage.cache_write.input_tokens": cw}}
 
 
-def tool_span(block, out: dict, is_err: bool, started: float) -> dict:
+def tool_span(block, out: dict, is_err: bool, started: float, diag: dict | None = None) -> dict:
+    """diag: search's per-candidate figures and failed requirements (logged only; the model never sees them)."""
     return {"name": f"execute_tool {block.name}", "duration_ms": int((time.monotonic() - started) * 1000),
             "status": "ERROR" if is_err else "OK",
             "attributes": {"gen_ai.operation.name": "execute_tool", "gen_ai.provider.name": PROVIDER,
                            "gen_ai.tool.name": block.name, "gen_ai.tool.call.id": block.id,
-                           "gen_ai.tool.call.arguments": block.input, "gen_ai.tool.call.result": summarise(block.name, out)}}
+                           "gen_ai.tool.call.arguments": block.input, "gen_ai.tool.call.result": summarise(block.name, out) | (diag or {})}}
 
 
 def summarise(name: str, out: dict) -> dict:

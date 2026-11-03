@@ -210,8 +210,10 @@ def _criteria_view(n: Norm) -> dict:
     return {k: v for k, v in n.model_dump().items() if v not in (None, [], False) and k != "ambiguous"}
 
 
-def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None) -> dict:
-    """customer_text: the customer's own messages this session, used only to judge vague colour wording."""
+def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None, diag: dict | None = None) -> dict:
+    """customer_text: the customer's own messages this session, used only to judge vague colour wording.
+    diag: if given, filled with per-candidate figures and failed requirements for the request log. It never
+    changes the returned dict, which is what the model sees."""
     n, errs = normalise(c, customer_text)
     if errs:
         return {"error": "invalid criteria", "details": errs}
@@ -270,6 +272,8 @@ def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None
     hard = [it for it in sized if _fixed_ok(it, n)]
     soft_ok = lambda it, n_: _soft_fail(it, n_) == []
     exact = [it for it in hard if soft_ok(it, n)]
+    if diag is not None:
+        diag["candidates"] = sorted((_diag(it, n) for it in exact), key=lambda d: len(d["failed"]))
     in_stock = [_priced(it, n) for it in exact if it.stock_status == "in_stock" and it.quotable]
     in_stock = [p for p in in_stock if _price_ok(p, n)]
     unavailable = [{"sku": it.sku, "product_name": it.product_name, "stock": it.stock_status,
@@ -331,6 +335,8 @@ def search(c: Criteria, items: dict[str, Item], customer_text: str | None = None
         for p in cands[:3 - len(alts)]:
             seen.add(p["it"].sku)
             alts.append(_view(p, differs=_differs(p, n)))
+            if diag is not None:
+                diag.setdefault("alternatives", []).append(_diag(p["it"], n, relaxed=list(relaxed)))
         if len(alts) >= 3:
             break
     return base | {"decision": "no_exact_match",
@@ -350,6 +356,46 @@ def _promote_keywords(n: Norm, items: dict[str, Item]) -> None:
             n.brand = next((b for b in sorted(brands, key=len, reverse=True) if re.search(rf"\b{re.escape(b)}\b", k)), None)
         if n.paper_colour is None and "paper_colour" not in n.ambiguous:
             n.paper_colour = next((c for c in sorted(colours) if re.search(rf"\b{re.escape(c)}\b", k)), None)
+
+
+def _plain(v: int) -> str:
+    return f"{'-' if v < 0 else ''}{abs(v) // 100}.{abs(v) % 100:02d}"
+
+
+def _gap(req: str, limit: int, actual: int) -> dict:
+    return {"requirement": req, "limit": _plain(limit), "actual": _plain(actual), "over_by": _plain(actual - limit)}
+
+
+def _diag(it: Item, n: Norm, relaxed: list[str] | None = None) -> dict:
+    """One candidate for the trace: the figures the decision rests on, and each requirement it fails with the gap."""
+    d: dict = {"sku": it.sku, "stock": it.stock_status}
+    failed: list[dict] = []
+    if it.stock_status != "in_stock":
+        failed.append({"requirement": "in_stock", "actual": it.stock_status,
+                       "back_in_stock": it.back_in_stock.isoformat() if it.back_in_stock else None})
+    if not it.quotable:
+        failed.append({"requirement": "quotable", "actual": "catalog data problem; sales must confirm"})
+    else:
+        p = _priced(it, n)
+        d |= {"unit_price": _plain(p["unit"]), "price_rule": p["rule"], "qty_packs": p["packs"],
+              "subtotal": _plain(p["sub"]), "delivery": _plain(p["pre_vat"] - p["sub"]),
+              "vat": _plain(p["total"] - p["pre_vat"]), "total_incl_vat": _plain(p["total"])}
+        if n.max_unit_price_satang is not None and p["unit"] > n.max_unit_price_satang:
+            failed.append(_gap("max_unit_price", n.max_unit_price_satang, p["unit"]))
+        if n.budget_satang is not None:
+            spend = p["total"] if n.budget_includes_vat else p["pre_vat"]
+            if spend > n.budget_satang:
+                failed.append(_gap("budget_total_incl_vat" if n.budget_includes_vat else "budget_subtotal_plus_delivery",
+                                   n.budget_satang, spend))
+    wanted = {"finish": (n.finish, it.finish), "paper_colour": (n.paper_colour, it.colour), "brand": (n.brand, it.brand),
+              "weight": (f"{n.weight_gsm} gsm" if n.weight_gsm is not None else f"{n.min_gsm or 0}-{n.max_gsm or '∞'} gsm",
+                         f"{it.weight_gsm} gsm")}
+    for f in dict.fromkeys(_soft_fail(it, n)):
+        failed.append({"requirement": f, "wanted": wanted[f][0], "actual": wanted[f][1]})
+    d["failed"] = failed
+    if relaxed is not None:
+        d["relaxed"] = relaxed
+    return d
 
 
 def _missing(n: Norm, f: str) -> bool:

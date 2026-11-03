@@ -147,7 +147,8 @@ class Agent:
             s.criteria[c.item_label] = c
             said = " ".join(m["content"] for m in s.messages if m["role"] == "user" and isinstance(m["content"], str)
                             and not m["content"].startswith("[automatic check"))
-            res = search(c, self.items, customer_text=said)
+            turn["search_diag"] = {}
+            res = search(c, self.items, customer_text=said, diag=turn["search_diag"])
             if "error" in res:
                 return res, True
             turn["decision"] = res["decision"]
@@ -235,7 +236,7 @@ class Agent:
                 for b in uses:
                     tt = time.monotonic()
                     out, is_err = self._run_tool(s, b.name, b.input, turn)
-                    spans.append(trace.tool_span(b, out, is_err, tt))
+                    spans.append(trace.tool_span(b, out, is_err, tt, turn.pop("search_diag", None)))
                     txt = json.dumps(out, ensure_ascii=False, default=str)
                     results_this_turn.append(txt)
                     results.append({"type": "tool_result", "tool_use_id": b.id, "content": txt, "is_error": is_err})

@@ -173,7 +173,7 @@ def eval_metrics(records: list[dict], results: dict | None) -> dict | None:
 
 def export_case(records: list[dict], request_id: str, expect: str | None = None) -> str:
     """The conversation up to this request as an eval case in requests.yaml format (messages already masked)."""
-    r = next(x for x in records if x["request_id"] == request_id)
+    r = next(x for x in records if x.get("request_id") == request_id)
     turns = [x for x in records if x["session_id"] == r["session_id"] and x["ts"] <= r["ts"]]
     turns = turns[:turns.index(r) + 1] if r in turns else [r]
     case = {"id": f"X-{request_id}", "turns": [x["message"] for x in turns], "decision": expect or r["decision"],
@@ -216,6 +216,7 @@ table{border-collapse:collapse;width:100%;background:var(--card);font-size:13px}
 td,th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:top}
 a{color:inherit}pre{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);padding:10px;font-size:12px}
 .wrap{overflow-x:auto}.bad{color:var(--alert);font-weight:600}
+.step{border:2px solid var(--ink);border-radius:6px;padding:4px 12px 12px;margin:12px 0}.step h2{margin-top:10px}
 """
 
 
@@ -317,6 +318,37 @@ Red = threshold crossed; the card says what to do.</div>
 </main></body></html>"""
 
 
+_FIGS = ["unit_price", "price_rule", "qty_packs", "subtotal", "delivery", "vat", "total_incl_vat"]
+
+
+def _gap_text(f: dict) -> str:
+    if "over_by" in f:
+        return f"{f['requirement']}: {f['actual']} vs limit {f['limit']} (over by {f['over_by']})"
+    if "wanted" in f:
+        return f"{f['requirement']}: {f['actual']} instead of {f['wanted']}"
+    return f"{f['requirement']}: {f['actual']}" + (f" (back {f['back_in_stock']})" if f.get("back_in_stock") else "")
+
+
+def _candidate_tables(r: dict) -> str:
+    """The search step first: every candidate with the figures and failed requirements the decision rests on."""
+    out = []
+    for s in r.get("spans", []):
+        res = s.get("attributes", {}).get("gen_ai.tool.call.result", {})
+        if s["name"] != "execute_tool search_products" or not ("candidates" in res or "alternatives" in res):
+            continue
+        rows = [("candidate", c) for c in res.get("candidates", [])] + [("alternative", c) for c in res.get("alternatives", [])]
+        body = "".join(
+            f"<tr><td>{kind}</td><td>{html.escape(c['sku'])}</td>"
+            + "".join(f"<td>{html.escape(str(c.get(k, '')))}</td>" for k in _FIGS)
+            + f"<td class=\"{'bad' if c['failed'] else ''}\">{html.escape('; '.join(_gap_text(f) for f in c['failed']) or 'none')}</td>"
+            f"<td>{html.escape(', '.join(c.get('relaxed', [])))}</td></tr>" for kind, c in rows)
+        out.append(f"<p>decision <b>{html.escape(str(res.get('decision')))}</b>"
+                   f"{' · ' + html.escape(res['reason']) if res.get('reason') else ''}</p><div class=\"wrap\"><table>"
+                   "<tr><th></th><th>SKU</th>" + "".join(f"<th>{k.replace('_', ' ')}</th>" for k in _FIGS)
+                   + f"<th>failed requirements</th><th>relaxed</th></tr>{body}</table></div>")
+    return ('<section class="step"><h2>Search step</h2>' + "".join(out) + "</section>") if out else ""
+
+
 def render_trace(records: list[dict], request_id: str) -> str:
     r = next(x for x in records if x.get("request_id") == request_id)
     flags = []
@@ -333,6 +365,7 @@ def render_trace(records: list[dict], request_id: str) -> str:
 <div class="mute">{html.escape(r["ts"])} · {r.get("traffic")} · conversation {html.escape(r["session_id"])} · snapshot {r.get("snapshot")}
 · {r["latency_ms"]} ms · ${r["est_cost_usd"]:.4f}</div>
 <p class="bad">{html.escape("; ".join(flags))}</p>
+{_candidate_tables(r)}
 <h2>Customer message (masked)</h2><pre>{html.escape(r.get("message", ""))}</pre>
 <h2>Decision: {html.escape(r["decision"])}</h2><pre>{html.escape(json.dumps(r.get("criteria"), indent=1, ensure_ascii=False))}</pre>
 <h2>Reply-check problems per attempt</h2><pre>{html.escape(json.dumps(r.get("check_problems"), indent=1, ensure_ascii=False))}</pre>
