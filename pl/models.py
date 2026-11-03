@@ -58,6 +58,8 @@ class Item(BaseModel):
 
     def validation_errors(self) -> list[str]:
         errs = [f"missing {f}" for f in self.missing_required()]
+        if self.product_type == "printed_flyer":
+            errs += [f"missing {f}" for f in ("sides", "colour_mode") if getattr(self, f) is None]
         if self.list_price_satang is not None and self.list_price_satang <= 0:
             errs.append("list price <= 0")
         if self.sale_price_satang is not None and self.list_price_satang and self.sale_price_satang >= self.list_price_satang:

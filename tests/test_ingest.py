@@ -134,3 +134,41 @@ def test_diff_detects_changes(site_copy, con, tmp_path):
     assert res.status == "promoted"
     assert res.changes["price"] == ["PL-CP-A4-70: list 109.00 -> 112.00"]
     assert sum(len(v) for v in res.changes.values()) == 1
+
+
+def test_print_wordings():
+    from pl.normalise import parse_colour_mode, parse_sides
+    assert [parse_sides(t) for t in ["1-sided", "2-sided", "1 side", "Front & back", "front and back"]] == [1, 2, 1, 2, 2]
+    assert [parse_colour_mode(t) for t in ["Colour", "Black only", "Single colour (black)", "1 colour"]] == \
+        ["cmyk", "bw", "bw", "bw"]
+
+
+def test_sale_markups_detected():
+    from bs4 import BeautifulSoup
+    from pl.parse import _price_from
+    for html in ["<td><s>฿299.00</s> ฿259.00</td>", "<td><span class='was'>฿299.00</span> ฿259.00</td>",
+                 "<td>Was ฿299.00, now ฿259.00</td>"]:
+        assert _price_from(BeautifulSoup(html, "lxml").td) == (29900, 25900), html
+
+
+def test_flyer_without_sides_quarantined(site_copy, con, tmp_path):
+    p = site_copy / "product/flyers-ltr-gloss.html"
+    _edit(p, "<td>Single-sided</td><td>Full colour (CMYK)</td><td>฿235.00</td>", "<td></td><td>Full colour (CMYK)</td><td>฿235.00</td>")
+    res = _ingest(site_copy, con, tmp_path)
+    assert res.status == "promoted" and "missing sides" in res.quarantined["PL-PR-LTR-GL-100-40"]
+    assert res.items["PL-PR-LTR-MT-100-40"].quotable     # other pages unaffected (this page goes to the fallback)
+
+
+def test_sale_flag_without_sale_price_quarantined(site_copy, con, tmp_path):
+    _edit(site_copy / "product/flyers-ltr-gloss.html", "<del>฿299.00</del> ฿259.00<span class='sale'>Sale</span>", "฿299.00")
+    res = _ingest(site_copy, con, tmp_path)
+    assert "no sale price" in res.quarantined["PL-PR-LTR-GL-170-40"]
+
+
+def test_tier_coverage_drop_quarantines_affected_skus(site_copy, con, tmp_path):
+    assert _ingest(site_copy, con, tmp_path).status == "promoted"
+    for f in (site_copy / "product").glob("*.html"):     # tier placeholders gone, e.g. endpoint renamed in JS
+        f.write_text(f.read_text().replace("data-sku=", "data-item="))
+    res = _ingest(site_copy, con, tmp_path)
+    hit = [s for s, r in res.quarantined.items() if "volume pricing missing" in r]
+    assert len(hit) == 59 and res.items["PL-CP-A4-70"].quotable is False

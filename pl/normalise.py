@@ -163,9 +163,9 @@ def parse_sides(text: str | None) -> int | None:
         return 1
     if t in ("2", "two", "both", "double"):
         return 2
-    if re.search(r"double|both sides|two.sided|duplex|4/4|1/1", t):
+    if re.search(r"double|both sides|two.sided|\b2\s*-?\s*sided|\b2 sides|front (?:&|and) back|duplex|4/4|1/1", t):
         return 2
-    if re.search(r"single|one side|one.sided|simplex|4/0|1/0", t):
+    if re.search(r"single|one side|one.sided|\b1\s*-?\s*sided|\b1 side\b|simplex|4/0|1/0", t):
         return 1
     return None
 
@@ -174,7 +174,8 @@ def parse_colour_mode(text: str | None) -> str | None:
     if not text:
         return None
     t = text.lower()
-    if re.search(r"black and white|black & white|b&w|b/w|mono|greyscale|grayscale", t):
+    if re.search(r"black and white|black & white|b&w|b/w|mono|greyscale|grayscale|black only|"
+                 r"single colou?r|one colou?r|\b1\s*-?\s*colou?r", t):
         return "bw"
     if re.search(r"cmyk|full colou?r|colou?r", t):
         return "cmyk"

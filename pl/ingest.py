@@ -103,6 +103,8 @@ def run_ingest(base_url: str, data_dir: Path = Path("data"), min_delay: float = 
                 it.tiers, it.tiers_url, tprobs = _tiers_for(fx, page.url, page.text, it.sku)
                 for p in tprobs:
                     it.quarantine(p)
+            if it.sku in res.sale_skus and it.sale_price_satang is None:
+                it.quarantine("marked on sale (data-sale='1') but no sale price found")
             if page_problem:
                 it.quarantine(page_problem)
             for e in it.validation_errors():
@@ -117,6 +119,15 @@ def run_ingest(base_url: str, data_dir: Path = Path("data"), min_delay: float = 
             keep = old.model_copy(deep=True)
             keep.quarantine(f"page failed to parse in this run; showing last known data from {prev_id}")
             items[sku] = keep
+
+    # A moved or renamed tier endpoint shows up as volume pricing vanishing from many SKUs at once.
+    prev_tiered = {s for s, it in prev.items() if it.tiers}
+    now_tiered = {s for s, it in items.items() if it.tiers}
+    if prev_tiered and len(now_tiered) < len(prev_tiered) / 2:
+        for sku in prev_tiered - now_tiered:
+            if sku in items and items[sku].sale_price_satang is None:
+                items[sku].quarantine(f"volume pricing missing: SKUs with tiers fell from {len(prev_tiered)} to "
+                                      f"{len(now_tiered)} (tier endpoint moved?)")
 
     usable = [it for it in items.values() if it.quotable]
     if prev and abs(len(items) - len(prev)) > MAX_COUNT_SWING * len(prev):

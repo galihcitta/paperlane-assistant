@@ -31,7 +31,10 @@ SYNONYMS = {
 _LABEL = {syn: key for key, syns in SYNONYMS.items() for syn in syns}
 
 # Values in a "Colour" column that describe print colour, not paper colour.
-_PRINT_COLOUR = re.compile(r"cmyk|full colou?r|black and white|black & white|mono|greyscale|grayscale|b&w", re.I)
+_PRINT_COLOUR = re.compile(r"cmyk|full colou?r|black and white|black & white|mono|greyscale|grayscale|b&w|black only|"
+                           r"single colou?r|one colou?r|\b1\s*-?\s*colou?r|^\s*colou?r\s*$", re.I)
+_AMT = r"(฿\s*[\d,]+(?:\.\d+)?|[\d,]+(?:\.\d+)?\s*(?:THB|baht))"
+_WAS_NOW = re.compile(r"\bwas\s*:?\s*" + _AMT + r"\W*\bnow\s*:?\s*" + _AMT, re.I)
 
 
 def label_key(label: str) -> str | None:
@@ -50,6 +53,7 @@ class PageResult:
     items: list[Item] = field(default_factory=list)
     notes: list[tuple[str, str]] = field(default_factory=list)  # (sku, text), untrusted
     tier_skus: list[str] = field(default_factory=list)          # data-sku without data-sale
+    sale_skus: list[str] = field(default_factory=list)          # data-sale='1': must have a sale price
     errors: list[str] = field(default_factory=list)
     main_text: str = ""
 
@@ -59,14 +63,17 @@ def _text(el: Tag | None) -> str:
 
 
 def _price_from(el: Tag) -> tuple[int | None, int | None]:
-    """(list, sale) from a cell/box. <del>old</del> new => list=old, sale=new."""
-    d = el.find("del")
+    """(list, sale) from a cell/box. <del>/<s>/span.was old</del> new, or "Was old now new" => list=old, sale=new."""
+    d = el.find(["del", "s"]) or el.select_one(".was")
     if d:
         list_p = N.money_to_satang(_text(d))
         clone = BeautifulSoup(str(el), "lxml")
-        for x in clone.find_all("del") + clone.select(".sale"):
+        for x in clone.find_all(["del", "s"]) + clone.select(".was, .sale"):
             x.decompose()
         return list_p, N.money_to_satang(_text(clone.select_one(".big") or clone))
+    m = _WAS_NOW.search(_text(el))
+    if m:
+        return N.money_to_satang(m.group(1)), N.money_to_satang(m.group(2))
     big = el.select_one(".big") if el.name != "td" else None
     return N.money_to_satang(_text(big or el)), None
 
@@ -102,7 +109,8 @@ def parse_page(html: str, url: str, crawled_at: str) -> PageResult:
     tier_skus = [e["data-sku"] for e in main.select("[data-sku]") if e.get("data-sale") != "1"]
     is_product = bool(main.select("[data-sku]") or main.select(".pricebox")
                       or re.search(r"\b(item code|sku)\b", main_text, re.I))
-    res = PageResult(url=url, is_product=is_product, tier_skus=tier_skus, main_text=main_text)
+    sale_skus = [e["data-sku"] for e in main.select("[data-sku]") if e.get("data-sale") == "1"]
+    res = PageResult(url=url, is_product=is_product, tier_skus=tier_skus, sale_skus=sale_skus, main_text=main_text)
     if not is_product:
         return res
 
@@ -225,6 +233,9 @@ def _parse_spec_block(main: Tag, title: str, common: dict, errors: list) -> Item
     size_code, w, h = N.parse_size(v.get("size"), v.get("dims"))
     gsm, lb, wsrc = N.parse_weight(v.get("weight"))
     printing = v.get("printing")
+    mode_txt = v.get("colour") if printing and _PRINT_COLOUR.search(v.get("colour") or "") else None
+    if mode_txt:
+        v.pop("colour")
     return Item(
         sku=v.get("sku", ""), product_name=title,
         product_type="printed_flyer" if printing else "paper",
@@ -232,7 +243,7 @@ def _parse_spec_block(main: Tag, title: str, common: dict, errors: list) -> Item
         weight_gsm=gsm, weight_lb_stated=lb, weight_source=wsrc,
         colour=N.parse_colour(v.get("colour")), colour_raw=v.get("colour"),
         finish=N.parse_finish(v.get("finish")), finish_raw=v.get("finish"),
-        sides=N.parse_sides(printing), colour_mode=None,
+        sides=N.parse_sides(printing), colour_mode=N.parse_colour_mode(mode_txt),
         pack_unit=unit or "pack", sheets_per_pack=spec_sheets or sheets, **pb, **common,
     )
 
