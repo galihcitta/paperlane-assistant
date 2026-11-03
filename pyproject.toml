@@ -1,0 +1,33 @@
+[project]
+name = "paperlane-assistant"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic>=0.60",
+  "fastapi",
+  "uvicorn",
+  "pydantic>=2",
+  "httpx",
+  "beautifulsoup4",
+  "lxml",
+  "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "hypothesis"]
+
+[project.scripts]
+pl = "pl.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["pl"]
+
+[tool.setuptools.package-data]
+pl = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
