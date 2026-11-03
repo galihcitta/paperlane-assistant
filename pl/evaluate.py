@@ -4,6 +4,7 @@ import json
 import re
 import time
 from collections import defaultdict
+from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
@@ -15,6 +16,17 @@ from .replycheck import allowed_numbers
 from .search import Criteria, search
 
 ROOT = Path("eval")
+
+
+def _with_date_forms(wanted: list[str]) -> list[str]:
+    """Scorer only: an ISO date in reply_has_any also accepts '12 Nov', '12 November', 'Nov 12', 'November 12'."""
+    out = list(wanted)
+    for s in wanted:
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
+            d = date.fromisoformat(s)
+            for m in (d.strftime("%b"), d.strftime("%B")):
+                out += [f"{d.day} {m}", f"{m} {d.day}"]
+    return out
 
 
 def ingest_layer(con) -> dict:
@@ -96,7 +108,7 @@ def score(case: dict, out: dict) -> dict:
             r["notes"].append(f"delivery flag {da} (expected flagged={case['delivery_flag']})")
     reply_checks = []
     if "reply_has_any" in case:
-        ok = any(s.lower() in out["reply"].lower() for s in case["reply_has_any"])
+        ok = any(re.search(rf"(?<!\d){re.escape(s)}(?!\d)", out["reply"], re.I) for s in _with_date_forms(case["reply_has_any"]))
         reply_checks.append(ok)
         if not ok:
             r["notes"].append(f"reply lacks any of {case['reply_has_any']}")
