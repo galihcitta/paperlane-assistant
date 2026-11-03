@@ -2,8 +2,8 @@
 
 A sales assistant for PaperLane that turns chat requests like *"We need letter-size flyers, one side, colour,
 under 250 a pack, 20 packs"* into the right products and an exact quote. **The model reads intent and writes the
-reply; code decides facts, matches and prices**, and a code check rejects any figure in a reply that didn't come
-from a tool.
+reply; code decides facts, matches and prices**, and a code check rejects a reply whose prices, totals, SKUs or
+product names don't match that turn's tool results.
 
 ## Run it (5 commands)
 
@@ -37,7 +37,7 @@ with a report in `data/reports/`.
  chat ──▶ Claude (tool use, ≤4 rounds) ──▶ search_products ──▶ search.py: normalise ▸ required? ▸ hard filters
                 │                          get_product          ▸ rank ▸ relax ▸ decision + prices
                 │                          quote ─────────────▶ pricing.py (pure Decimal, PR1–PR8)
-                └──▶ reply check (every THB figure and SKU must be in tool output) ──fail──▶ regenerate ──fail──▶ template reply
+                └──▶ reply check (figures, totals, SKUs, names vs this turn's tool output) ──fail──▶ regenerate ──fail──▶ template reply
 ```
 
 | File | Role |
@@ -75,8 +75,12 @@ We didn't send clarifying questions to devx; these are our calls, and the code b
 object and writing the reply. Whether to ask a question, which products qualify, what they cost and what to
 offer when nothing fits are all decided in `search.py` and `pricing.py`, so they are unit-tested and identical on
 every run. The model can't price: tool results carry formatted THB strings, and `replycheck.py` compares every
-money-looking figure and SKU in the final reply against the session's tool output and the customer's own
-messages. On a mismatch the model gets one rewrite; if that also fails, the customer gets a template reply built
+money-looking figure (currency-marked incl. บาท, two decimals, or a bare amount of 3+ digits that isn't a
+quantity) against **this turn's** tool output and the customer's message, plus the two fixed delivery-policy
+figures. On a line that names one SKU, each figure must be that SKU's own (unit/list/line price, tier, its
+quote total); a "total"/"subtotal" on a line naming no product must equal the quote's. Every SKU and every
+catalog product name mentioned must appear in this turn's tool output. What it can't catch: wrong prose claims
+("matte" for a gloss item), paraphrased product names, and a figure attached to a product by name only. On a mismatch the model gets one rewrite; if that also fails, the customer gets a template reply built
 straight from the tool JSON. The figure is never "probably right".
 
 **Scraping: labels, not positions; tiers from the JSON.** The site shows the same facts in four layouts (flyer

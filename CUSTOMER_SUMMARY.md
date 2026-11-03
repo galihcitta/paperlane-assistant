@@ -16,9 +16,11 @@ assistant keeps using the last good copy and shows you a report of what changed.
 EVAL_SUMMARY_PLACEHOLDER
 
 Prices are never worked out by the AI. They come from a fixed calculator that follows your pricing rules
-exactly (volume tiers, sale prices, free delivery from ฿3,000, VAT rounding), and every price the assistant
-writes is checked against that calculator before the customer sees it. If the AI writes a figure that doesn't
-match, the reply is rewritten or replaced with a plain quote from the calculator.
+exactly (volume tiers, sale prices, free delivery from ฿3,000, VAT rounding). Before a reply is sent, code
+checks that every amount in it came from the calculator in that same exchange, that each price sits next to the
+product it belongs to, that the stated total is the quote's total, and that every product named was actually
+found. If not, the reply is rewritten or replaced with a plain quote from the calculator. The check covers
+numbers and product names; it doesn't judge the wording around them.
 
 It also:
 - asks one short question when a request is unclear ("one side or both sides?"),

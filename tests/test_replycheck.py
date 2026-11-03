@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 from types import SimpleNamespace
 
 from pl import agent as agent_mod
@@ -11,10 +12,39 @@ def test_figures_detected():
 
 
 def test_check_flags_invented_price_and_sku():
-    src = [json.dumps({"total": "4,237.20", "sku": "PL-PR-LTR-MT-100-40"}), "under 250 a pack"]
-    assert check("PL-PR-LTR-MT-100-40 costs ฿4,237.20, under your ฿250 limit", src) == []
+    src = [json.dumps({"total": "4,237.20", "sku": "PL-PR-LTR-MT-100-40"})]
+    assert check("PL-PR-LTR-MT-100-40 costs ฿4,237.20, under your ฿250 limit", src, "under 250 a pack") == []
     probs = check("Total ฿4,200.00 for PL-PR-LTR-XX-1", src)
     assert len(probs) == 2
+
+
+_Q = {"lines": [{"sku": "PL-CP-A3-80", "product_name": "Copy A3", "unit_price": "289.00", "line_total": "1,445.00"}],
+      "subtotal": "1,445.00", "delivery": "0.00", "vat_7pct": "101.15", "total_incl_vat": "1,546.15"}
+_S = {"matches": [{"sku": "PL-CL-A3-80-PBL", "unit_price": "450.00", "line_total": "2,250.00"}], "best_quote": _Q}
+
+
+def test_stated_total_must_equal_quote_total():
+    res = [json.dumps(_S)]
+    assert check("PL-CP-A3-80 x 5 @ 289.00 = 1,445.00\nVAT 7% 101.15\nTotal (incl. 7% VAT): ฿1,546.15", res) == []
+    probs = check("PL-CP-A3-80 x 5 @ 289.00\nTotal: ฿2,250.00", res)    # a real figure, but not the quote's total
+    assert any("stated total 2250.00" in p for p in probs)
+
+
+def test_price_must_belong_to_its_sku():
+    probs = check("PL-CP-A3-80: 450.00 per ream", [json.dumps(_S)])
+    assert probs == ["450.00 is stated for PL-CP-A3-80 but is not that SKU's figure"]
+
+
+def test_thai_baht_and_bare_amounts():
+    assert money_figures("รวม 1546 บาท, 500 sheets, 80 gsm, 1200") == [Decimal("1546"), Decimal("1200")]
+    assert check("Total 1546 บาท", [json.dumps(_S)])                    # 1546 is not 1546.15
+    assert check("about 1,500 for 5 reams", [json.dumps(_S)])
+
+
+def test_only_this_turns_results_and_known_names():
+    assert check("PL-CP-A3-80 is ฿289.00", []) != []                     # no tool ran this turn
+    probs = check("Try Lotus Bright Premium A4 80gsm", [json.dumps(_S)], catalog_names=["Lotus Bright Premium A4 80gsm"])
+    assert probs and "Lotus Bright" in probs[0]
 
 
 class FakeClient:

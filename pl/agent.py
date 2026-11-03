@@ -62,7 +62,7 @@ TOOLS = [
 SYSTEM = """You are PaperLane's sales assistant (paper and flyer printing, Bangkok). Customers write informally; you answer like a helpful, precise salesperson.
 
 Hard rules:
-- Never calculate, estimate or round a price yourself. Every THB amount you write must be copied exactly from a tool result. Never mention a product or SKU that no tool returned.
+- Never calculate, estimate or round a price yourself. Every THB amount you write must be copied exactly from a tool result of this turn: if you restate an earlier price or total, call the tool again first. Put each price on the same line as its SKU. Never mention a product or SKU that no tool returned this turn.
 - For any product request, call search_products first. Fill only what the customer actually said; leave other fields empty. Put size/sides/colour/finish in the customer's own words (code normalises them). Use quantity.unit "sheets" or "reams" when that is what they said.
 - If the decision is needs_clarification: ask exactly that one question (you may list the allowed values). Do not quote yet.
 - If the decision is matches: show up to 3 options in the order given (SKU, name, unit price at their quantity, why it matches), then the full breakdown of the first one (unit price and price rule, subtotal, delivery, VAT 7%, total), then end with the narrowing_question if one is given.
@@ -102,7 +102,6 @@ def catalog_summary(items: dict[str, Item]) -> str:
 class Session:
     messages: list = field(default_factory=list)
     criteria: dict[str, Criteria] = field(default_factory=dict)
-    sources: list[str] = field(default_factory=list)   # tool results + customer messages, for the reply check
     delivery_location: str | None = None
 
 
@@ -199,7 +198,7 @@ class Agent:
         s = self.sessions.setdefault(session_id, Session())
         start_len = len(s.messages)
         s.messages.append({"role": "user", "content": message})
-        s.sources.append(message)
+        results_this_turn: list[str] = []   # the reply check only trusts this turn's tool output
         turn = {"decision": None, "criteria": {}, "skus": [], "quote": None, "last_search": None, "delivery_area": None}
         usage = {"input": 0, "cache_read": 0, "cache_write": 0, "output": 0}
         rounds, regenerated, template_used, problems, error = 0, False, False, [], None
@@ -218,7 +217,7 @@ class Agent:
                 for b in uses:
                     out, is_err = self._run_tool(s, b.name, b.input, turn)
                     txt = json.dumps(out, ensure_ascii=False, default=str)
-                    s.sources.append(txt)
+                    results_this_turn.append(txt)
                     results.append({"type": "tool_result", "tool_use_id": b.id, "content": txt, "is_error": is_err})
                 if rounds >= MAX_TOOL_ROUNDS:
                     results.append({"type": "text", "text": "Tool budget for this turn is used up. Reply to the customer now with what you have."})
@@ -226,17 +225,19 @@ class Agent:
                 if rounds > MAX_TOOL_ROUNDS:
                     break
 
-            problems = replycheck.check(reply, s.sources) if reply else ["empty reply"]
+            names = [it.product_name for it in self.items.values()]
+            problems = replycheck.check(reply, results_this_turn, message, names) if reply else ["empty reply"]
             if problems:
                 regenerated = True
                 s.messages.append({"role": "user", "content": (
                     "[automatic check, not from the customer] Your reply contained: " + "; ".join(problems)
-                    + ". Rewrite the reply using only figures and SKUs exactly as they appear in the tool results.")})
+                    + ". Rewrite the reply using only figures, SKUs and product names exactly as they appear in this turn's"
+                    " tool results, each price next to the product it belongs to, and the quote's own total.")})
                 resp = self._call(s, tool_choice={"type": "none"})
                 _add_usage(usage, resp.usage)
                 s.messages.append({"role": "assistant", "content": resp.content})
                 reply = "".join(b.text for b in resp.content if b.type == "text").strip()
-                problems = replycheck.check(reply, s.sources) if reply else ["empty reply"]
+                problems = replycheck.check(reply, results_this_turn, message, names) if reply else ["empty reply"]
                 if problems:
                     template_used = True
                     reply = template_reply(turn)
