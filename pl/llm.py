@@ -32,6 +32,8 @@ def client() -> anthropic.Anthropic:
 PRICES = {"claude-sonnet-5-5": (2.0, 10.0), "claude-opus-5-5": (4.0, 20.0), "claude-haiku-5-5": (0.10, 0.50)}
 
 
-def est_cost(model_id: str, input_tokens: int, output_tokens: int) -> float:
+def est_cost(model_id: str, usage: dict) -> float:
+    """Cache reads bill at 0.1x input, 5-minute cache writes at 1.25x."""
     pin, pout = PRICES.get(model_id, (2.0, 10.0))
-    return round((input_tokens * pin + output_tokens * pout) / 1e6, 6)
+    inp = usage["input"] + 0.1 * usage["cache_read"] + 1.25 * usage["cache_write"]
+    return round((inp * pin + usage["output"] * pout) / 1e6, 6)

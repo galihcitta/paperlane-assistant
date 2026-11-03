@@ -1,0 +1,141 @@
+# PaperLane assistant (devx take-home A3)
+
+A sales assistant for PaperLane that turns chat requests like *"We need letter-size flyers, one side, colour,
+under 250 a pack, 20 packs"* into the right products and an exact quote. **The model reads intent and writes the
+reply; code decides facts, matches and prices**, and a code check rejects any figure in a reply that didn't come
+from a tool.
+
+## Run it (5 commands)
+
+From this folder, with Python 3.11+ and the site served at `http://localhost:8000/paperlane/`
+(`cd .. && python -m http.server 8000`, as in the brief):
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -q -e '.[dev]'
+.venv/bin/pl ingest --base-url http://localhost:8000/paperlane/
+export ANTHROPIC_API_KEY=sk-ant-...
+.venv/bin/pl serve        # UI + API on http://127.0.0.1:8080
+.venv/bin/pl eval         # 21 requests x 3 runs -> eval/results.md
+```
+
+Other entry points: `pl chat` (terminal REPL), `pl quote PL-CP-A4-70:10` (pricing only, no model), `pytest`
+(no key needed), `python eval/refresh_rehearsal.py ../paperlane <tmpdir>` (re-ingest a mutated copy of the site).
+
+For the demo's updated site: `pl ingest --base-url <new url>`. A running server picks up the new snapshot on the
+next message. If the new site fails validation, the previous snapshot stays live and the command exits non-zero
+with a report in `data/reports/`.
+
+## Architecture
+
+```
+                 ┌──────────── ingest (pl ingest / POST /ingest) ────────────┐
+ site ──HTTP──▶ crawl (BFS, 1 req/s, robots Crawl-delay) ──▶ raw files data/raw/<run>/
+                 │   parse: 4 layouts, label-driven ──fail──▶ LLM fallback (same schema, same validation)
+                 │   tiers: api/pricing/<SKU>.json (what tiers.js loads)       notes ──▶ quarantined table
+                 │   validate ──▶ SQLite snapshot (run_id) ──▶ diff vs live ──▶ promote | reject
+                 └───────────────────────────────────────────────────────────┘
+ chat ──▶ Claude (tool use, ≤4 rounds) ──▶ search_products ──▶ search.py: normalise ▸ required? ▸ hard filters
+                │                          get_product          ▸ rank ▸ relax ▸ decision + prices
+                │                          quote ─────────────▶ pricing.py (pure Decimal, PR1–PR8)
+                └──▶ reply check (every THB figure and SKU must be in tool output) ──fail──▶ regenerate ──fail──▶ template reply
+```
+
+| File | Role |
+|---|---|
+| `pl/crawl.py` | Same-origin BFS crawler, rate-limited, stores every response for provenance |
+| `pl/parse.py`, `pl/normalise.py` | Label-driven parsers for the four page layouts; unit/size/weight/money/stock normalisers |
+| `pl/llm_extract.py` | Fallback extractor for pages the parsers can't read: the model copies field text, code normalises it |
+| `pl/ingest.py`, `pl/db.py`, `pl/diff.py` | Snapshot per run, promotion gates, diff report |
+| `pl/pricing.py` | The only place prices are computed |
+| `pl/search.py` | Criteria validation and the decision (clarify / matches / no_exact_match / not_sold) |
+| `pl/agent.py`, `pl/replycheck.py` | Claude tool loop, session memory, reply post-check, JSONL request log |
+| `pl/api.py`, `pl/static/index.html` | FastAPI (`POST /chat`, `POST /quote`, `POST /ingest`, `GET /items`) and a one-page UI |
+| `eval/` | Requests with expected products and totals, runner, independent price calculator, refresh rehearsal |
+
+## Key decisions and trade-offs
+
+**Code decides, the model talks.** The model's only jobs are reading the customer's words into a `Criteria`
+object and writing the reply. Whether to ask a question, which products qualify, what they cost and what to
+offer when nothing fits are all decided in `search.py` and `pricing.py`, so they are unit-tested and identical on
+every run. The model can't price: tool results carry formatted THB strings, and `replycheck.py` compares every
+money-looking figure and SKU in the final reply against the session's tool output and the customer's own
+messages. On a mismatch the model gets one rewrite; if that also fails, the customer gets a template reply built
+straight from the tool JSON. The figure is never "probably right".
+
+**Scraping: labels, not positions; tiers from the JSON.** The site shows the same facts in four layouts (flyer
+variant table, spec table, spec `<dl>`, prose). Every value is found through its label via a synonym map
+("Basis weight" = "Weight" = "Paper weight"), so a reordered or renamed-but-known column still parses. Volume
+tiers aren't in the HTML: `assets/tiers.js` fetches `api/pricing/<SKU>.json` for each `data-sku` element, so the
+crawler does the same (and skips `data-sale='1'` elements exactly as the JS does). Category-page "from ฿x" prices
+are ignored because they can be a B&W variant.
+
+**Refresh path without code changes.** Each ingest writes a new snapshot tagged with a `run_id`. It is promoted
+to live only if every product page parsed (deterministically or via the LLM fallback), no row is missing a
+required field, tier prices decrease, and the SKU count is within ±20% of the live snapshot. Otherwise the old
+snapshot stays live. Every run writes a diff report (new/removed SKUs, price, sale, tier, stock and other field
+changes) so a human can see what moved. An unknown label or a failed validation sends that page to the LLM
+fallback instead of guessing; the fallback only copies text, the same normalisers and validation run on it, and
+those rows are marked `extraction='llm'` and listed in the report.
+
+**Untrusted text.** The `pl-ph-a4-230-mt` page carries a customer note addressed to "AI shopping assistants".
+Notes are cut out of the page before parsing, stored in a separate `notes` table, and never sent to any model
+(not to the agent, not to the extraction fallback). Eval case E21 checks the assistant doesn't repeat the claim.
+
+**No vector search.** 72 SKUs with a dozen typed attributes is a filtering problem, not a retrieval problem.
+Customer wording ("8.5x11", "4/0", "20 lb bond") maps to exact values with small normalisers, and hard
+constraints must be exact (an A4 match must never come back for "letter"). Embeddings would add a
+fuzzy step exactly where the brief demands exactness. Soft wishes (brand, "recycled") are a keyword boost in
+ranking. With thousands of SKUs and free-text descriptions I'd add BM25 or embeddings as a ranking signal only,
+behind the same hard filters.
+
+**Relaxation is fixed and explicit.** When nothing in stock fits: relax max price/budget, then finish, then
+weight, then paper colour, and each alternative states exactly what differs and by how much ("unit price 113.52
+is 13.52 over the max 100.00"). Size, product type, sides and colour mode are never relaxed. Out-of-stock exact
+matches are reported with their back-in-stock date and never quoted (PR8).
+
+**Several matches → top 3, a full quote for the best, one narrowing question.** This answers the brief's
+example completely and still asks the question a salesperson would ("Matte or gloss?"). Code also computes
+upsell hints (e.g. G8→G9: one more pack crosses free delivery and costs only 45.68 more).
+
+## Schema decisions
+
+SQLite, one row per SKU per ingest run; money in integer satang (no floats anywhere near prices).
+
+| Field | Decision |
+|---|---|
+| `size_code` + `width_mm`/`height_mm` | Named size wins (A3/A4/A5/LETTER/LEGAL); dimensions are parsed from mm or inches and used to recognise "8.5x11" style text. Letter = 216 × 279, Legal = 216 × 356 (rounded from inches). |
+| `weight_gsm`, `weight_lb_stated`, `weight_source` | gsm is the comparable value. A bare "24 lb" is converted with the customer's table (20/24/28/32 lb = 75/90/105/120 gsm) and marked `converted_from_lb`; "24 lb (90 gsm)" is `stated`. An lb value outside the table is left empty, which fails validation rather than guessing. |
+| `colour` / `colour_raw` | Paper colour family (white, ivory, pink, assorted…) plus the original text. For flyers the site's "Colour" column is print colour, so it goes to `colour_mode`, not `colour`. |
+| `finish` / `finish_raw` | matte, gloss, uncoated, smooth, laid. Flyer finish comes from the page title ("– Matte"). |
+| `sides` (1/2), `colour_mode` (cmyk/bw) | Flyers only; NULL for blank paper. |
+| `pack_unit`, `sheets_per_pack` | ream vs pack, and sheet count, so "2,000 sheets" converts per product (and rounds up, with a note, when it doesn't divide). |
+| `list_price_satang`, `sale_price_satang`, `tiers` | Sale is a separate column (PR3 needs to know it's a sale, not just a price). Tiers are their own table with source URL. |
+| `stock_status`, `back_in_stock`, `stock_raw` | in_stock / out_of_stock / discontinued / unknown. Unknown availability text is a validation failure, never treated as in stock. |
+| `extraction`, `source_url`, `crawled_at`, `run_id` | Provenance on every row; quotes carry the source URL and crawl time per line. |
+
+## Known limitations
+
+KNOWN_LIMITATIONS_PLACEHOLDER
+
+## With another week
+
+- Put the agent behind LINE: a LINE Messaging API webhook maps `userId` to `session_id`, replies with the same
+  text plus a Flex Message for the quote table; move session state from the in-process dict to Redis so several
+  workers can serve one conversation; add a "talk to a person" handoff that posts the conversation to the sales
+  team's LINE group.
+- Run the eval in CI on every change and on every promoted snapshot (with the expected values regenerated by
+  the independent calculator from the new site), and alert on the production metrics below.
+- Quote documents: a PDF quote with a number, validity date and the snapshot it was priced from.
+- A small review screen for the ingest diff, so an owner approves a refresh before it goes live instead of the
+  automatic gates alone.
+
+### Metrics I'd watch in production
+
+1. **Reply-check failure rate** (and template-reply rate): the model trying to state a figure that isn't from a tool.
+2. **Decision mix per day** (clarify / matches / no_exact_match / not_sold): a jump in no_exact_match or not_sold means a catalog change or a demand gap.
+3. **Quote-to-order conversion and edits by sales staff**: how often a person changes what the assistant quoted.
+4. **p95 latency and cost per conversation** from the JSONL log (`data/logs/requests.jsonl`).
+
+## How I used AI tools
+
+AI_TOOLS_PLACEHOLDER

@@ -171,14 +171,13 @@ class Agent:
         s.messages.append({"role": "user", "content": message})
         s.sources.append(message)
         turn = {"decision": None, "criteria": {}, "skus": [], "quote": None, "last_search": None}
-        usage = {"input": 0, "output": 0}
+        usage = {"input": 0, "cache_read": 0, "cache_write": 0, "output": 0}
         rounds, regenerated, template_used, problems, error = 0, False, False, [], None
         reply = ""
         try:
             while True:
                 resp = self._call(s)
-                usage["input"] += resp.usage.input_tokens + (resp.usage.cache_read_input_tokens or 0) + (resp.usage.cache_creation_input_tokens or 0)
-                usage["output"] += resp.usage.output_tokens
+                _add_usage(usage, resp.usage)
                 s.messages.append({"role": "assistant", "content": resp.content})
                 uses = [b for b in resp.content if b.type == "tool_use"]
                 if resp.stop_reason != "tool_use" or not uses:
@@ -204,8 +203,7 @@ class Agent:
                     "[automatic check, not from the customer] Your reply contained: " + "; ".join(problems)
                     + ". Rewrite the reply using only figures and SKUs exactly as they appear in the tool results.")})
                 resp = self._call(s, tool_choice={"type": "none"})
-                usage["input"] += resp.usage.input_tokens + (resp.usage.cache_read_input_tokens or 0) + (resp.usage.cache_creation_input_tokens or 0)
-                usage["output"] += resp.usage.output_tokens
+                _add_usage(usage, resp.usage)
                 s.messages.append({"role": "assistant", "content": resp.content})
                 reply = "".join(b.text for b in resp.content if b.type == "text").strip()
                 problems = replycheck.check(reply, s.sources) if reply else ["empty reply"]
@@ -222,6 +220,7 @@ class Agent:
             s.messages += [{"role": "user", "content": message}, {"role": "assistant", "content": reply}]
 
         out = {"reply": reply, "decision": turn["decision"] or "none", "items": turn["skus"], "quote": turn["quote"],
+               "unavailable": [u["sku"] for u in (turn["last_search"] or {}).get("unavailable", [])],
                "criteria": turn["criteria"], "reply_check_passed": not problems and not error,
                "regenerated": regenerated, "template_used": template_used, "tool_rounds": rounds,
                "snapshot": self.run_id, "error": error}
@@ -229,7 +228,8 @@ class Agent:
               "decision": out["decision"], "skus": out["items"],
               "total": (turn["quote"] or {}).get("total_incl_vat"),
               "latency_ms": int((time.monotonic() - t0) * 1000), "input_tokens": usage["input"],
-              "output_tokens": usage["output"], "est_cost_usd": llm.est_cost(llm.model(), usage["input"], usage["output"]),
+              "cache_read_tokens": usage["cache_read"], "cache_write_tokens": usage["cache_write"],
+              "output_tokens": usage["output"], "est_cost_usd": llm.est_cost(llm.model(), usage),
               "reply_check_passed": out["reply_check_passed"], "regenerated": regenerated,
               "template_used": template_used, "tool_rounds": rounds, "model": llm.model(), "snapshot": self.run_id,
               "error": error})
@@ -274,6 +274,13 @@ def template_reply(turn: dict) -> str:
     if r.get("narrowing_question"):
         lines.append(r["narrowing_question"])
     return "\n".join(lines) or "Could you tell me which product, size and quantity you need?"
+
+
+def _add_usage(acc: dict, u):
+    acc["input"] += u.input_tokens
+    acc["cache_read"] += u.cache_read_input_tokens or 0
+    acc["cache_write"] += u.cache_creation_input_tokens or 0
+    acc["output"] += u.output_tokens
 
 
 def _log(rec: dict):
