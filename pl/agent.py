@@ -3,6 +3,7 @@ clarification, matches and prices; a code post-check rejects any figure that did
 """
 import json
 import os
+import threading
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -108,16 +109,21 @@ class Session:
 class Agent:
     def __init__(self, con=None):
         self.con = con or db.connect()
+        self._db_lock = threading.Lock()   # uvicorn runs /chat on a thread pool; one connection, one user at a time
         self.sessions: dict[str, Session] = {}
         self.run_id = None
         self.reload()
 
     def reload(self):
-        self.run_id, self.items = db.load_current(self.con)
-        self.system = SYSTEM.format(catalog=catalog_summary(self.items))
+        with self._db_lock:
+            run_id, items = db.load_current(self.con)
+        self.run_id, self.items = run_id, items
+        self.system = SYSTEM.format(catalog=catalog_summary(items))
 
     def _maybe_reload(self):
-        if db.current_run_id(self.con) != self.run_id:
+        with self._db_lock:
+            changed = db.current_run_id(self.con) != self.run_id
+        if changed:
             self.reload()
 
     # ---- tools ----

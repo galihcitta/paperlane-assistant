@@ -38,7 +38,7 @@ def db_path() -> Path:
 def connect(path: Path | None = None) -> sqlite3.Connection:
     path = path or db_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    con = sqlite3.connect(path)
+    con = sqlite3.connect(path, check_same_thread=False)   # callers sharing one across threads must lock
     con.row_factory = sqlite3.Row
     con.executescript(SCHEMA)
     cols = {r["name"] for r in con.execute("PRAGMA table_info(items)")}

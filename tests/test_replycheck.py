@@ -107,3 +107,28 @@ def test_quote_tool_sheets_and_delivery(monkeypatch, tmp_path):
     assert not err and out["lines"][0]["qty_packs"] == 3 and out["total_incl_vat"] == "510.39"
     assert "rounded up to 3 reams" in out["rounding_notes"][0]
     assert out["delivery_area"]["in_service_area"] is False and turn["delivery_area"] == out["delivery_area"]
+
+
+def test_chat_from_two_threads(monkeypatch, tmp_path):
+    import threading
+    from conftest import BASE, SITE, FileFetcher
+    from pl import db
+    from pl.ingest import run_ingest
+    con = db.connect(tmp_path / "a.db")
+    run_ingest(BASE, data_dir=tmp_path, con=con, log=lambda *_: None, fetcher=FileFetcher(SITE))
+    fake = FakeClient([_resp([_text("Hello")], "end_turn") for _ in range(20)])
+    monkeypatch.setattr(agent_mod.llm, "client", lambda: fake)
+    monkeypatch.setattr(agent_mod, "LOG_PATH", tmp_path / "log.jsonl")
+    a = agent_mod.Agent(con=con)     # created on this thread, used from others (as under uvicorn)
+    errors = []
+
+    def go(i):
+        try:
+            for _ in range(5):
+                assert a.chat(f"s{i}", "hi")["reply"] == "Hello"
+        except Exception as e:
+            errors.append(e)
+    ts = [threading.Thread(target=go, args=(i,)) for i in range(2)]
+    [t.start() for t in ts]
+    [t.join() for t in ts]
+    assert errors == []
