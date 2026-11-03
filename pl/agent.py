@@ -208,6 +208,7 @@ class Agent:
         turn = {"decision": None, "criteria": {}, "skus": [], "quote": None, "last_search": None, "delivery_area": None}
         usage = {"input": 0, "cache_read": 0, "cache_write": 0, "output": 0}
         rounds, regenerated, template_used, problems, error = 0, False, False, [], None
+        check_log: list[list[str]] = []   # problems found on each attempt, for the request log
         reply = ""
         try:
             while True:
@@ -233,6 +234,7 @@ class Agent:
 
             names = [it.product_name for it in self.items.values()]
             problems = replycheck.check(reply, results_this_turn, message, names) if reply else ["empty reply"]
+            check_log.append(problems)
             if problems:
                 regenerated = True
                 s.messages.append({"role": "user", "content": (
@@ -245,6 +247,7 @@ class Agent:
                 s.messages.append({"role": "assistant", "content": resp.content})
                 reply = "".join(b.text for b in resp.content if b.type == "text").strip()
                 problems = replycheck.check(reply, results_this_turn, message, names) if reply else ["empty reply"]
+                check_log.append(problems)
                 if problems:
                     template_used = True
                     reply = template_reply(turn)
@@ -271,7 +274,7 @@ class Agent:
               "output_tokens": usage["output"], "est_cost_usd": llm.est_cost(llm.model(), usage),
               "reply_check_passed": out["reply_check_passed"], "regenerated": regenerated,
               "template_used": template_used, "tool_rounds": rounds, "model": llm.model(), "snapshot": self.run_id,
-              "error": error})
+              "error": error, "check_problems": check_log})
         return out
 
 
@@ -308,6 +311,9 @@ def template_reply(turn: dict) -> str:
         lines += [f"Subtotal {q['subtotal']}", f"Delivery {q['delivery']}", f"VAT 7% {q['vat_7pct']}", f"Total {q['total_incl_vat']}"]
         for x in q.get("refused", []):
             lines.append(f"Not quotable: {x['sku']} ({x['reason']})")
+    da = turn.get("delivery_area")
+    if da and da.get("in_service_area") is False:
+        lines.append("Delivery to that location needs confirmation by our sales team (we deliver in Bangkok and vicinity).")
     if r.get("budget_assumption"):
         lines.append(r["budget_assumption"])
     if r.get("narrowing_question"):

@@ -34,6 +34,14 @@ def test_delivery_threshold_is_not_a_wrong_subtotal():
     assert check("Delivery: free (subtotal over ฿3,000.00)\nTotal: ฿1,546.15", [json.dumps(_S)]) == []
 
 
+def test_hypothetical_totals_and_budgets_are_not_the_stated_total():
+    q = dict(_Q, insights=["Suggestion only (quote unchanged): 1 more pack makes delivery free; total would be 3,299.02 (+45.68)"])
+    res = [json.dumps({"best_quote": q})]
+    reply = ("Your subtotal limit of 1,200 is met.\nAdding 1 more pack of PL-CP-A3-80 makes delivery free: total would be"
+             " 3,299.02 (+45.68).\nTotal: 1,546.15")
+    assert check(reply, res, "budget 1,200") == []
+
+
 def test_price_must_belong_to_its_sku():
     probs = check("PL-CP-A3-80: 450.00 per ream", [json.dumps(_S)])
     assert probs == ["450.00 is stated for PL-CP-A3-80 but is not that SKU's figure"]

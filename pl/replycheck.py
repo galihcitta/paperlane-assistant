@@ -3,7 +3,7 @@
 - every money figure (currency-marked, two-decimal, or a bare amount of 3+ digits that isn't a quantity)
   appears in this turn's tool results or the customer's own message this turn (or is a fixed policy figure);
 - a figure on a line that names one SKU belongs to that SKU's tool data (or is a quote total);
-- a "total" / "subtotal" on a line that names no product equals a quote's total / subtotal;
+- a line labelled "Total" / "Subtotal" (the breakdown line) states a quote's total / subtotal;
 - every SKU and every catalog product name in the reply appears in this turn's tool results.
 
 It cannot tell whether prose claims (e.g. "matte finish") are right, and it misses paraphrased product names.
@@ -25,7 +25,8 @@ _MONEY = re.compile(
 )
 _ANY_NUM = re.compile(_NUM)
 _SKU = re.compile(r"\bPL-[A-Z0-9]+(?:-[A-Z0-9]+)+\b")
-_TOTAL = re.compile(r"(?<!line )\b(sub)?total\b", re.I)
+# The breakdown line: "Total: 1,546.15", "- Subtotal 1,295.00", "**Total incl. VAT**: ...". Not "the total would rise".
+_TOTAL = re.compile(r"^\s*(?:[-*•]\s*)?(?:\*\*)?(sub)?total\b", re.I)
 POLICY = {Decimal("3000"), Decimal("150")}   # free-delivery threshold and fee, stated in the system prompt
 
 
@@ -74,6 +75,8 @@ def check(reply: str, results: list[str], customer: str = "", catalog_names=()) 
         except ValueError:
             pass
     q_totals = {_dec(q["total_incl_vat"]) for q in quotes}
+    q_level = allowed_numbers(*(json.dumps({k: v for k, v in q.items() if k != "lines"}, ensure_ascii=False)
+                                for q in quotes))   # subtotal, delivery, VAT, total, insights (e.g. free-delivery tip)
     q_subs = {_dec(q["subtotal"]) for q in quotes}
     names = {n for n in catalog_names if n and n.lower() in reply.lower()}
 
@@ -92,7 +95,7 @@ def check(reply: str, results: list[str], customer: str = "", catalog_names=()) 
         skus = set(_SKU.findall(line))
         if len(skus) == 1:
             sku = skus.pop()
-            ok = per_sku.get(sku, set()) | q_totals | q_subs | allowed_numbers(customer) | POLICY
+            ok = per_sku.get(sku, set()) | q_level | allowed_numbers(customer) | POLICY
             for v in money_figures(line):
                 if v not in ok and v in allowed:
                     problems.append(f"{v} is stated for {sku} but is not that SKU's figure")
