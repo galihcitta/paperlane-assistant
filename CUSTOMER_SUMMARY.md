@@ -20,11 +20,12 @@ AI assistants to say the item is free.
 
 - **Every price and total was exact to the satang** in all 90 conversations, and it picked the right product in
   every case where the request was clear.
-- **87 of 90 conversations did everything right.** The 3 misses are one request asked three times, "Do you have
-  A4 colour paper?": it quoted coloured paper instead of first asking whether the customer meant coloured paper
-  or colour printing. We know the cause and the fix.
+- **All 90 conversations did everything right**: the right decision (quote, question, or "we don't sell that"),
+  the right products, the right wording checks. An earlier run found five problems, including "Do you have A4
+  colour paper?" being quoted as coloured paper instead of asking whether the customer meant colour printing;
+  all were fixed before this final run.
 - **It gives the same answer every time** to the same request.
-- **About 0.35 baht and 5-6 seconds per message.**
+- **About 0.33 baht and 5 seconds per message.**
 
 We also checked that it keeps working when the website changes: on a copy of your site with changed prices, a
 stock change, a discontinued item, a new product, a broken link and 16 extra products, it picked up every change,

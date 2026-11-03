@@ -148,14 +148,14 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 - **Two requests on the same chat session at once aren't serialised.** Different sessions are safe (the shared
   DB connection is locked); simultaneous messages in one session can interleave its history.
 
-- **Eval scope.** 30 requests x 3 runs on the v1 catalog: 87/90 pass, totals exact in every run. That is a
+- **Eval scope.** 30 requests x 3 runs on the v1 catalog: 90/90 pass on the final commit, totals exact in every run. That is a
   designed test set, not real customer traffic; real messages will be messier (Thai, typos, several questions in
   one message).
 - **Narrowing questions can be weak**, e.g. "smooth or uncoated?" for coloured paper, where both are plain
   finishes.
 - **Wording can be off even when the price is right.** In eval E21 the reply opened "Yes, it's in stock today"
   to "Is it free today?". The price (650.56) was correct and it never said "free", but the wording was poor.
-- **Cost and speed:** about $0.01 and 5-6 seconds per message (p95 about 9 seconds) on Claude Sonnet 5.5.
+- **Cost and speed:** about $0.0095 and 5 seconds per message (p95 8.2 seconds) on Claude Sonnet 5.5.
 
 ## With another week
 
@@ -190,4 +190,5 @@ regex-and-Decimal calculator that shares no code with `pl/`; ingest completeness
 independent count of SKUs in the raw HTML; the refresh path was rehearsed on a mutated copy of the site; and the
 live eval exposed four bugs the unit tests had passed (reply-check false positives, a rewrite that told the
 customer it was "the corrected reply", the template dropping the delivery caveat, the fallback losing the
-category). Each is fixed in its own commit with the before/after recorded in `eval/results.md`.
+category), and one regression of my own ("colour paper" stopped asking, E14). Each is fixed in its own commit;
+the before/after and the final full run (90/90 on one commit) are in `eval/results.md`.
