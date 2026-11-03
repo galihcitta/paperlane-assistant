@@ -57,6 +57,9 @@ function renderQuote(d) {
   for (const l of d.lines) h += `<tr><td><a href="${esc(l.source_url)}" target="_blank" rel="noopener">${esc(l.sku)}</a><br><small>${esc(l.product_name)} · ${esc(l.pack)}</small></td><td class=n>${l.qty_packs}</td><td class=n>${esc(l.unit_price)}</td><td>${esc(l.price_rule)}</td><td class=n>${esc(l.line_total)}</td></tr>`;
   h += `<tr><td colspan=4>Subtotal</td><td class=n>${esc(d.subtotal)}</td></tr><tr><td colspan=4>Delivery</td><td class=n>${esc(d.delivery)}</td></tr><tr><td colspan=4>VAT 7%</td><td class=n>${esc(d.vat_7pct)}</td></tr><tr class=total><td colspan=4>Total incl. VAT</td><td class=n>${esc(d.total_incl_vat)}</td></tr></table>`;
   for (const r of d.refused || []) h += `<p class=refused>Not quotable: ${esc(r.sku)} (${esc(r.reason)})</p>`;
+  for (const n of d.rounding_notes || []) h += `<p class=empty>${esc(n)}</p>`;
+  if (d.delivery_area && d.delivery_area.in_service_area === false) h += `<p class=refused>${esc(d.delivery_area.note)}</p>`;
+  h += `<p class=empty>Prices excl. VAT from the catalog crawled ${esc(d.lines[0].crawled_at)}.</p>`;
   q.innerHTML = h;
 }
 document.getElementById("f").addEventListener("submit", async e => {

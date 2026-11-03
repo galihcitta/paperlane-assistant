@@ -61,3 +61,19 @@ def test_bad_figures_regenerate_then_template(monkeypatch, tmp_path, v1_items):
     assert "4,237.20" in out["reply"] and "PL-PR-LTR-MT-100-40" in out["reply"]
     assert out["decision"] == "matches"
     assert json.loads((tmp_path / "log.jsonl").read_text().splitlines()[-1])["template_used"] is True
+
+
+def test_quote_tool_sheets_and_delivery(monkeypatch, tmp_path):
+    from conftest import BASE, SITE, FileFetcher
+    from pl import db
+    from pl.ingest import run_ingest
+    con = db.connect(tmp_path / "q.db")
+    run_ingest(BASE, data_dir=tmp_path, con=con, log=lambda *_: None, fetcher=FileFetcher(SITE))
+    a = agent_mod.Agent(con=con)
+    s = agent_mod.Session()
+    turn = {"decision": None, "criteria": {}, "skus": [], "quote": None, "last_search": None, "delivery_area": None}
+    out, err = a._run_tool(s, "quote", {"lines": [{"sku": "PL-CP-A4-70", "qty_sheets": 1200}],
+                                        "delivery_location": "Chiang Mai"}, turn)
+    assert not err and out["lines"][0]["qty_packs"] == 3 and out["total_incl_vat"] == "510.39"
+    assert "rounded up to 3 reams" in out["rounding_notes"][0]
+    assert out["delivery_area"]["in_service_area"] is False and turn["delivery_area"] == out["delivery_area"]

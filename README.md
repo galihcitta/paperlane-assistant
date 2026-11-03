@@ -15,7 +15,7 @@ python3 -m venv .venv && .venv/bin/pip install -q -e '.[dev]'
 .venv/bin/pl ingest --base-url http://localhost:8000/paperlane/
 export ANTHROPIC_API_KEY=sk-ant-...
 .venv/bin/pl serve        # UI + API on http://127.0.0.1:8080
-.venv/bin/pl eval         # 21 requests x 3 runs -> eval/results.md
+.venv/bin/pl eval         # 25 requests x 3 runs -> eval/results.md
 ```
 
 Other entry points: `pl chat` (terminal REPL), `pl quote PL-CP-A4-70:10` (pricing only, no model), `pytest`
@@ -51,6 +51,23 @@ with a report in `data/reports/`.
 | `pl/agent.py`, `pl/replycheck.py` | Claude tool loop, session memory, reply post-check, JSONL request log |
 | `pl/api.py`, `pl/static/index.html` | FastAPI (`POST /chat`, `POST /quote`, `POST /ingest`, `GET /items`) and a one-page UI |
 | `eval/` | Requests with expected products and totals, runner, independent price calculator, refresh rehearsal |
+
+## Assumptions
+
+We didn't send clarifying questions to devx; these are our calls, and the code behaves exactly this way.
+
+| # | Assumption | Why | Where |
+|---|---|---|---|
+| 1 | Several items qualify and every required attribute is given → rank by stated preferences, then cheapest effective unit price at the requested quantity; show the top 3, the full breakdown for #1, and end with one narrowing question. | Answers the request completely and still asks the question a salesperson would, instead of stalling on a clarification. | `search.py` ranking, `narrowing_question` |
+| 2 | Quantities in sheets are rounded up to whole packs, and the reply says so. | PaperLane sells whole packs only; rounding down would under-deliver, and a silent change surprises the customer. | `search.packs_for`, `rounding_note`; quote tool `qty_sheets`; eval E20, E22, E25 |
+| 3 | If a few more packs (at most ฿150.00 extra in total) would cross the ฿3,000 free-delivery threshold, suggest it; never change the quoted quantity. | It's often a good deal for the customer (G8→G9 costs +45.68), but the order size is their decision. | `pricing._insights`; eval E05 |
+| 4 | Out-of-stock items are named with their expected return date and never quoted; discontinued items are "no longer sold"; in-stock alternatives are offered. | PR8, and a customer who asked for a specific item needs to know why it isn't in the quote. | `search` `unavailable`, `pricing.quote` refusals; eval E10, E11, refresh rehearsal |
+| 5 | The site says "Bangkok and vicinity". A delivery location outside that (or not recognised as inside it) is still quoted, with a flag that sales must confirm delivery. | Losing the quote is worse than a manual check; vicinity = Bangkok plus Nonthaburi, Pathum Thani, Samut Prakan, Samut Sakhon, Nakhon Pathom. | `search.delivery_area`; eval E23, E24 |
+| 6 | Budgets exclude VAT (PR7) unless the customer says "including VAT" / "all-in"; an ex-VAT budget is compared with subtotal + delivery. The reply states which was used. | PR7 says so; delivery is part of what the customer pays before VAT. | `search.normalise` `budget_assumption`; eval E15, E16 |
+| 7 | A flyer pack is 100 printed sheets ("500 flyers" = 5 packs). Artwork, turnaround and custom sizes are out of scope; the assistant says so. | That's the site's pack definition; the rest isn't in the catalog, so any answer would be invented. | `Quantity`, custom-size decision, system prompt; eval E25 |
+| 8 | Prices are those of the snapshot the quote was built from; each quote line shows `source_url` and `crawled_at`. | A quote must be traceable to what the site said at the time. | `pricing.Quote`, UI footer |
+| 9 | The updated demo site may change page layouts: label-driven parsers plus an LLM fallback handle it, and an unsafe snapshot is rejected, not promoted. | The demo forbids code changes, so the pipeline has to absorb layout drift or fail safe. | `parse.py`, `llm_extract.py`, `ingest.py` gates |
+| 10 | Crawl at 1 request/second, following `robots.txt` (stricter than the brief's 2/s). | robots.txt says `Crawl-delay: 1`; the stricter of the two rules wins. | `crawl.Fetcher` |
 
 ## Key decisions and trade-offs
 

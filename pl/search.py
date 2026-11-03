@@ -2,6 +2,7 @@
 this module decides clarify / matches / no_exact_match / not_sold and prices every candidate.
 """
 import math
+import re
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -14,12 +15,13 @@ from .pricing import delivery_for, quote, unit_price, vat_for
 
 class Quantity(BaseModel):
     value: int = Field(gt=0)
-    unit: Literal["packs", "sheets", "reams"] = "packs"
+    unit: Literal["packs", "sheets", "reams"] = Field(
+        "packs", description="'500 flyers' or '2,000 sheets' -> sheets (a flyer pack is 100 printed sheets)")
 
 
 class Budget(BaseModel):
     amount: float = Field(gt=0, description="THB")
-    includes_vat: bool | None = Field(None, description="true only if the customer said the budget includes VAT")
+    includes_vat: bool | None = Field(None, description="true only if the customer said the budget includes VAT ('incl. VAT', 'all-in', 'including tax')")
 
 
 class Criteria(BaseModel):
@@ -43,6 +45,7 @@ class Criteria(BaseModel):
     max_unit_price: float | None = Field(None, description="THB per pack, before VAT")
     budget_total: Budget | None = None
     keywords: list[str] = Field(default_factory=list, description="soft preferences: brand, 'recycled'...")
+    delivery_location: str | None = Field(None, description="where the customer wants delivery, if they said")
 
 
 _GENERIC_COLOUR = {"colour", "color", "coloured", "colored", "colourful", "colorful", "any colour", "any color", "coloured paper"}
@@ -78,6 +81,7 @@ class Norm(BaseModel):
     budget_assumption: str | None = None
     keywords: list[str] = []
     ambiguous: list[str] = []
+    size_raw: str | None = None
 
 
 def merge(prev: Criteria | None, new: Criteria) -> Criteria:
@@ -96,9 +100,8 @@ def normalise(c: Criteria) -> tuple[Norm, list[str]]:
              min_gsm=c.min_gsm, max_gsm=c.max_gsm, quantity=c.quantity)
     if c.size:
         code, _, _ = N.parse_size(c.size)
-        if code in (None, "OTHER"):
-            errs.append(f"size {c.size!r} not recognised; allowed: A3, A4, A5, Letter (8.5x11 in), Legal (8.5x14 in)")
-        n.size_code = code
+        n.size_code = "CUSTOM" if code in (None, "OTHER") else code
+        n.size_raw = c.size
     if c.sides:
         n.sides = N.parse_sides(c.sides) or ({"1": 1, "2": 2}.get(c.sides.strip()))
         if n.sides is None:
@@ -200,6 +203,8 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
     base = {"criteria_used": _criteria_view(n)}
     if n.budget_assumption:
         base["budget_assumption"] = n.budget_assumption
+    if c.delivery_location:
+        base["delivery_area"] = delivery_area(c.delivery_location)
 
     if n.product_type == "other":
         types = sorted({(it.product_type, it.size_code) for it in items.values()})
@@ -232,6 +237,10 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
         if len(weights) > 1:
             return clarify("weight", [f"{w} gsm" for w in weights])
 
+    if n.size_code == "CUSTOM":
+        return base | {"decision": "no_exact_match", "reason": f"size {n.size_raw!r} is not a size PaperLane lists; custom sizes are out of scope",
+                       "alternatives": [], "unavailable": [], "sizes_we_sell": sorted({it.size_code for it in pool}),
+                       "message": "Say custom sizes aren't offered; ask if one of the listed sizes would work."}
     sized = [it for it in pool if it.size_code == n.size_code]
     if not sized:
         return base | {"decision": "no_exact_match", "reason": f"no {n.product_type.replace('_', ' ')} in size {n.size_code}",
@@ -246,14 +255,13 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
     in_stock = [p for p in in_stock if _price_ok(p, n)]
     unavailable = [{"sku": it.sku, "product_name": it.product_name, "stock": it.stock_status,
                     "back_in_stock": it.back_in_stock.isoformat() if it.back_in_stock else None,
-                    "note": "matches the request but cannot be quoted"} for it in exact if it.stock_status != "in_stock"]
+                    "note": ("no longer sold (discontinued)" if it.stock_status == "discontinued"
+                             else "temporarily out of stock; cannot be quoted until it is back")}
+                   for it in exact if it.stock_status != "in_stock"]
 
     if in_stock:
-        # Unstated paper colour on plain paper: white first (the usual intent), coloured stays in the list.
-        off_white = lambda it: int(n.product_type == "paper" and n.paper_colour is None
-                                   and n.paper_kind != "coloured" and it.colour not in (None, "white"))
-        ranked = sorted(in_stock, key=lambda p: (-_kw_score(p["it"], n), off_white(p["it"]),
-                                                 p["unit"] / p["it"].sheets_per_pack, p["unit"]))
+        # Assumption 1: stated preferences first, then cheapest effective unit price (per pack) at the requested qty.
+        ranked = sorted(in_stock, key=lambda p: (-_kw_score(p["it"], n), p["unit"], p["unit"] / p["it"].sheets_per_pack))
         top = ranked[:3]
         best = top[0]
         q = quote([(best["it"].sku, best["packs"])], items)
@@ -430,3 +438,23 @@ def _narrowing_question(ranked: list[dict], n: Norm) -> str | None:
         return "Any brand preference: " + ", ".join(sorted({i.brand for i in its if i.brand})) + "?"
     return None
 
+
+
+# "Bangkok and vicinity" (site banner) = Bangkok plus the five adjoining provinces of the metropolitan region.
+_IN_AREA = ["bangkok", "bkk", "krung thep", "nonthaburi", "pathum thani", "samut prakan", "samut sakhon",
+            "nakhon pathom", "pak kret", "rangsit", "bang phli", "bang yai", "bang bua thong", "lam luk ka",
+            "phra pradaeng", "suvarnabhumi", "sukhumvit", "silom", "sathorn", "sathon", "bang na", "chatuchak",
+            "lat phrao", "ladprao", "ratchada", "bang kapi", "huai khwang", "pathum wan", "bang rak", "khlong toei",
+            "watthana", "phaya thai", "ratchathewi", "din daeng", "don mueang", "lak si", "bang sue", "min buri",
+            "lat krabang", "thon buri", "thonburi", "bang khen", "sai mai", "prawet", "suan luang", "phra khanong",
+            "yan nawa", "bang kho laem", "rama 9", "ari", "thonglor", "thong lo", "ekkamai", "on nut", "asok", "siam"]
+
+
+def delivery_area(location: str) -> dict:
+    """Assumption 5: quote normally, but flag delivery outside (or not recognisably inside) Bangkok and vicinity."""
+    t = location.lower()
+    if any(re.search(rf"\b{re.escape(a)}\b", t) for a in _IN_AREA):
+        return {"location": location, "in_service_area": True}
+    return {"location": location, "in_service_area": False,
+            "note": "PaperLane delivers in Bangkok and vicinity. Delivery to this location needs confirmation by "
+                    "the sales team; the quote below uses standard delivery terms."}

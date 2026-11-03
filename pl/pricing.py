@@ -133,11 +133,12 @@ def _insights(priced: list[tuple[Item, int]], q: Quote) -> list[str]:
                         best = (it.sku, extra, t[3])
                     break
         out.append(f"Subtotal is {fmt(gap)} below the free-delivery threshold of 3,000.00.")
-        if best:
+        # Assumption 3: suggest only when it costs little (at most the delivery fee extra); never applied.
+        if best and best[2] - q.total_satang <= DELIVERY_FEE:
             sku, extra, total = best
             delta = total - q.total_satang
-            out.append(f"Adding {extra} more pack(s) of {sku} makes delivery free; the new total would be "
-                       f"{fmt(total)} ({'+' if delta >= 0 else ''}{fmt(delta)} vs this quote).")
+            out.append(f"Suggestion only (quote unchanged): adding {extra} more pack(s) of {sku} makes delivery free; "
+                       f"the total would be {fmt(total)} ({'+' if delta >= 0 else ''}{fmt(delta)} vs this quote).")
     for it, qty in priced:
         if it.sale_price_satang is not None:
             continue

@@ -104,3 +104,10 @@ def test_delivery_flips_exactly_at_3000():
     below = quote([("X", 1)], {"X": _item(299_999, [])}, insights=False)
     at = quote([("X", 1)], {"X": _item(300_000, [])}, insights=False)
     assert (below.delivery_satang, at.delivery_satang) == (15_000, 0)
+
+
+def test_free_delivery_suggestion_only_when_cheap(v1_items):
+    q = quote([("PL-PR-A4-MT-100-40", 15)], v1_items)          # G8: +45.68 for one more pack
+    assert q.lines[0].qty == 15 and any("Suggestion only" in i and "+45.68" in i for i in q.insights)
+    q = quote([("PL-CP-A4-70", 9)], v1_items)                  # far below 3,000: no suggestion
+    assert not any("Suggestion" in i for i in q.insights)

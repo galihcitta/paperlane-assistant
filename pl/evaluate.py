@@ -86,6 +86,13 @@ def score(case: dict, out: dict) -> dict:
             r["notes"].append(f"quote total {got} (expected {case['total']})")
         elif not reply_ok:
             r["notes"].append(f"reply does not state the total {case['total']}")
+    if "delivery_flag" in case:
+        da = out.get("delivery_area")
+        flagged = bool(da) and da["in_service_area"] is False
+        ok = flagged == case["delivery_flag"] and (case["delivery_flag"] is False or da is not None)
+        r["checks"]["delivery"] = ok
+        if not ok:
+            r["notes"].append(f"delivery flag {da} (expected flagged={case['delivery_flag']})")
     reply_checks = []
     if "reply_has_any" in case:
         ok = any(s.lower() in out["reply"].lower() for s in case["reply_has_any"])
@@ -159,6 +166,7 @@ def report(cases, results, ing, runs) -> str:
         f"| (d) Totals exact (tool quote and reply text) | {rate('total')} |",
         f"| (e) Decision type | {rate('decision')} |",
         f"| Reply content checks | {rate('reply')} |",
+        f"| Delivery-area flag | {rate('delivery')} |",
         f"| Reply post-check passed first or second try | {rate('reply_check')} |",
         f"| **Overall pass** | {sum(r['pass'] for r in allr)}/{len(allr)} |", "",
         f"Latency per conversation: median {lat[len(lat) // 2]}s, max {lat[-1]}s.", "",

@@ -73,9 +73,12 @@ def test_not_sold(v1_items):
     assert S(v1_items, product_type="other", requested_item="envelopes")["decision"] == "not_sold"
 
 
+def test_custom_size_is_out_of_scope(v1_items):
+    r = S(v1_items, product_type="printed_flyer", size="DL 99x210mm", sides="one side", colour_mode="cmyk", quantity={"value": 5})
+    assert r["decision"] == "no_exact_match" and "custom sizes" in r["reason"] and r["alternatives"] == []
+
+
 def test_invalid_values_return_error(v1_items):
-    r = S(v1_items, product_type="paper", size="B5", quantity={"value": 1})
-    assert r["error"] and "B5" in r["details"][0]
     r = S(v1_items, product_type="paper", size="A4", weight_lb=22, quantity={"value": 1})
     assert "22 lb" in r["details"][0]
 
@@ -86,3 +89,26 @@ def test_merge_follow_up():
     m = merge(a, b)
     assert (m.size, m.sides, m.quantity.value) == ("A4", "one side", 5)
     assert merge(a, Criteria(product_type="paper", new_request=True)).size is None
+
+
+def test_discontinued_is_named_not_offered(v1_items):
+    items = dict(v1_items)
+    items["PL-CP-A4-70"] = items["PL-CP-A4-70"].model_copy(update={"stock_status": "discontinued"})
+    r = S(items, product_type="paper", size="A4", weight_gsm=70, quantity={"value": 5})
+    assert r["decision"] == "no_exact_match" and "no longer sold" in r["unavailable"][0]["note"]
+    assert r["alternatives"] and "PL-CP-A4-70" not in [a["sku"] for a in r["alternatives"]]
+
+
+def test_ranked_by_cheapest_unit_price(v1_items):
+    r = S(v1_items, product_type="paper", size="A4", weight_gsm=80, quantity={"value": 10})
+    prices = [float(m["unit_price"]) for m in r["matches"]]
+    assert prices == sorted(prices)
+
+
+@pytest.mark.parametrize("loc,inside", [("Chiang Mai", False), ("Phuket", False), ("Nonthaburi", True),
+                                        ("our office on Sukhumvit 21", True), ("Bangkok", True), ("Hua Hin", False)])
+def test_delivery_area(v1_items, loc, inside):
+    r = S(v1_items, product_type="paper", size="A4", weight_gsm=70, quantity={"value": 10}, delivery_location=loc)
+    assert r["decision"] == "matches" and r["best_quote"]["total_incl_vat"] == "1,280.15"   # still quoted
+    assert r["delivery_area"]["in_service_area"] is inside
+    assert ("needs confirmation" in r["delivery_area"].get("note", "")) is (not inside)

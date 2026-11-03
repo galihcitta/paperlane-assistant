@@ -15,7 +15,7 @@ from . import db, llm, replycheck
 from .models import Item
 from .normalise import satang_to_str as fmt
 from .pricing import quote as price_quote
-from .search import Criteria, merge, search
+from .search import Criteria, Quantity, delivery_area, merge, packs_for, search
 
 MAX_TOOL_ROUNDS = 4
 LOG_PATH = Path(os.environ.get("PL_LOG", "data/logs/requests.jsonl"))
@@ -49,9 +49,14 @@ TOOLS = [
     {"name": "quote",
      "description": ("Exact quote computed by code (volume tiers, sale, delivery, 7% VAT). Use for multi-item "
                      "orders or changed quantities. Out-of-stock/discontinued lines come back under 'refused'."),
-     "input_schema": {"type": "object", "properties": {"lines": {"type": "array", "items": {
-         "type": "object", "properties": {"sku": {"type": "string"}, "qty_packs": {"type": "integer", "minimum": 1}},
-         "required": ["sku", "qty_packs"]}}}, "required": ["lines"]}},
+     "input_schema": {"type": "object", "properties": {
+         "lines": {"type": "array", "items": {"type": "object", "properties": {
+             "sku": {"type": "string"},
+             "qty_packs": {"type": "integer", "minimum": 1},
+             "qty_sheets": {"type": "integer", "minimum": 1, "description": "use instead of qty_packs when the customer gave sheets; code rounds up to whole packs"}},
+             "required": ["sku"]}},
+         "delivery_location": {"type": "string", "description": "delivery location if the customer gave one"}},
+         "required": ["lines"]}},
 ]
 
 SYSTEM = """You are PaperLane's sales assistant (paper and flyer printing, Bangkok). Customers write informally; you answer like a helpful, precise salesperson.
@@ -60,8 +65,12 @@ Hard rules:
 - Never calculate, estimate or round a price yourself. Every THB amount you write must be copied exactly from a tool result. Never mention a product or SKU that no tool returned.
 - For any product request, call search_products first. Fill only what the customer actually said; leave other fields empty. Put size/sides/colour/finish in the customer's own words (code normalises them). Use quantity.unit "sheets" or "reams" when that is what they said.
 - If the decision is needs_clarification: ask exactly that one question (you may list the allowed values). Do not quote yet.
-- If the decision is matches: show up to 3 options (SKU, name, unit price at their quantity, why it matches), then the full breakdown of the best one (unit price and price rule, subtotal, delivery, VAT 7%, total), then the narrowing_question if one is given. Mention any rounding_note and insights (free delivery / next volume tier) briefly.
-- If the decision is no_exact_match: say plainly that nothing matches exactly and why; list unavailable exact matches with their back-in-stock date (never offer them as available); then offer the alternatives, stating exactly what differs.
+- If the decision is matches: show up to 3 options in the order given (SKU, name, unit price at their quantity, why it matches), then the full breakdown of the first one (unit price and price rule, subtotal, delivery, VAT 7%, total), then end with the narrowing_question if one is given.
+- If a quantity was given in sheets, always say how it was converted to packs, and if it was rounded up, say so (use the rounding_note).
+- insights are suggestions: mention a free-delivery or volume-tier suggestion briefly, but always quote the quantity the customer asked for. Never change their quantity yourself.
+- If the decision is no_exact_match: say plainly that nothing matches exactly and why. Out-of-stock exact matches: name them with their expected back-in-stock date and say they can't be ordered now. Discontinued: say they are no longer sold. Then offer the in-stock alternatives, stating exactly what differs.
+- If a delivery_area result says in_service_area false, still give the quote, and say clearly that delivery to that location needs confirmation by the sales team (PaperLane delivers in Bangkok and vicinity). Pass delivery_location whenever the customer mentions where they are.
+- Artwork design, turnaround times / rush jobs and custom sizes are out of scope: say so briefly and suggest contacting PaperLane's sales team. Prices are from the catalog snapshot shown in the quote (crawled_at).
 - If the decision is not_sold (use product_type "other" for anything PaperLane does not list, e.g. envelopes, business cards, ink): say we don't sell it, and mention what we do sell only if helpful.
 - When a budget is used, state the budget_assumption from the tool result (budgets exclude VAT unless the customer said otherwise).
 - Prices exclude VAT; totals include 7% VAT. Delivery is free from a 3,000.00 subtotal, otherwise 150.00.
@@ -94,6 +103,7 @@ class Session:
     messages: list = field(default_factory=list)
     criteria: dict[str, Criteria] = field(default_factory=dict)
     sources: list[str] = field(default_factory=list)   # tool results + customer messages, for the reply check
+    delivery_location: str | None = None
 
 
 class Agent:
@@ -119,6 +129,10 @@ class Agent:
             except ValidationError as e:
                 return {"error": "invalid criteria", "details": json.loads(e.json(include_url=False))}, True
             c = merge(s.criteria.get(c.item_label), c)
+            if c.delivery_location:
+                s.delivery_location = c.delivery_location
+            elif s.delivery_location:
+                c = c.model_copy(update={"delivery_location": s.delivery_location})
             s.criteria[c.item_label] = c
             res = search(c, self.items)
             if "error" in res:
@@ -129,6 +143,8 @@ class Agent:
             if res.get("best_quote"):
                 turn["quote"] = res["best_quote"]
             turn["last_search"] = res
+            if res.get("delivery_area"):
+                turn["delivery_area"] = res["delivery_area"]
             return res, False
         if name == "get_product":
             it = self.items.get(str(args.get("sku", "")).strip())
@@ -140,11 +156,25 @@ class Agent:
             d["tiers"] = [{"min_qty": t["min_qty"], "unit_price": fmt(t["unit_price_satang"])} for t in d["tiers"]]
             return d, False
         if name == "quote":
+            lines, notes = [], []
             try:
-                lines = [(l["sku"], int(l["qty_packs"])) for l in args["lines"]]
+                for l in args["lines"]:
+                    it = self.items.get(l["sku"])
+                    if l.get("qty_sheets") and it:
+                        packs, note = packs_for(it, Quantity(value=int(l["qty_sheets"]), unit="sheets"))
+                        notes += [f"{l['sku']}: {note}"] if note else []
+                    else:
+                        packs = int(l["qty_packs"])
+                    lines.append((l["sku"], packs))
             except (KeyError, TypeError, ValueError) as e:
-                return {"error": f"lines must be [{{sku, qty_packs}}]: {e}"}, True
+                return {"error": f"lines must be [{{sku, qty_packs | qty_sheets}}]: {e!r}"}, True
             q = price_quote(lines, self.items).to_dict()
+            if notes:
+                q["rounding_notes"] = notes
+            loc = args.get("delivery_location") or s.delivery_location
+            if loc:
+                q["delivery_area"] = delivery_area(loc)
+                turn["delivery_area"] = q["delivery_area"]
             turn["quote"] = q
             turn["skus"] = [l["sku"] for l in q["lines"]]
             if turn["decision"] in (None, "matches"):
@@ -170,7 +200,7 @@ class Agent:
         start_len = len(s.messages)
         s.messages.append({"role": "user", "content": message})
         s.sources.append(message)
-        turn = {"decision": None, "criteria": {}, "skus": [], "quote": None, "last_search": None}
+        turn = {"decision": None, "criteria": {}, "skus": [], "quote": None, "last_search": None, "delivery_area": None}
         usage = {"input": 0, "cache_read": 0, "cache_write": 0, "output": 0}
         rounds, regenerated, template_used, problems, error = 0, False, False, [], None
         reply = ""
@@ -221,6 +251,7 @@ class Agent:
 
         out = {"reply": reply, "decision": turn["decision"] or "none", "items": turn["skus"], "quote": turn["quote"],
                "unavailable": [u["sku"] for u in (turn["last_search"] or {}).get("unavailable", [])],
+               "delivery_area": turn["delivery_area"],
                "criteria": turn["criteria"], "reply_check_passed": not problems and not error,
                "regenerated": regenerated, "template_used": template_used, "tool_rounds": rounds,
                "snapshot": self.run_id, "error": error}
