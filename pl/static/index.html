@@ -23,6 +23,7 @@
   input { flex:1; padding:10px; border:1px solid var(--line); border-radius:6px; font:inherit; min-width:0; }
   button { padding:10px 16px; border:0; border-radius:6px; background:var(--accent); color:#fff; font:inherit; cursor:pointer; }
   button:disabled { opacity:.5; }
+  button.copy { padding:4px 10px; font-size:12px; background:transparent; color:var(--accent); border:1px solid var(--line); margin:-4px 0 14px; }
   #quote { padding:14px; overflow-x:auto; }
   table { width:100%; border-collapse:collapse; font-size:14px; }
   th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
@@ -39,7 +40,7 @@
   <section>
     <h2>Chat</h2>
     <div id="log"><p class="empty">Try: “We need letter-size flyers, one side, colour, under 250 a pack, 20 packs”</p></div>
-    <form id="f"><input id="m" autocomplete="off" placeholder="Type a request…" aria-label="Message"><button id="b">Send</button></form>
+    <form id="f"><input id="m" autocomplete="off" placeholder="Paste the customer's message…" aria-label="Message"><button id="b">Send</button></form>
   </section>
   <section>
     <h2>Quote (computed by code, THB)</h2>
@@ -76,6 +77,15 @@ document.getElementById("f").addEventListener("submit", async e => {
     const meta = document.createElement("p"); meta.className = "meta";
     meta.textContent = `decision: ${d.decision} · reply check: ${d.reply_check_passed ? "passed" : "failed"}${d.template_used ? " (template reply)" : ""}`;
     log.appendChild(meta);
+    if (d.reply) {
+      const c = document.createElement("button"); c.type = "button"; c.className = "copy"; c.textContent = "Copy reply";
+      c.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(d.reply); }
+        catch { const t = document.createElement("textarea"); t.value = d.reply; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
+        c.textContent = "Copied"; setTimeout(() => { c.textContent = "Copy reply"; }, 1500);
+      });
+      log.appendChild(c);
+    }
     renderQuote(d.quote);
     if (d.snapshot) document.getElementById("snap").textContent = "catalog snapshot " + d.snapshot;
   } catch (err) { wait.textContent = "Error: " + err; }
