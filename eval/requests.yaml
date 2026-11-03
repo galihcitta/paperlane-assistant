@@ -241,3 +241,11 @@
   total: "1280.15"
   reply_not_regex: "(?i)which (size|product)"
   notes: Informal wording, no SKU or product name.
+
+# Exported from a logged failure via /ops (eval/exported/): the E11 miss as a regression case.
+- id: X-req_5be5878bf35a
+  turns:
+  - Can I get 2 packs of the Heritage Ivory A4 paper?
+  decision: no_exact_match
+  notes: Exported from req_5be5878bf35a (eval, snapshot 20261103T144315978835Z); observed decision matches, items
+    ['PL-CP-A4-70', 'PL-CP-A4-75', 'PL-CP-A4-80-NUSA'], total 393.76.

@@ -1,0 +1,58 @@
+{
+ "eval_run": "eval-20261103T172124",
+ "spend_usd": 0.0121,
+ "ingest": {
+  "snapshot": "20261103T144315978835Z",
+  "skus_in_db": 72,
+  "skus_in_source": 72,
+  "missing_required": 0,
+  "db_equals_source": true,
+  "pricing_files": 59,
+  "all_tiers_attached": true
+ },
+ "results": {
+  "X-req_5be5878bf35a": [
+   {
+    "checks": {
+     "decision": false,
+     "reply_check": true
+    },
+    "notes": [
+     "decision matches (expected ['no_exact_match'])"
+    ],
+    "pass": false,
+    "run": 0,
+    "latency_s": 6.4,
+    "reply": "Heritage Ivory A4 100gsm (PL-CL-A4-100-IVY) is out of stock right now, so I can't take an order for it. It's expected back on 20 Nov 2026.\n\nNone of the other A4 papers is Heritage Ivory. These in-stock A4 papers are the closest, but they're white, not ivory, and lighter than 100 gsm:\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. White, uncoated, 500 sheets.\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. White, uncoated.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. White, uncoated.\n\nIf you want a cream shade, I can look at the coloured A4 papers, such as the 90 gsm cream. I haven't checked its price or availability yet.\n\nFor comparison, 2 packs of the first option (PL-CP-A4-70):\n- Unit price: ฿109.00 x 2 packs\n- Subtotal: ฿218.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿25.76\n- Total: ฿393.76\n\nPrices exclude VAT, and the total includes it. Prices are from our catalog of 3 Nov 2026.\n\nWould you like to wait for the Heritage Ivory, or should I look at a cream alternative?",
+    "decision": "matches",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "quantity": {
+       "value": 2,
+       "unit": "packs"
+      },
+      "keywords": [
+       "heritage ivory"
+      ],
+      "size_raw": "A4"
+     }
+    },
+    "total": "393.76",
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.012094,
+    "request_ids": [
+     "req_6489dc27acb6"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,58 @@
+{
+ "eval_run": "eval-20261103T172304",
+ "spend_usd": 0.0107,
+ "ingest": {
+  "snapshot": "20261103T144315978835Z",
+  "skus_in_db": 72,
+  "skus_in_source": 72,
+  "missing_required": 0,
+  "db_equals_source": true,
+  "pricing_files": 59,
+  "all_tiers_attached": true
+ },
+ "results": {
+  "X-req_5be5878bf35a": [
+   {
+    "checks": {
+     "decision": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 0,
+    "latency_s": 6.6,
+    "reply": "Sorry, we can't supply Heritage Ivory A4 100 gsm (PL-CL-A4-100-IVY) right now. It's temporarily out of stock and is expected back on 2026-11-20. We can't take an order for it until then.\n\nThese in-stock A4 options are the closest. Each price is the regular price for 2 packs:\n\n- Heritage Cream A4 90 gsm, smooth finish (PL-CL-A4-90-CRM): ฿152.00 per pack of 250 sheets. It's the same Heritage brand, but the colour is cream instead of ivory and it's 90 gsm instead of 100 gsm.\n- Siam Office Copy Paper A4 70 gsm (PL-CP-A4-70): ฿109.00 per ream of 500 sheets. It's white, not ivory, and a different brand.\n- Lotus Bright Everyday A4 75 gsm (PL-CP-A4-75): ฿118.00 per ream of 500 sheets. It's white, not ivory, and a different brand.\n\nIf you want something close to ivory, the Heritage Cream is the nearest. Do you want a full quote for one of these, or would you rather wait for the Ivory?\n\nPrices exclude VAT. Delivery is ฿150.00 for orders under a ฿3,000.00 subtotal.",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CL-A4-90-CRM",
+     "PL-CP-A4-70",
+     "PL-CP-A4-75"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "paper_colour": "ivory",
+      "quantity": {
+       "value": 2,
+       "unit": "packs"
+      },
+      "keywords": [
+       "heritage ivory"
+      ],
+      "brand": "heritage",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.010712,
+    "request_ids": [
+     "req_403888c13b0d"
+    ]
+   }
+  ]
+ }
+}
