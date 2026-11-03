@@ -181,6 +181,35 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 3. **Quote-to-order conversion and edits by sales staff**: how often a person changes what the assistant quoted.
 4. **p95 latency and cost per conversation** from the JSONL log (`data/logs/requests.jsonl`).
 
+1, 2 and 4 are on `/ops` (below); 3 needs the pilot's order data.
+
+### Operations page (`/ops`)
+
+`pl serve` also serves `/ops`: one static page (inline SVG, no JavaScript) over the request log
+(`data/logs/requests.jsonl`, one structured trace per request), the `runs` table and `eval/results.json`. Each
+card compares a metric to its threshold and says what to do when it's crossed; the table below is generated from
+the same config (`pl/ops.py` `THRESHOLDS`, checked by a test). `?traffic=live|eval|all` switches traffic;
+`pl eval` tags its requests `eval`. Each recent request opens its trace (customer message with phones and emails
+masked, criteria, every tool call with arguments and a result summary, check problems per attempt, reply, token
+usage) and exports as a `requests.yaml` case (`/ops/export/<request_id>?expect=<decision>`), runnable with
+`pl eval --cases <file>`. Trace attributes use the OpenTelemetry GenAI names (`gen_ai.operation.name`,
+`gen_ai.request.model`, `gen_ai.usage.input_tokens` including cache tokens, `gen_ai.usage.cache_read.input_tokens`,
+`gen_ai.tool.name`, `gen_ai.tool.call.arguments`, ...). Price drift re-prices the latest logged quotes with
+`eval/independent_quote.py` against the live snapshot's raw pages.
+
+| Metric | Alert when | Action |
+|---|---|---|
+| Reply-check failure rate (first attempt) | > 10% | Open the failing traces. If the figure was right, the check has a false positive: fix it narrowly in replycheck.py. If it was wrong, fix the prompt or tool output. |
+| Template-reply rate | > 2% | Customers are getting the plain fallback. Open the traces: both attempts failed the check, or the API errored (see error). |
+| Decision mix: no exact match | > 30% | Many requests find nothing: check for a catalog gap or out-of-stock items in the traces. |
+| Decision mix: not sold | > 20% | Customers ask for things PaperLane doesn't list: share with the owner as demand. |
+| Latency p50 | > 8 s | Check tool rounds and rewrites in slow traces; check API status. |
+| Latency p95 | > 15 s | Same as p50; slow tails usually mean a rewrite or 2+ tool rounds. |
+| Cost per conversation | > $0.03 | Check cache reads in the traces (a cache miss costs ~10x), rewrites and tool rounds. |
+| Catalog age (live snapshot) | > 7 days | Prices may be stale: run `pl ingest --base-url ...` and review the report. |
+| Last ingest held or rejected | > 0 runs | Read data/reports/<run>.md. If the warnings are expected, `pl promote <run>`; otherwise fix the site or the parser. The previous snapshot stays live. |
+| Logged quotes that re-price differently | > 0 quotes | A logged quote no longer matches the independent calculator on the live snapshot's raw pages: if the site changed, re-ingest; if not, it's a pricing bug. Open the trace. |
+
 ## How I used AI tools
 
 Built with Claude Code (Claude Opus 5.5). One session turned the brief into `SPEC.md` (decisions, golden totals,

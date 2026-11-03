@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
 from pydantic import BaseModel, Field
 
-from . import db
+from . import db, ops
 from .ingest import run_ingest
 from .pricing import quote
 
@@ -64,6 +64,30 @@ def post_ingest(body: IngestIn):
     res = run_ingest(body.base_url, accept=body.accept)
     return {"run_id": res.run_id, "status": res.status, "report": res.report, "warnings": res.warnings,
             "not_quotable": res.quarantined}
+
+
+@app.get("/ops", response_class=HTMLResponse)
+def ops_page(traffic: str = "live"):
+    from .agent import LOG_PATH
+    return ops.render(ops.gather(LOG_PATH, db.connect(), ops.ROOT / "eval/results.json", traffic=traffic))
+
+
+@app.get("/ops/trace/{request_id}", response_class=HTMLResponse)
+def ops_trace(request_id: str):
+    from .agent import LOG_PATH
+    try:
+        return ops.render_trace(ops.load_records(LOG_PATH), request_id)
+    except StopIteration:
+        raise HTTPException(404, "unknown request id")
+
+
+@app.get("/ops/export/{request_id}", response_class=PlainTextResponse)
+def ops_export(request_id: str, expect: str | None = None):
+    from .agent import LOG_PATH
+    try:
+        return ops.export_case(ops.load_records(LOG_PATH), request_id, expect)
+    except StopIteration:
+        raise HTTPException(404, "unknown request id")
 
 
 @app.get("/items")

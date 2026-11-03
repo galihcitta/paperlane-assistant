@@ -125,12 +125,16 @@ def score_replycheck(case: dict, items: dict) -> dict:
             "notes": [] if ok else [f"reply check did not flag {rc['expect_problem']!r} (problems: {probs})"]}
 
 
-def main(runs: int = 3, only: list[str] | None = None) -> int:
+def main(runs: int = 3, only: list[str] | None = None, cases_path: Path | None = None) -> int:
+    """cases_path: an alternative cases file (e.g. a case exported from /ops); its results go next to it."""
     if not llm.available():
         print("ANTHROPIC_API_KEY is not set; the eval needs the model.")
         return 2
     con = db.connect()
-    cases = yaml.safe_load((ROOT / "requests.yaml").read_text())
+    cases = yaml.safe_load((cases_path or ROOT / "requests.yaml").read_text())
+    out_json, out_md = ((cases_path.with_suffix(".results.json"), cases_path.with_suffix(".results.md")) if cases_path
+                        else (ROOT / "results.json", ROOT / "results.md"))
+    eval_run = "eval-" + time.strftime("%Y%m%dT%H%M%S", time.gmtime())   # tags this run's request-log records
     if only:
         cases = [c for c in cases if any(c["id"].startswith(o) for o in only)]
     agent = Agent(con=con)
@@ -146,18 +150,23 @@ def main(runs: int = 3, only: list[str] | None = None) -> int:
                 results[c["id"]].append(s)
                 print(f"run {run} {c['id']}: {'PASS' if s['pass'] else 'FAIL'} {'; '.join(s['notes'])}", flush=True)
                 continue
-            for msg in c["turns"]:
-                out = agent.chat(sid, msg)
+            outs = [agent.chat(sid, msg, traffic="eval", eval_run=eval_run) for msg in c["turns"]]
+            # the conversation passes the reply check / avoids the template only if every turn does
+            out = outs[-1] | {"reply_check_passed": all(o["reply_check_passed"] for o in outs),
+                              "template_used": any(o["template_used"] for o in outs)}
             s = score(c, out)
             s |= {"run": run, "latency_s": round(time.monotonic() - t0, 1), "reply": out["reply"],
                   "decision": out["decision"], "items": out["items"], "criteria": out["criteria"],
                   "total": (out["quote"] or {}).get("total_incl_vat"), "template_used": out["template_used"],
-                  "regenerated": out["regenerated"], "error": out["error"]}
+                  "regenerated": out["regenerated"], "error": out["error"],
+                  "cost_usd": round(sum(o["est_cost_usd"] for o in outs), 6), "request_ids": [o["request_id"] for o in outs]}
             results[c["id"]].append(s)
             print(f"run {run} {c['id']}: {'PASS' if s['pass'] else 'FAIL'} {'; '.join(s['notes'])}", flush=True)
-    (ROOT / "results.json").write_text(json.dumps({"ingest": ing, "results": results}, indent=1, ensure_ascii=False, default=str))
-    md = report(cases, results, ing, runs)
-    (ROOT / "results.md").write_text(md)
+    spend = round(sum(r.get("cost_usd", 0) for rs in results.values() for r in rs), 4)
+    out_json.write_text(json.dumps({"eval_run": eval_run, "spend_usd": spend, "ingest": ing, "results": results},
+                                   indent=1, ensure_ascii=False, default=str))
+    md = report(cases, results, ing, runs) + f"\nEval run `{eval_run}` (tag in the request log); spend ${spend:.2f}.\n"
+    out_md.write_text(md)
     print(md)
     return 0
 

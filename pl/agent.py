@@ -12,7 +12,7 @@ from pathlib import Path
 import anthropic
 from pydantic import ValidationError
 
-from . import db, llm, replycheck
+from . import db, llm, replycheck, trace
 from .models import Item
 from .normalise import satang_to_str as fmt
 from .pricing import quote as price_quote
@@ -206,8 +206,9 @@ class Agent:
         return llm.client().messages.create(**kw)
 
     # ---- one customer turn ----
-    def chat(self, session_id: str, message: str) -> dict:
+    def chat(self, session_id: str, message: str, traffic: str = "live", eval_run: str | None = None) -> dict:
         t0 = time.monotonic()
+        request_id, spans = trace.new_request_id(), []
         self._maybe_reload()
         s = self.sessions.setdefault(session_id, Session())
         start_len = len(s.messages)
@@ -220,7 +221,9 @@ class Agent:
         reply = ""
         try:
             while True:
+                tc = time.monotonic()
                 resp = self._call(s)
+                spans.append(trace.chat_span(resp, llm.model(), tc, "answer"))
                 _add_usage(usage, resp.usage)
                 s.messages.append({"role": "assistant", "content": resp.content})
                 uses = [b for b in resp.content if b.type == "tool_use"]
@@ -230,7 +233,9 @@ class Agent:
                 rounds += 1
                 results = []
                 for b in uses:
+                    tt = time.monotonic()
                     out, is_err = self._run_tool(s, b.name, b.input, turn)
+                    spans.append(trace.tool_span(b, out, is_err, tt))
                     txt = json.dumps(out, ensure_ascii=False, default=str)
                     results_this_turn.append(txt)
                     results.append({"type": "tool_result", "tool_use_id": b.id, "content": txt, "is_error": is_err})
@@ -250,7 +255,9 @@ class Agent:
                     + ". Rewrite the reply using only figures, SKUs and product names exactly as they appear in this turn's"
                     " tool results, each price next to the product it belongs to, and the quote's own total. Write only the"
                     " message to the customer: don't mention this check or that the reply was rewritten.")})
+                tc = time.monotonic()
                 resp = self._call(s, tool_choice={"type": "none"})
+                spans.append(trace.chat_span(resp, llm.model(), tc, "rewrite after failed reply check"))
                 _add_usage(usage, resp.usage)
                 s.messages.append({"role": "assistant", "content": resp.content})
                 reply = "".join(b.text for b in resp.content if b.type == "text").strip()
@@ -273,8 +280,16 @@ class Agent:
                "delivery_area": turn["delivery_area"],
                "criteria": turn["criteria"], "reply_check_passed": not problems and not error,
                "regenerated": regenerated, "template_used": template_used, "tool_rounds": rounds,
-               "snapshot": self.run_id, "error": error}
-        _log({"ts": datetime.now(timezone.utc).isoformat(timespec="seconds"), "session_id": session_id,
+               "snapshot": self.run_id, "error": error, "request_id": request_id,
+               "est_cost_usd": llm.est_cost(llm.model(), usage)}
+        q = turn["quote"] or {}
+        _log({"ts": datetime.now(timezone.utc).isoformat(timespec="seconds"), "request_id": request_id,
+              "traffic": traffic, "eval_run": eval_run, "session_id": session_id,
+              "gen_ai.conversation.id": session_id, "gen_ai.provider.name": trace.PROVIDER,
+              "gen_ai.request.model": llm.model(), "message": trace.mask(message),
+              "criteria": turn["criteria"], "reply": reply,
+              "quote_lines": [[l["sku"], l["qty_packs"]] for l in q.get("lines", [])],
+              "spans": spans,
               "decision": out["decision"], "skus": out["items"],
               "total": (turn["quote"] or {}).get("total_incl_vat"),
               "latency_ms": int((time.monotonic() - t0) * 1000), "input_tokens": usage["input"],
@@ -282,7 +297,11 @@ class Agent:
               "output_tokens": usage["output"], "est_cost_usd": llm.est_cost(llm.model(), usage),
               "reply_check_passed": out["reply_check_passed"], "regenerated": regenerated,
               "template_used": template_used, "tool_rounds": rounds, "model": llm.model(), "snapshot": self.run_id,
-              "error": error, "check_problems": check_log})
+              "error": error, "check_problems": check_log,
+              "gen_ai.usage.input_tokens": usage["input"] + usage["cache_read"] + usage["cache_write"],
+              "gen_ai.usage.output_tokens": usage["output"],
+              "gen_ai.usage.cache_read.input_tokens": usage["cache_read"],
+              "gen_ai.usage.cache_write.input_tokens": usage["cache_write"]})
         return out
 
 

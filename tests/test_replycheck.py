@@ -73,7 +73,7 @@ class FakeClient:
 
 def _resp(blocks, stop):
     usage = SimpleNamespace(input_tokens=10, output_tokens=5, cache_read_input_tokens=0, cache_creation_input_tokens=0)
-    return SimpleNamespace(content=blocks, stop_reason=stop, usage=usage)
+    return SimpleNamespace(content=blocks, stop_reason=stop, usage=usage, model="claude-sonnet-5-5", id="msg_test")
 
 
 def _text(t):

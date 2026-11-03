@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+from pathlib import Path
 
 
 def main(argv=None):
@@ -20,6 +21,7 @@ def main(argv=None):
     pe = sub.add_parser("eval", help="run the evaluation set")
     pe.add_argument("--runs", type=int, default=3)
     pe.add_argument("--only", nargs="*")
+    pe.add_argument("--cases", type=Path, help="cases file instead of eval/requests.yaml (e.g. exported from /ops)")
     a = p.parse_args(argv)
 
     if a.cmd == "ingest":
@@ -55,4 +57,4 @@ def main(argv=None):
         uvicorn.run("pl.api:app", host="127.0.0.1", port=a.port)
     if a.cmd == "eval":
         from .evaluate import main as eval_main
-        sys.exit(eval_main(runs=a.runs, only=a.only))
+        sys.exit(eval_main(runs=a.runs, only=a.only, cases_path=a.cases))
