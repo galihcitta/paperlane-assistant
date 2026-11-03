@@ -112,7 +112,8 @@ def normalise(c: Criteria) -> tuple[Norm, list[str]]:
             errs.append(f"colour_mode {c.colour_mode!r} not recognised; allowed: full colour (CMYK), black and white")
     if c.paper_colour:
         if c.paper_colour.strip().lower() in _GENERIC_COLOUR:
-            n.ambiguous.append("paper_colour")
+            if c.paper_kind != "coloured":  # "any coloured paper" is already said by paper_kind
+                n.ambiguous.append("paper_colour")
         else:
             n.paper_colour = N.parse_colour(c.paper_colour)
     if c.finish:
@@ -171,6 +172,12 @@ def _priced(it: Item, n: Norm) -> dict:
     vat = vat_for(sub + dl)
     return {"it": it, "packs": packs, "unit": u, "rule": rule, "sub": sub, "pre_vat": sub + dl,
             "total": sub + dl + vat, "rounding_note": note}
+
+
+def _off_white(it: Item, n: Norm) -> int:
+    """1 for a non-white paper when the customer named no colour (and didn't ask for coloured paper)."""
+    return int(n.product_type == "paper" and n.paper_colour is None and n.paper_kind != "coloured"
+               and it.colour not in (None, "white"))
 
 
 def _view(p: dict, why: list[str] | None = None, differs: list[str] | None = None) -> dict:
@@ -261,8 +268,9 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
                    for it in exact if it.stock_status != "in_stock" or not it.quotable]
 
     if in_stock:
-        # Assumption 1: stated preferences first, then cheapest effective unit price (per pack) at the requested qty.
-        ranked = sorted(in_stock, key=lambda p: (-_kw_score(p["it"], n), p["unit"], p["unit"] / p["it"].sheets_per_pack))
+        # Stated preferences first; with no paper colour given, white first; then the cheapest line total for the
+        # requested quantity (converted to whole packs per item, so a 250-sheet pack is compared fairly with a ream).
+        ranked = sorted(in_stock, key=lambda p: (-_kw_score(p["it"], n), _off_white(p["it"], n), p["sub"], p["unit"]))
         top = ranked[:3]
         best = top[0]
         q = quote([(best["it"].sku, best["packs"])], items)
@@ -303,7 +311,7 @@ def search(c: Criteria, items: dict[str, Item]) -> dict:
         relaxed.append(step)
         cands = [_priced(it, n2) for it in hard if soft_ok(it, n2) and it.stock_status == "in_stock" and it.quotable]
         cands = [p for p in cands if _price_ok(p, n2) and p["it"].sku not in seen]
-        cands.sort(key=lambda p: (len(_differs(p, n)), _distance(p, n), p["unit"] / p["it"].sheets_per_pack))
+        cands.sort(key=lambda p: (len(_differs(p, n)), _distance(p, n), _off_white(p["it"], n), p["sub"]))
         for p in cands[:3 - len(alts)]:
             seen.add(p["it"].sku)
             alts.append(_view(p, differs=_differs(p, n)))

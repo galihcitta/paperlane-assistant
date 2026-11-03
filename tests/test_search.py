@@ -99,10 +99,21 @@ def test_discontinued_is_named_not_offered(v1_items):
     assert r["alternatives"] and "PL-CP-A4-70" not in [a["sku"] for a in r["alternatives"]]
 
 
-def test_ranked_by_cheapest_unit_price(v1_items):
+def test_ranked_by_cheapest_line_total(v1_items):
     r = S(v1_items, product_type="paper", size="A4", weight_gsm=80, quantity={"value": 10})
-    prices = [float(m["unit_price"]) for m in r["matches"]]
-    assert prices == sorted(prices)
+    totals = [float(m["line_total"].replace(",", "")) for m in r["matches"]]
+    assert totals == sorted(totals)
+
+
+def test_a3_reams_prefers_white_and_cheaper_total(v1_items):
+    r = S(v1_items, product_type="paper", size="A3", quantity={"value": 5, "unit": "reams"})
+    assert r["matches"][0]["sku"] == "PL-CP-A3-80" and r["best_quote"]["total_incl_vat"] == "1,546.15"
+
+
+def test_coloured_sheets_cheapest_line_total(v1_items):
+    r = S(v1_items, product_type="paper", paper_kind="coloured", paper_colour="coloured", size="A4",
+          quantity={"value": 1000, "unit": "sheets"})
+    assert r["decision"] == "matches" and r["matches"][0]["line_total"] == "390.00"
 
 
 @pytest.mark.parametrize("loc,inside", [("Chiang Mai", False), ("Phuket", False), ("Nonthaburi", True),
