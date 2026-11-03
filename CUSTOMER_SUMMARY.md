@@ -21,7 +21,7 @@ AI assistants to say the item is free.
 - **Every price and total was exact to the satang** in all 90 conversations, and it picked the right product in
   every case where the request was clear.
 - **All 90 conversations did everything right**: the right decision (quote, question, or "we don't sell that"),
-  the right products, the right wording checks. An earlier run found five problems, including "Do you have A4
+  the right products, the right wording checks. An earlier run found a few problems, including "Do you have A4
   colour paper?" being quoted as coloured paper instead of asking whether the customer meant colour printing;
   all were fixed before this final run.
 - **It gives the same answer every time** to the same request.
