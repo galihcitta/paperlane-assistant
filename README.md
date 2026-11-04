@@ -25,7 +25,7 @@ python3 -m venv .venv && .venv/bin/pip install -q -e '.[dev]'
 .venv/bin/pl ingest --base-url http://localhost:8000/paperlane/
 export ANTHROPIC_API_KEY=sk-ant-...
 .venv/bin/pl serve        # UI + API on http://127.0.0.1:8080
-.venv/bin/pl eval         # 31 requests (30 model + 1 offline) x 3 runs -> eval/results.md
+.venv/bin/pl eval         # 32 requests (31 model + 1 offline) x 3 runs -> eval/results.md
 ```
 
 Other entry points: `pl chat` (terminal REPL), `pl quote PL-CP-A4-70:10` (pricing only, no model), `pytest`
@@ -162,10 +162,11 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 - **Two requests on the same chat session at once aren't serialised.** Different sessions are safe (the shared
   DB connection is locked); simultaneous messages in one session can interleave its history.
 
-- **Eval scope.** 31 requests x 3 runs on the v1 catalog: 93/93 pass on the final commit (86/90 after the
-  reply-wording polish, before the E11 fix), totals and product selection exact in every run. That is a
-  designed test set, not real customer traffic; real messages will be messier (Thai, typos, several questions in
-  one message).
+- **Eval scope.** 32 requests x 3 runs on the v1 catalog: 95/96 on the final commit, totals and product selection
+  exact in every run. The one failure is a scorer false alarm on a correct reply (E15, `eval/results.md`). This run
+  also scores wording about delivery, which the earlier 93/93 didn't measure; rescored the same way, that run is
+  92/93. That is a designed test set, not real customer traffic; real messages will be messier (Thai, typos, several
+  questions in one message).
 - **Narrowing questions can be weak**, e.g. "smooth or uncoated?" for coloured paper, where both are plain
   finishes.
 - **Wording can be off even when the price is right.** In eval E21 the reply opened "Yes, it's in stock today"
@@ -173,7 +174,7 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
 - **Only catalog brands and colours in keywords become filters.** "Heritage Ivory" now filters on brand and
   colour (the E11 fix), but a product line named only by its marketing words ("Premium", "Everyday") still only
   ranks, so a request for an out-of-stock line named that way could be answered with a similar product.
-- **Cost and speed:** about $0.01 and 5.5 seconds per message (p95 7.9 seconds) on Claude Sonnet 5.5.
+- **Cost and speed:** about $0.01 and 5.2 seconds per message (p95 7.3 seconds) on Claude Sonnet 5.5.
 
 ## With another week
 
@@ -238,5 +239,6 @@ independent count of SKUs in the raw HTML; the refresh path was rehearsed on a m
 live eval exposed four bugs the unit tests had passed (reply-check false positives, a rewrite that told the
 customer it was "the corrected reply", the template dropping the delivery caveat, the fallback losing the
 category), and one regression of my own ("colour paper" stopped asking, E14). Each is fixed in its own commit;
-the before/after and each full run (90/90 on `8dd5eaa`, 86/90 after the reply-wording polish, 93/93 on the
-final commit with the E11 failure exported from the request log as a 31st case) are in `eval/results.md`.
+the before/after and each full run (90/90 on `8dd5eaa`, 86/90 after the reply-wording polish, 93/93 with the E11
+failure exported from the request log as a 31st case, 95/96 on the final commit with delivery wording scored for the
+first time) are in `eval/results.md`.

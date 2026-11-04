@@ -1,0 +1,465 @@
+{
+ "eval_run": "eval-20261104T004847",
+ "spend_usd": 0.1345,
+ "ingest": {
+  "snapshot": "20261103T144315978835Z",
+  "skus_in_db": 72,
+  "skus_in_source": 72,
+  "missing_required": 0,
+  "db_equals_source": true,
+  "pricing_files": 59,
+  "all_tiers_attached": true
+ },
+ "results": {
+  "X-req_c09cb9339d0d": [
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 0,
+    "latency_s": 6.5,
+    "reply": "Nothing fits your budget exactly. The Siam Office A4 70gsm paper you asked for is the closest, but it comes in slightly over.\n\nBudget: I treated your 1,200 baht as including 7% VAT.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. 9 reams come to ฿981.00 before delivery and VAT. With ฿150.00 delivery and 7% VAT, the total is ฿1,210.17. That's ฿10.17 over your budget.\n\nThe other in-stock A4 options cost more and differ from what you asked for:\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. It's 75 gsm, not 70, and it's a different brand. The total for 9 reams is ฿1,296.84.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. It's 80 gsm, not 70, and it's a different brand. The total for 9 reams is ฿1,330.55.\n\nEach ream has 500 sheets. Delivery is ฿150.00 on orders under a ฿3,000.00 subtotal, and it's included in the totals above.\n\nPrices are from our catalog snapshot.\n\nWould you like the Siam Office 70gsm at ฿1,210.17, or should I look at a smaller quantity that fits within ฿1,200?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.020762,
+    "request_ids": [
+     "req_6d000faf5ce2"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 1,
+    "latency_s": 6.2,
+    "reply": "Nothing matches your budget exactly. Siam Office A4 70gsm is in stock, but 9 reams comes to slightly more than ฿1,200.00 including VAT. I've read your budget as including 7% VAT.\n\nClosest option:\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70), ฿109.00 per ream at 9 reams (regular price). It's the exact product you asked for.\n  - 9 reams x ฿109.00 = ฿981.00\n  - Delivery: ฿150.00 (free delivery starts at a ฿3,000.00 subtotal)\n  - The total with delivery and 7% VAT is ฿1,210.17.\n  - That is ฿10.17 over your budget.\n\nOther options, which are also over budget and differ from what you asked for:\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75), ฿118.00 per ream (regular price). It is 75 gsm and a different brand. The total is ฿1,296.84.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA), ฿121.50 per ream (regular price). It is 80 gsm and a different brand. The total is ฿1,330.55.\n\nPrices exclude VAT, but the totals above include delivery and VAT.\n\nIf you order 8 reams of the Siam Office, it should fit your budget. I can quote that for you if you'd like.",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.011762,
+    "request_ids": [
+     "req_ef7ded7cf1a9"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 2,
+    "latency_s": 6.9,
+    "reply": "Nothing fits your budget exactly. The Siam Office A4 70gsm paper is in stock, but 9 reams comes to ฿10.17 over ฿1,200.\n\nYour budget was read as including VAT.\n\nHere are the closest options:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70) is ฿109.00 per ream at list price. For 9 reams the total including delivery and VAT is ฿1,210.17. This is the exact product you asked for, just ฿10.17 over budget.\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75) is ฿118.00 per ream at list price. For 9 reams the total is ฿1,296.84. It's a different brand and 5 gsm heavier, and it's ฿96.84 over budget.\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA) is ฿121.50 per ream at list price. For 9 reams the total is ฿1,330.55. It's a different brand and 10 gsm heavier, and it's ฿130.55 over budget.\n\nFor the Siam Office paper, the 9 reams cost ฿981.00 before VAT. Delivery is ฿150.00 because the subtotal is under ฿3,000.00. The total of ฿1,210.17 includes delivery and VAT.\n\nPrices exclude VAT unless stated as a total. I haven't changed your quantity.\n\nWould you like the Siam Office paper at ฿1,210.17, or should I check a smaller quantity that fits ฿1,200?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.012242,
+    "request_ids": [
+     "req_37114bc8e9b8"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 3,
+    "latency_s": 7.3,
+    "reply": "Nothing fits your budget exactly. The Siam Office paper you asked for is in stock, but 9 reams comes to slightly more than ฿1,200.\n\nBudget: I read ฿1,200 as including VAT, as you said.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. It's the exact product. For 9 reams, the total with delivery and VAT is ฿1,210.17, which is ฿10.17 over your budget.\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. It's 75 gsm instead of 70 gsm and a different brand. The total for 9 reams is ฿1,296.84, which is ฿96.84 over.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. It's 80 gsm and a different brand. The total for 9 reams is ฿1,330.55, which is ฿130.55 over.\n\nThe ฿1,210.17 for the Siam Office is made up of ฿981.00 for the paper plus ฿150.00 delivery, then 7% VAT. Delivery is free once the subtotal reaches ฿3,000.00, so it isn't free at this quantity.\n\nIf ฿10.17 matters, you could drop to 8 reams. I'd need to re-quote that before giving you a price.\n\nPrices are from our catalog snapshot. Would you like me to quote 8 reams, or go ahead with 9?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.012282,
+    "request_ids": [
+     "req_56f88660292c"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 4,
+    "latency_s": 6.1,
+    "reply": "Nothing fits your budget exactly. The Siam Office A4 70gsm paper is the right product, but 9 reams comes to slightly more than ฿1,200.00.\n\nBudget: I read ฿1,200.00 as including 7% VAT.\n\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream at 9 reams, regular price. Subtotal ฿981.00, plus ฿150.00 delivery (the subtotal is under ฿3,000.00). Total with VAT is ฿1,210.17, which is ฿10.17 over your budget. It's in stock.\n\nTwo other options are further over budget, and both differ from what you asked for:\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, total ฿1,296.84. It's 75 gsm and a different brand.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, total ฿1,330.55. It's 80 gsm and a different brand.\n\nI haven't changed your quantity. If you order 8 reams of the Siam Office paper, I can quote that and it should fit your budget. Would you like me to do that, or stay with 9 reams?\n\nPrices are from our catalog snapshot. Prices exclude VAT, and totals include delivery and 7% VAT.",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.011712,
+    "request_ids": [
+     "req_71bf1cc200ce"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 5,
+    "latency_s": 6.3,
+    "reply": "Nothing fits your budget exactly. The Siam Office A4 70gsm is the right product, but 9 reams comes to slightly more than ฿1,200.\n\nBudget: I treated ฿1,200 as including VAT.\n\nThe closest options, all in stock:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream at regular price. Your 9 reams cost ฿981.00 before delivery and VAT. With ฿150.00 delivery and 7% VAT, the total is ฿1,210.17. That is ฿10.17 over your budget.\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream at regular price. It's a different brand and 5 gsm heavier. The total is ฿1,296.84, which is ฿96.84 over.\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream at regular price. It's a different brand and 10 gsm heavier. The total is ฿1,330.55, which is ฿130.55 over.\n\nDelivery is ฿150.00 because the subtotal is under ฿3,000.00. Each 500-sheet ream is one pack.\n\nPrices exclude VAT, but the totals above include delivery and VAT.\n\nWould you like the Siam Office at 9 reams for ฿1,210.17? Or I can check a smaller quantity that stays within ฿1,200.",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.011972,
+    "request_ids": [
+     "req_96521ce392db"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 6,
+    "latency_s": 6.6,
+    "reply": "Nothing fits your budget exactly. The Siam Office A4 70gsm you asked for is in stock, but 9 reams comes to ฿1,210.17 including delivery and VAT. That is ฿10.17 over your ฿1,200 budget. I read the budget as including 7% VAT, as you said.\n\nHere are the closest options, all in stock:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70) is ฿109.00 per ream at the regular price. It is the exact product you asked for. For 9 reams the total is ฿1,210.17, which is over budget.\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75) is ฿118.00 per ream at the regular price. It is a different brand and 5 gsm heavier. For 9 reams the total is ฿1,296.84, which is ฿96.84 over budget.\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA) is ฿121.50 per ream at the regular price. It is a different brand and 10 gsm heavier. For 9 reams the total is ฿1,330.55, which is ฿130.55 over budget.\n\nFor the Siam Office (PL-CP-A4-70), the 9 reams break down like this:\n- Unit price: ฿109.00 x 9 reams\n- Subtotal: ฿981.00\n- Delivery: ฿150.00, because the subtotal is under ฿3,000.00\n- Total including delivery and VAT 7%: ฿1,210.17\n\nPrices exclude VAT, and the totals above include delivery and VAT. They come from our current catalog snapshot.\n\nWould you like the Siam Office at 9 reams anyway, or should I check a smaller quantity that fits within ฿1,200?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.012972,
+    "request_ids": [
+     "req_a906953f3cc8"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 7,
+    "latency_s": 6.4,
+    "reply": "Nothing fits your budget exactly. The Siam Office A4 70gsm is available, but 9 reams comes to slightly more than ฿1,200.00 with VAT.\n\nBudget: I treated ฿1,200.00 as including 7% VAT, as you said.\n\nThe closest option is:\n- Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price, in stock. 9 reams is ฿981.00 before VAT. With ฿150.00 delivery and 7% VAT, the total is ฿1,210.17. That is ฿10.17 over your budget.\n\nDelivery is ฿150.00 because the subtotal is under ฿3,000.00.\n\nTwo other options cost more and differ from what you asked for:\n- Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. It is 75 gsm instead of 70 gsm and a different brand. The total is ฿1,296.84.\n- Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. It is 80 gsm instead of 70 gsm and a different brand. The total is ฿1,330.55.\n\nBoth are over budget as well. I haven't changed your quantity. If you order 8 reams of the Siam Office, I can quote that so it fits your budget.\n\nPrices are from our catalog snapshot.\n\nWould you like me to quote 8 reams, or keep 9 at ฿1,210.17?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.012152,
+    "request_ids": [
+     "req_cb1ce8799f29"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 8,
+    "latency_s": 6.4,
+    "reply": "Nothing matches your budget exactly. The Siam Office A4 70gsm paper is in stock, but 9 reams comes to ฿10.17 over ฿1,200. I read your budget as including 7% VAT, as you said.\n\nHere are the closest options, cheapest first:\n\n1. Siam Office Copy Paper A4 70gsm (PL-CP-A4-70): ฿109.00 per ream, regular price. This is exactly what you asked for. The total with delivery and VAT is ฿1,210.17, which is ฿10.17 over budget.\n2. Lotus Bright Everyday A4 75gsm (PL-CP-A4-75): ฿118.00 per ream, regular price. It's a different brand and 5 gsm heavier. The total is ฿1,296.84, which is ฿96.84 over budget.\n3. Nusa Paper Copy A4 80gsm (PL-CP-A4-80-NUSA): ฿121.50 per ream, regular price. It's a different brand and 10 gsm heavier. The total is ฿1,330.55, which is ฿130.55 over budget.\n\nThe ฿150.00 delivery fee is included in those totals. Delivery is free from a ฿3,000.00 subtotal, and these orders are well under that.\n\nSiam Office is the closest fit. Each ream is 500 sheets, so 9 reams is 4,500 sheets. Dropping to 8 reams would bring it under your budget, but I haven't quoted that. I can check it if you like.\n\nPrices are from our current catalog snapshot.\n\nDo you want me to quote 8 reams, or go ahead with 9 at ฿1,210.17?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70",
+     "PL-CP-A4-75",
+     "PL-CP-A4-80-NUSA"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": null,
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.012412,
+    "request_ids": [
+     "req_1bfa8faa730e"
+    ]
+   },
+   {
+    "checks": {
+     "decision": true,
+     "delivery_wording": true,
+     "reply_check": true
+    },
+    "notes": [],
+    "pass": true,
+    "run": 9,
+    "latency_s": 7.7,
+    "reply": "Siam Office A4 70gsm is available, but 9 reams comes to ฿10.17 over your budget. I read your budget as including 7% VAT.\n\nSiam Office Copy Paper A4 70gsm (PL-CP-A4-70)\n- ฿109.00 per ream (regular price), 500 sheets per ream, in stock.\n\nFor 9 reams:\n- Unit price x packs: ฿109.00 x 9\n- Subtotal: ฿981.00\n- Delivery: ฿150.00 (free from a ฿3,000.00 subtotal)\n- VAT 7%: ฿79.17\n- Total: ฿1,210.17\n\nIf the budget is firm, here are two ways to get under it:\n- Order 8 reams instead of 9. I can quote that for you.\n- Order 10 reams. The unit price drops to ฿104.64 per ream, but the total would still be above ฿1,200 because of delivery and VAT.\n\nPrices from our catalog of 3 Nov 2026.\n\nWould you like me to quote 8 reams?",
+    "decision": "no_exact_match",
+    "items": [
+     "PL-CP-A4-70"
+    ],
+    "criteria": {
+     "item1": {
+      "product_type": "paper",
+      "size_code": "A4",
+      "weight_gsm": 70,
+      "quantity": {
+       "value": 9,
+       "unit": "reams"
+      },
+      "budget_satang": 120000,
+      "budget_includes_vat": true,
+      "budget_assumption": "Budget treated as including 7% VAT (customer said so).",
+      "keywords": [
+       "siam office"
+      ],
+      "brand": "siam office",
+      "size_raw": "A4"
+     }
+    },
+    "total": "1,210.17",
+    "template_used": false,
+    "regenerated": false,
+    "error": null,
+    "cost_usd": 0.016236,
+    "request_ids": [
+     "req_e85d517840fa"
+    ]
+   }
+  ]
+ }
+}
