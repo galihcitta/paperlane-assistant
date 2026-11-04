@@ -103,6 +103,15 @@
   .small { margin:14px 0 0; color:var(--muted); font-size:13px; }
   .bar { display:flex; gap:0; margin-top:26px; justify-content:flex-end; }
   .bar i { width:12px; height:12px; }
+  #strip { display:none; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:10px; }
+  .strip-info { flex:1 1 auto; min-width:0; line-height:1.3; }
+  .strip-info strong { display:block; font-weight:600; font-variant-numeric:tabular-nums; }
+  .strip-actions { display:flex; gap:8px; margin-left:auto; }
+  .strip-info small { display:block; color:var(--muted); font-size:12px; }
+  .strip-info .alert { color:var(--warn); font-weight:500; }
+  .view { display:inline-flex; align-items:center; font-weight:500; text-decoration:none; white-space:nowrap; transition:transform 160ms ease-out; }
+  .view:active { transform:scale(.97); }
+  .short { display:none; }
 
   @media (min-width:861px) {
     #log { padding-bottom:0; }
@@ -110,18 +119,27 @@
   }
   @media (max-width:860px) {
     html, body { height:auto; }
-    body { display:block; min-height:100dvh; }
+    body { min-height:100dvh; }
     header { padding:10px 16px; flex-wrap:wrap; gap:6px 12px; }
     #catalog { order:3; width:100%; font-size:13px; }
     .brand { margin-right:auto; }
-    main { display:flex; flex-direction:column; min-height:calc(100dvh - 90px); }
+    main { flex:1 0 auto; display:flex; flex-direction:column; }
     .chat { display:contents; }
     #log { flex:none; overflow:visible; padding:20px 16px; }
     .desk { flex:1; overflow:visible; padding:32px 26px 20px; }
-    form { order:3; position:sticky; bottom:0; padding:10px 16px; }
+    .desk.empty { display:none; }
+    form { order:3; position:sticky; bottom:0; margin-top:auto; padding:10px 16px; }
+    #strip:not([hidden]) { display:flex; }
+    .turn:last-child .after .copy { display:none; }
     .hint { display:none; }
-    #sheet { padding:20px; }
+    #sheet { padding:20px; scroll-margin-top:32px; }
     .grand { font-size:22px; }
+  }
+  @media (max-width:420px) {
+    #catalog, .long { display:none; }
+    .short { display:inline; }
+    #strip .copy { min-width:88px; padding:6px 8px; }
+    #strip .view { padding:6px 8px; }
   }
   @media (hover:hover) and (pointer:fine) {
     .quiet:hover:not(:disabled) { border-color:var(--ink); }
@@ -133,7 +151,7 @@
   }
   @media (prefers-reduced-motion:reduce) {
     button { transition:background-color 120ms ease, border-color 120ms ease; }
-    button:active:not(:disabled) { transform:none; }
+    button:active:not(:disabled), .view:active { transform:none; }
     #sheet.feed, .text.arrived { animation:fade 180ms ease; }
     .copy span { transition:none; }
   }
@@ -143,13 +161,14 @@
 <header>
   <span class="brand">PaperLane</span>
   <span id="catalog"></span>
-  <a href="/ops" target="_blank" rel="noopener">Operations</a>
+  <a href="/ops" target="_blank" rel="noopener" aria-label="Operations"><span class="long">Operations</span><span class="short">Ops</span></a>
   <button type="button" class="quiet" id="reset" disabled>New customer</button>
 </header>
 <main>
   <div class="chat">
     <div id="log" role="log" aria-live="polite" aria-label="Conversation"></div>
     <form id="f">
+      <div id="strip" role="group" aria-label="Latest reply" hidden></div>
       <div class="box">
         <textarea id="m" rows="1" autocomplete="off" placeholder="Paste the customer's message…" aria-label="Customer's message"></textarea>
         <button id="send">Send</button>
@@ -170,7 +189,8 @@
 </main>
 <script>
 const $ = id => document.getElementById(id);
-const log = $("log"), sheet = $("sheet"), input = $("m"), send = $("send"), reset = $("reset");
+const log = $("log"), sheet = $("sheet"), input = $("m"), send = $("send"), reset = $("reset"), strip = $("strip");
+const desk = document.querySelector(".desk"), smallPhone = matchMedia("(max-width:420px)");
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const EXAMPLES = [
@@ -200,7 +220,7 @@ function catalogDate(snapshot) {
   return m ? new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric", timeZone:"UTC"}) : "";
 }
 function sheetHead() { return `<div class="sheet-head"><h2>Quotation</h2><span>${today()}</span></div>`; }
-function emptySheet(text) { sheet.className = ""; sheet.innerHTML = sheetHead() + `<p class="nothing">${esc(text)}</p>`; }
+function emptySheet(text) { desk.classList.add("empty"); sheet.className = ""; sheet.innerHTML = sheetHead() + `<p class="nothing">${esc(text)}</p>`; }
 function ruleName(rule) {
   if (rule === "list") return "regular price";
   if (rule === "sale") return "sale price";
@@ -209,7 +229,7 @@ function ruleName(rule) {
 }
 
 function start() {
-  sid = newId(); hasQuote = false; reset.disabled = true;
+  sid = newId(); hasQuote = false; reset.disabled = true; strip.hidden = true;
   log.innerHTML = `<div class="welcome"><h1>Paste a customer's message to get a quote you can send.</h1>
     <p>You'll get a draft reply and an exact price. Check them, then copy the reply to the customer.</p>
     <div class="examples" aria-label="Example messages">${EXAMPLES.map(t => `<button type="button">${esc(t)}</button>`).join("")}</div></div>`;
@@ -247,7 +267,7 @@ function renderQuote(d) {
     const when = new Date(lines[0].crawled_at);
     h += `<p class="small">Unit prices exclude VAT. Prices from the catalog of ${when.toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"})}.</p>`;
   }
-  sheet.className = ""; sheet.innerHTML = h;
+  desk.classList.remove("empty"); sheet.className = ""; sheet.innerHTML = h;
   void sheet.offsetWidth;
   sheet.className = "feed";
   hasQuote = true;
@@ -275,17 +295,43 @@ function afterReply(turn, d) {
   if (d.reply_check_passed) check.textContent = d.template_used ? "Prices checked, standard wording used" : "Prices checked";
   else { check.className = "alert"; check.textContent = "Prices not verified. Review before sending."; turn.classList.add("failed"); }
   row.appendChild(check);
+  row.appendChild(copyButton(d.reply));
+  turn.appendChild(row);
+}
+
+function copyButton(reply) {
   const c = document.createElement("button"); c.type = "button"; c.className = "copy";
   const name = document.createElement("span"); name.textContent = "Copy reply"; c.appendChild(name);
   const relabel = text => { name.classList.add("swap"); setTimeout(() => { name.textContent = text; name.classList.remove("swap"); }, 90); };
   let back;
   c.addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText(d.reply); }
-    catch { const t = document.createElement("textarea"); t.value = d.reply; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
+    try { await navigator.clipboard.writeText(reply); }
+    catch { const t = document.createElement("textarea"); t.value = reply; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
     clearTimeout(back); relabel("Copied"); back = setTimeout(() => relabel("Copy reply"), 1500);
   });
-  row.appendChild(c);
-  turn.appendChild(row);
+  return c;
+}
+
+function showStrip(d) {
+  const q = d.quote, priced = q && (q.lines || []).length;
+  const info = document.createElement("div"); info.className = "strip-info";
+  const head = document.createElement("strong");
+  head.textContent = priced ? "฿" + q.total_incl_vat : (DECISIONS[d.decision] || "Draft reply");
+  info.appendChild(head);
+  const note = !d.reply_check_passed ? "Prices not verified" : priced ? "Total incl. VAT" : "";
+  if (note) {
+    const n = document.createElement("small"); n.textContent = note;
+    if (!d.reply_check_passed) n.className = "alert";
+    info.appendChild(n);
+  }
+  const actions = document.createElement("div"); actions.className = "strip-actions";
+  if (priced || (q && (q.refused || []).length)) {
+    const v = document.createElement("a"); v.className = "quiet view"; v.href = "#sheet"; v.textContent = "View quote";
+    actions.appendChild(v);
+  }
+  actions.appendChild(copyButton(d.reply));
+  strip.replaceChildren(info, actions);
+  strip.hidden = false;
 }
 
 async function submit() {
@@ -293,11 +339,11 @@ async function submit() {
   if (!text || send.disabled) return;
   if (log.querySelector(".welcome")) log.innerHTML = "";
   reset.disabled = false;
-  bubble("customer", "Customer", text);
-  input.value = ""; grow(); send.disabled = true;
+  const said = bubble("customer", "Customer", text);
+  input.value = ""; grow(); send.disabled = true; strip.hidden = true;
   const wait = bubble("draft", "Draft reply", "");
   wait.querySelector(".text").innerHTML = `<span class="thinking"><span class="dots"><i></i><i></i><i></i><i></i></span>Reading the message and checking prices</span>`;
-  wait.scrollIntoView({block:"nearest"});
+  said.scrollIntoView({block:"start"});
   const asked = sid;
   try {
     const r = await fetch("/chat", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({session_id: sid, message: text})});
@@ -310,6 +356,7 @@ async function submit() {
     if (d.quote && ((d.quote.lines || []).length || (d.quote.refused || []).length)) renderQuote(d.quote);
     else showNoQuote(d.decision);
     showCatalog(d.snapshot);
+    showStrip(d);
     wait.scrollIntoView({block:"start"});
   } catch (err) {
     if (asked !== sid) return;
@@ -326,8 +373,10 @@ function showCatalog(snapshot) {
   const date = catalogDate(snapshot);
   if (date) $("catalog").textContent = productCount ? `${productCount}catalog of ${date}` : `Catalog of ${date}`;
 }
+function fitPlaceholder() { input.placeholder = smallPhone.matches ? "Customer's message…" : "Paste the customer's message…"; grow(); }
 function grow() { input.style.height = "auto"; input.style.height = input.scrollHeight + 2 + "px"; }
 
+smallPhone.addEventListener("change", fitPlaceholder);
 input.addEventListener("input", grow);
 input.addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); }
@@ -341,6 +390,7 @@ fetch("/items").then(r => r.ok ? r.json() : null).then(d => {
   showCatalog(d.snapshot);
 }).catch(() => {});
 start();
+fitPlaceholder();
 </script>
 </body>
 </html>
