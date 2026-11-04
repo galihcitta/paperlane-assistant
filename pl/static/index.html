@@ -4,93 +4,343 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PaperLane Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Trirong:wght@500;600&display=swap">
 <style>
-  :root { --bg:#f6f5f2; --panel:#fff; --ink:#1d1d1b; --muted:#6b6a66; --line:#e3e1dc; --accent:#2f5d50; --warn:#9a3b1f; }
-  * { box-sizing: border-box; }
-  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); }
-  header { padding:14px 20px; border-bottom:1px solid var(--line); background:var(--panel); display:flex; justify-content:space-between; align-items:baseline; }
-  header b { font-size:17px; } header span { color:var(--muted); font-size:13px; }
-  main { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:16px; padding:16px 20px; max-width:1200px; margin:auto; }
-  @media (max-width: 860px) { main { grid-template-columns: 1fr; padding:12px 16px; } }
-  section { background:var(--panel); border:1px solid var(--line); border-radius:8px; display:flex; flex-direction:column; min-height:70vh; }
-  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:0; padding:12px 14px; border-bottom:1px solid var(--line); }
-  #log { flex:1; overflow-y:auto; padding:14px; }
-  .msg { margin:0 0 12px; white-space:pre-wrap; }
-  .you { color:var(--muted); } .you::before { content:"You: "; font-weight:600; }
-  .bot::before { content:"Assistant: "; font-weight:600; color:var(--accent); }
-  .meta { font-size:12px; color:var(--muted); margin-top:-8px; margin-bottom:12px; }
-  form { display:flex; gap:8px; padding:12px; border-top:1px solid var(--line); }
-  input { flex:1; padding:10px; border:1px solid var(--line); border-radius:6px; font:inherit; min-width:0; }
-  button { padding:10px 16px; border:0; border-radius:6px; background:var(--accent); color:#fff; font:inherit; cursor:pointer; }
-  button:disabled { opacity:.5; }
-  button.copy { padding:4px 10px; font-size:12px; background:transparent; color:var(--accent); border:1px solid var(--line); margin:-4px 0 14px; }
-  #quote { padding:14px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; font-size:14px; }
-  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
-  td.n, th.n { text-align:right; font-variant-numeric: tabular-nums; white-space:nowrap; }
-  tr.total td { font-weight:700; border-bottom:0; }
-  .refused { color:var(--warn); margin-top:10px; }
-  .empty { color:var(--muted); }
-  a { color:var(--accent); }
+  :root {
+    --ink:#14263b; --muted:#4d6071; --stock:#eef3f6; --sheet:#fff; --rule:#cbd7df; --press:#1e5a7a;
+    --link:#006b8a; --warn:#7a4300; --warn-bg:#fff3dc;
+    --sans:"IBM Plex Sans Thai","Sukhumvit Set",Thonburi,system-ui,sans-serif;
+    --serif:"Trirong",Georgia,serif;
+    --ease-out:cubic-bezier(.23,1,.32,1);
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; display:flex; flex-direction:column; height:100dvh; background:var(--stock); color:var(--ink); font:16px/1.55 var(--sans); }
+  a { color:var(--link); }
+  button { font:inherit; cursor:pointer; transition:transform 160ms ease-out, background-color 120ms ease, border-color 120ms ease; }
+  button:active:not(:disabled) { transform:scale(.97); }
+  :focus-visible { outline:3px solid var(--link); outline-offset:2px; }
+
+  header { display:flex; align-items:center; gap:16px; padding:12px 24px; background:var(--sheet); border-bottom:1px solid var(--rule); }
+  .brand { font:600 20px/1 var(--serif); }
+  #catalog { color:var(--muted); font-size:14px; margin-right:auto; }
+  header a { font-size:14px; }
+  .quiet { padding:6px 12px; background:var(--sheet); border:1px solid var(--rule); border-radius:6px; color:var(--ink); font-size:14px; }
+  .quiet:disabled { color:var(--muted); cursor:default; opacity:.6; }
+
+  main { flex:1; min-height:0; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(400px,.9fr); }
+  .chat { min-height:0; display:flex; flex-direction:column; }
+  #log { flex:1; min-height:0; overflow-y:auto; padding:28px max(24px,calc((100% - 660px)/2)); }
+
+  .welcome h1 { font:500 26px/1.3 var(--serif); margin:0 0 8px; }
+  .welcome p { margin:0 0 20px; color:var(--muted); max-width:52ch; }
+  .examples { display:grid; gap:8px; }
+  .examples button { text-align:left; padding:12px 14px; background:var(--sheet); border:1px solid var(--rule); border-radius:6px; color:var(--ink); }
+
+  .who { font-size:13px; font-weight:600; color:var(--muted); margin:0 0 4px; }
+  .turn { margin:0 0 24px; scroll-margin-top:16px; }
+  .customer { margin-left:auto; width:fit-content; max-width:85%; }
+  .customer .text { background:var(--press); color:#fff; border-radius:10px 10px 2px 10px; padding:9px 14px; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .customer .who { text-align:right; }
+  .draft .text { background:var(--sheet); border:1px solid var(--rule); border-radius:2px 10px 10px 10px; padding:14px 16px; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .draft.failed .text { border-color:var(--warn); }
+  .after { display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; margin-top:8px; font-size:14px; color:var(--muted); }
+  .after strong { color:var(--ink); font-weight:600; }
+  .after .alert { color:var(--warn); font-weight:500; }
+  .copy { margin-left:auto; min-width:100px; padding:6px 14px; background:var(--ink); color:#fff; border:0; border-radius:6px; font-size:14px; font-weight:500; }
+  .copy span { display:inline-block; transition:filter 120ms ease, opacity 120ms ease; }
+  .copy span.swap { filter:blur(2px); opacity:.6; }
+  .text.arrived { animation:settle 180ms var(--ease-out); }
+  @keyframes settle { from { opacity:0; transform:translateY(4px); } }
+  .thinking { display:flex; align-items:center; gap:10px; color:var(--muted); }
+  .dots { display:inline-flex; gap:4px; }
+  .dots i { width:9px; height:9px; animation:ink 1s linear infinite; }
+  .dots i:nth-child(1) { background:#00aeef; }
+  .dots i:nth-child(2) { background:#ec008c; animation-delay:.12s; }
+  .dots i:nth-child(3) { background:#ffd400; animation-delay:.24s; }
+  .dots i:nth-child(4) { background:#14263b; animation-delay:.36s; }
+  @keyframes ink { 0%,60%,100% { opacity:.25; } 30% { opacity:1; } }
+
+  form { padding:12px max(24px,calc((100% - 660px)/2)) 14px; background:var(--stock); border-top:1px solid var(--rule); }
+  .box { display:flex; align-items:flex-end; gap:8px; }
+  textarea { flex:1; min-width:0; resize:none; max-height:200px; padding:10px 12px; background:var(--sheet); border:1px solid #8ea3b3; border-radius:6px; color:var(--ink); font:inherit; }
+  #send { padding:10px 20px; background:var(--ink); color:#fff; border:0; border-radius:6px; font-weight:500; }
+  #send:disabled { opacity:.5; cursor:default; }
+  .hint { margin:6px 0 0; color:var(--muted); font-size:13px; }
+
+  .desk { min-height:0; overflow-y:auto; background:var(--press); padding:44px 44px 28px; }
+  .trim { position:relative; max-width:480px; margin:0 auto; color:rgba(255,255,255,.8); }
+  .crop { position:absolute; width:17px; height:17px; background:
+    linear-gradient(currentColor,currentColor) right top/1px 12px no-repeat,
+    linear-gradient(currentColor,currentColor) left bottom/12px 1px no-repeat; }
+  .crop.tl { top:-16px; left:-16px; }
+  .crop.tr { top:-16px; right:-16px; transform:rotate(90deg); }
+  .crop.br { bottom:-16px; right:-16px; transform:rotate(180deg); }
+  .crop.bl { bottom:-16px; left:-16px; transform:rotate(270deg); }
+  #sheet { background:var(--sheet); color:var(--ink); padding:28px 30px; box-shadow:0 14px 34px rgba(8,30,46,.35); }
+  #sheet.feed { animation:feed 260ms var(--ease-out); }
+  @keyframes feed { from { clip-path:inset(0 -60px 100% -60px); transform:translateY(-14px); } to { clip-path:inset(0 -60px -60px -60px); transform:none; } }
+  @keyframes fade { from { opacity:0; } }
+  #sheet.stale .body { opacity:.5; }
+  .sheet-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding-bottom:12px; border-bottom:2px solid var(--ink); }
+  .sheet-head h2 { font:600 24px/1.2 var(--serif); margin:0; }
+  .sheet-head span { color:var(--muted); font-size:14px; }
+  .stale-note { margin:14px 0 0; padding:8px 12px; background:var(--warn-bg); color:var(--warn); font-size:14px; }
+  .nothing { margin:20px 0 4px; color:var(--muted); }
+  .line { padding:14px 0; border-bottom:1px solid var(--rule); }
+  .line a { font-weight:500; text-decoration-thickness:1px; text-underline-offset:2px; }
+  .line small { display:block; color:var(--muted); font-size:13px; }
+  .sums { display:flex; justify-content:space-between; gap:12px; margin-top:6px; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .sums .num:first-child { white-space:normal; }
+  dl { margin:12px 0 0; display:grid; grid-template-columns:1fr auto; gap:4px 0; }
+  dd { margin:0; text-align:right; }
+  .grand { margin-top:10px; padding-top:10px; border-top:2px solid var(--ink); font:600 26px/1.2 var(--serif); }
+  dt.grand { display:flex; align-items:center; font-size:16px; }
+  .warning { margin:14px 0 0; padding:8px 12px; background:var(--warn-bg); color:var(--warn); font-size:14px; }
+  .small { margin:14px 0 0; color:var(--muted); font-size:13px; }
+  .bar { display:flex; gap:0; margin-top:26px; justify-content:flex-end; }
+  .bar i { width:12px; height:12px; }
+
+  @media (min-width:861px) {
+    #log { padding-bottom:0; }
+    .after { position:sticky; bottom:0; margin-top:0; padding:8px 0; background:var(--stock); }
+  }
+  @media (max-width:860px) {
+    html, body { height:auto; }
+    body { display:block; min-height:100dvh; }
+    header { padding:10px 16px; flex-wrap:wrap; gap:6px 12px; }
+    #catalog { order:3; width:100%; font-size:13px; }
+    .brand { margin-right:auto; }
+    main { display:flex; flex-direction:column; min-height:calc(100dvh - 90px); }
+    .chat { display:contents; }
+    #log { flex:none; overflow:visible; padding:20px 16px; }
+    .desk { flex:1; overflow:visible; padding:32px 26px 20px; }
+    form { order:3; position:sticky; bottom:0; padding:10px 16px; }
+    .hint { display:none; }
+    #sheet { padding:20px; }
+    .grand { font-size:22px; }
+  }
+  @media (hover:hover) and (pointer:fine) {
+    .quiet:hover:not(:disabled) { border-color:var(--ink); }
+    .examples button:hover { border-color:var(--press); box-shadow:inset 3px 0 0 var(--press); }
+    .copy:hover, #send:hover:not(:disabled) { background:var(--press); }
+  }
+  @media (pointer:coarse) {
+    .quiet, .copy, #send, .examples button { min-height:44px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    button { transition:background-color 120ms ease, border-color 120ms ease; }
+    button:active:not(:disabled) { transform:none; }
+    #sheet.feed, .text.arrived { animation:fade 180ms ease; }
+    .copy span { transition:none; }
+  }
 </style>
 </head>
 <body>
-<header><b>PaperLane sales assistant</b><span id="snap"></span></header>
+<header>
+  <span class="brand">PaperLane</span>
+  <span id="catalog"></span>
+  <a href="/ops" target="_blank" rel="noopener">Operations</a>
+  <button type="button" class="quiet" id="reset" disabled>New customer</button>
+</header>
 <main>
-  <section>
-    <h2>Chat</h2>
-    <div id="log"><p class="empty">Try: “We need letter-size flyers, one side, colour, under 250 a pack, 20 packs”</p></div>
-    <form id="f"><input id="m" autocomplete="off" placeholder="Paste the customer's message…" aria-label="Message"><button id="b">Send</button></form>
-  </section>
-  <section>
-    <h2>Quote (computed by code, THB)</h2>
-    <div id="quote"><p class="empty">No quote yet.</p></div>
-  </section>
+  <div class="chat">
+    <div id="log" role="log" aria-live="polite" aria-label="Conversation"></div>
+    <form id="f">
+      <div class="box">
+        <textarea id="m" rows="1" autocomplete="off" placeholder="Paste the customer's message…" aria-label="Customer's message"></textarea>
+        <button id="send">Send</button>
+      </div>
+      <p class="hint">Press Enter to send, Shift+Enter for a new line.</p>
+    </form>
+  </div>
+  <aside class="desk" aria-label="Quote">
+    <div class="trim">
+      <i class="crop tl"></i><i class="crop tr"></i><i class="crop br"></i><i class="crop bl"></i>
+      <div id="sheet"></div>
+    </div>
+    <div class="trim bar" aria-hidden="true">
+      <i style="background:#00aeef"></i><i style="background:#ec008c"></i><i style="background:#fff200"></i><i style="background:#231f20"></i>
+      <i style="background:#80d7f7"></i><i style="background:#f680c6"></i><i style="background:#fff880"></i><i style="background:#918f90"></i>
+    </div>
+  </aside>
 </main>
 <script>
-const sid = "web-" + Math.random().toString(36).slice(2, 10);
-const log = document.getElementById("log"), q = document.getElementById("quote");
+const $ = id => document.getElementById(id);
+const log = $("log"), sheet = $("sheet"), input = $("m"), send = $("send"), reset = $("reset");
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function add(cls, text) { const p = document.createElement("p"); p.className = "msg " + cls; p.textContent = text; log.appendChild(p); log.scrollTop = log.scrollHeight; return p; }
-function renderQuote(d) {
-  if (!d || !d.lines || !d.lines.length) return;
-  let h = "<table><tr><th>Item</th><th class=n>Packs</th><th class=n>Unit</th><th>Rule</th><th class=n>Line</th></tr>";
-  for (const l of d.lines) h += `<tr><td><a href="${esc(l.source_url)}" target="_blank" rel="noopener">${esc(l.sku)}</a><br><small>${esc(l.product_name)} · ${esc(l.pack)}</small></td><td class=n>${l.qty_packs}</td><td class=n>${esc(l.unit_price)}</td><td>${esc(l.price_rule)}</td><td class=n>${esc(l.line_total)}</td></tr>`;
-  h += `<tr><td colspan=4>Subtotal</td><td class=n>${esc(d.subtotal)}</td></tr><tr><td colspan=4>Delivery</td><td class=n>${esc(d.delivery)}</td></tr><tr><td colspan=4>VAT 7%</td><td class=n>${esc(d.vat_7pct)}</td></tr><tr class=total><td colspan=4>Total incl. VAT</td><td class=n>${esc(d.total_incl_vat)}</td></tr></table>`;
-  for (const r of d.refused || []) h += `<p class=refused>Not quotable: ${esc(r.sku)} (${esc(r.reason)})</p>`;
-  for (const n of d.rounding_notes || []) h += `<p class=empty>${esc(n)}</p>`;
-  if (d.delivery_area && d.delivery_area.in_service_area === false) h += `<p class=refused>${esc(d.delivery_area.note)}</p>`;
-  h += `<p class=empty>Prices excl. VAT from the catalog crawled ${esc(d.lines[0].crawled_at)}.</p>`;
-  q.innerHTML = h;
+
+const EXAMPLES = [
+  "We need letter-size flyers, one side, colour, under 250 a pack, 20 packs",
+  "Can I get 2 packs of the Heritage Ivory A4 paper?",
+  "5 reams of A3 paper",
+];
+const DECISIONS = {
+  matches: "Products found",
+  quote: "Quoted",
+  no_exact_match: "No exact match",
+  needs_clarification: "Waiting on the customer",
+  not_sold: "Not something we sell",
+};
+const NO_QUOTE = {
+  no_exact_match: "No quote: nothing in stock meets every requirement. The reply offers the closest options.",
+  needs_clarification: "No quote yet: the reply asks the customer for what's missing.",
+  not_sold: "No quote: PaperLane doesn't sell this.",
+};
+
+let sid, hasQuote;
+
+function newId() { return "web-" + Math.random().toString(36).slice(2, 10); }
+function today() { return new Date().toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"}); }
+function catalogDate(snapshot) {
+  const m = /^(\d{4})(\d{2})(\d{2})T/.exec(snapshot || "");
+  return m ? new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric", timeZone:"UTC"}) : "";
 }
-document.getElementById("f").addEventListener("submit", async e => {
-  e.preventDefault();
-  const m = document.getElementById("m"), b = document.getElementById("b"), text = m.value.trim();
-  if (!text) return;
-  if (log.querySelector(".empty")) log.innerHTML = "";
-  add("you", text); m.value = ""; b.disabled = true;
-  const wait = add("bot", "…");
+function sheetHead() { return `<div class="sheet-head"><h2>Quotation</h2><span>${today()}</span></div>`; }
+function emptySheet(text) { sheet.className = ""; sheet.innerHTML = sheetHead() + `<p class="nothing">${esc(text)}</p>`; }
+function ruleName(rule) {
+  if (rule === "list") return "regular price";
+  if (rule === "sale") return "sale price";
+  const m = /^tier:(\d+)$/.exec(rule || "");
+  return m ? `${m[1]}-pack price` : (rule || "");
+}
+
+function start() {
+  sid = newId(); hasQuote = false; reset.disabled = true;
+  log.innerHTML = `<div class="welcome"><h1>Paste a customer's message to get a quote you can send.</h1>
+    <p>You'll get a draft reply and an exact price. Check them, then copy the reply to the customer.</p>
+    <div class="examples" aria-label="Example messages">${EXAMPLES.map(t => `<button type="button">${esc(t)}</button>`).join("")}</div></div>`;
+  log.querySelectorAll(".examples button").forEach(b => b.addEventListener("click", () => { input.value = b.textContent; submit(); }));
+  emptySheet("The quote appears here once a product is priced.");
+  input.value = ""; grow(); input.focus();
+}
+
+function bubble(cls, who, text) {
+  const a = document.createElement("article"); a.className = "turn " + cls;
+  const w = document.createElement("p"); w.className = "who"; w.textContent = who;
+  const t = document.createElement("div"); t.className = "text"; t.textContent = text;
+  a.append(w, t); log.appendChild(a); return a;
+}
+
+function renderQuote(d) {
+  const lines = d.lines || [];
+  let h = sheetHead();
+  for (const l of lines) {
+    h += `<div class="line"><a href="${esc(l.source_url)}" target="_blank" rel="noopener">${esc(l.product_name)}</a>
+      <small>${esc(l.sku)}, ${esc(l.pack)}</small>
+      <div class="sums"><span class="num">${esc(l.qty_packs)} × ฿${esc(l.unit_price)}, ${esc(ruleName(l.price_rule))}</span><span class="num">฿${esc(l.line_total)}</span></div></div>`;
+  }
+  if (lines.length) {
+    const free = String(d.delivery) === "0.00";
+    h += `<dl><dt>Subtotal</dt><dd class="num">฿${esc(d.subtotal)}</dd>
+      <dt>Delivery</dt><dd class="num">${free ? "Free" : "฿" + esc(d.delivery)}</dd>
+      <dt>VAT 7%</dt><dd class="num">฿${esc(d.vat_7pct)}</dd>
+      <dt class="grand">Total</dt><dd class="grand num">฿${esc(d.total_incl_vat)}</dd></dl>`;
+  }
+  for (const r of d.refused || []) h += `<p class="warning">Can't quote ${esc(r.sku)}: ${esc(r.reason)}</p>`;
+  if (d.delivery_area && d.delivery_area.in_service_area === false) h += `<p class="warning">${esc(d.delivery_area.note)}</p>`;
+  for (const n of d.rounding_notes || []) h += `<p class="small">${esc(n)}</p>`;
+  if (lines.length) {
+    const when = new Date(lines[0].crawled_at);
+    h += `<p class="small">Unit prices exclude VAT. Prices from the catalog of ${when.toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"})}.</p>`;
+  }
+  sheet.className = ""; sheet.innerHTML = h;
+  void sheet.offsetWidth;
+  sheet.className = "feed";
+  hasQuote = true;
+}
+
+function showNoQuote(decision) {
+  if (hasQuote) {
+    sheet.className = "stale";
+    if (!sheet.querySelector(".stale-note")) {
+      const body = document.createElement("div"); body.className = "body";
+      const head = sheet.querySelector(".sheet-head");
+      while (head.nextSibling) body.appendChild(head.nextSibling);
+      const note = document.createElement("p"); note.className = "stale-note";
+      note.textContent = "From an earlier message. The latest message didn't produce a new quote.";
+      sheet.append(note, body);
+    }
+  } else emptySheet(NO_QUOTE[decision] || "No quote for this message.");
+}
+
+function afterReply(turn, d) {
+  const row = document.createElement("div"); row.className = "after";
+  const label = DECISIONS[d.decision];
+  if (label) { const s = document.createElement("strong"); s.textContent = label; row.appendChild(s); }
+  const check = document.createElement("span");
+  if (d.reply_check_passed) check.textContent = d.template_used ? "Prices checked, standard wording used" : "Prices checked";
+  else { check.className = "alert"; check.textContent = "Prices not verified. Review before sending."; turn.classList.add("failed"); }
+  row.appendChild(check);
+  const c = document.createElement("button"); c.type = "button"; c.className = "copy";
+  const name = document.createElement("span"); name.textContent = "Copy reply"; c.appendChild(name);
+  const relabel = text => { name.classList.add("swap"); setTimeout(() => { name.textContent = text; name.classList.remove("swap"); }, 90); };
+  let back;
+  c.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(d.reply); }
+    catch { const t = document.createElement("textarea"); t.value = d.reply; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
+    clearTimeout(back); relabel("Copied"); back = setTimeout(() => relabel("Copy reply"), 1500);
+  });
+  row.appendChild(c);
+  turn.appendChild(row);
+}
+
+async function submit() {
+  const text = input.value.trim();
+  if (!text || send.disabled) return;
+  if (log.querySelector(".welcome")) log.innerHTML = "";
+  reset.disabled = false;
+  bubble("customer", "Customer", text);
+  input.value = ""; grow(); send.disabled = true;
+  const wait = bubble("draft", "Draft reply", "");
+  wait.querySelector(".text").innerHTML = `<span class="thinking"><span class="dots"><i></i><i></i><i></i><i></i></span>Reading the message and checking prices</span>`;
+  wait.scrollIntoView({block:"nearest"});
+  const asked = sid;
   try {
     const r = await fetch("/chat", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({session_id: sid, message: text})});
+    if (asked !== sid) return;
+    if (!r.ok) throw new Error(`the server answered ${r.status}`);
     const d = await r.json();
-    wait.textContent = d.reply ?? JSON.stringify(d);
-    const meta = document.createElement("p"); meta.className = "meta";
-    meta.textContent = `decision: ${d.decision} · reply check: ${d.reply_check_passed ? "passed" : "failed"}${d.template_used ? " (template reply)" : ""}`;
-    log.appendChild(meta);
-    if (d.reply) {
-      const c = document.createElement("button"); c.type = "button"; c.className = "copy"; c.textContent = "Copy reply";
-      c.addEventListener("click", async () => {
-        try { await navigator.clipboard.writeText(d.reply); }
-        catch { const t = document.createElement("textarea"); t.value = d.reply; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
-        c.textContent = "Copied"; setTimeout(() => { c.textContent = "Copy reply"; }, 1500);
-      });
-      log.appendChild(c);
-    }
-    renderQuote(d.quote);
-    if (d.snapshot) document.getElementById("snap").textContent = "catalog snapshot " + d.snapshot;
-  } catch (err) { wait.textContent = "Error: " + err; }
-  b.disabled = false; m.focus();
+    const shown = wait.querySelector(".text");
+    shown.textContent = d.reply ?? ""; shown.classList.add("arrived");
+    afterReply(wait, d);
+    if (d.quote && ((d.quote.lines || []).length || (d.quote.refused || []).length)) renderQuote(d.quote);
+    else showNoQuote(d.decision);
+    showCatalog(d.snapshot);
+    wait.scrollIntoView({block:"start"});
+  } catch (err) {
+    if (asked !== sid) return;
+    wait.querySelector(".text").textContent = `No reply: ${err.message}. Your message is back in the box. Check that the server is running and has an API key, then send it again.`;
+    wait.classList.add("failed");
+    input.value = text; grow();
+  }
+  send.disabled = false;
+  if (matchMedia("(hover: hover)").matches) input.focus();
+}
+
+let productCount = "";
+function showCatalog(snapshot) {
+  const date = catalogDate(snapshot);
+  if (date) $("catalog").textContent = productCount ? `${productCount}catalog of ${date}` : `Catalog of ${date}`;
+}
+function grow() { input.style.height = "auto"; input.style.height = input.scrollHeight + 2 + "px"; }
+
+input.addEventListener("input", grow);
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); }
 });
+$("f").addEventListener("submit", e => { e.preventDefault(); submit(); });
+reset.addEventListener("click", () => { send.disabled = false; start(); });
+
+fetch("/items").then(r => r.ok ? r.json() : null).then(d => {
+  if (!d) return;
+  productCount = `${d.count} products, `;
+  showCatalog(d.snapshot);
+}).catch(() => {});
+start();
 </script>
 </body>
 </html>
