@@ -193,7 +193,8 @@ def _view(p: dict, why: list[str] | None = None, differs: list[str] | None = Non
          "finish": it.finish, "paper_colour": it.colour_raw, "sides": it.sides, "colour_mode": it.colour_mode,
          "pack": f"{it.pack_unit} of {it.sheets_per_pack} sheets", "qty_packs": p["packs"],
          "unit_price": fmt(p["unit"]), "price_rule": p["rule"], "list_price": fmt(it.list_price_satang),
-         "line_total": fmt(p["sub"]), "total_incl_vat_if_ordered_alone": fmt(p["total"]),
+         "line_total": fmt(p["sub"]), "delivery_if_ordered_alone": fmt(p["pre_vat"] - p["sub"]),
+         "total_incl_delivery_and_vat_if_ordered_alone": fmt(p["total"]),
          "stock": it.stock_status, "source_url": it.source_url}
     if it.weight_source == "converted_from_lb":
         d["weight_note"] = f"site states {it.weight_lb_stated} lb; {it.weight_gsm} gsm by the agreed table"

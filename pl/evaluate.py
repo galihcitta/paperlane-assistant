@@ -16,6 +16,23 @@ from .replycheck import allowed_numbers
 from .search import Criteria, search
 
 ROOT = Path("eval")
+# Scorer only, deliberately wider than replycheck.false_delivery_claim: the reply check rewrites whatever that function
+# catches, so sharing it would make this score unable to fail. Any sentence naming a total and delivery with wording
+# that delivery is outside the total.
+_D_OUTSIDE = re.compile(r"exclud|\bnot\b|n['’]t\b|without|separate|extra|additional|on top|\bbefore\b|higher(?!\s+than)|(?:will|would|to) be added", re.I)
+# "total including delivery and VAT is not within budget" is about the budget.
+_D_INSIDE = re.compile(r"(?<!not )(?<!n['’]t )\b(?:includ\w*|incl\.?|with)\s+(?:(?!(?:not?|but)\b)\S+\s+){0,3}?(?:delivery|shipping)"
+                       r"|(?:delivery|shipping)(?:\s+and\s+VAT)?\s+included", re.I)
+
+
+def delivery_outside_total(reply: str) -> str | None:
+    if (claim := replycheck.false_delivery_claim(reply)):
+        return claim
+    for s in re.split(r"(?<=[.!?])\s+|\n", reply):
+        if re.search(r"(?<!sub)(?<!line )\btotals?\b", s, re.I) and re.search(r"delivery|shipping", s, re.I) \
+                and _D_OUTSIDE.search(s) and "confirm" not in s.lower() and not _D_INSIDE.search(s):
+            return s
+    return None
 
 
 def _with_date_forms(wanted: list[str]) -> list[str]:
@@ -119,6 +136,10 @@ def score(case: dict, out: dict) -> dict:
             r["notes"].append(f"reply contains forbidden text {m.group(0)!r}")
     if reply_checks:
         r["checks"]["reply"] = all(reply_checks)
+    claim = delivery_outside_total(out["reply"])
+    r["checks"]["delivery_wording"] = claim is None
+    if claim:
+        r["notes"].append(f"reply says delivery is outside a total: {claim!r}")
     r["checks"]["reply_check"] = out["reply_check_passed"]
     if not out["reply_check_passed"]:
         r["notes"].append("reply post-check failed" + (" -> template reply sent" if out["template_used"] else ""))
@@ -206,6 +227,7 @@ def report(cases, results, ing, runs) -> str:
         f"| (e) Decision type | {rate('decision')} |",
         f"| Reply content checks | {rate('reply')} |",
         f"| Delivery-area flag | {rate('delivery')} |",
+        f"| No false claim that a total leaves out delivery | {rate('delivery_wording')} |",
         f"| Reply post-check passed first or second try | {rate('reply_check')} |",
         f"| Reply check catches a planted wrong total (offline) | {rate('reply_check_catches')} |",
         f"| **Overall pass** | {sum(r['pass'] for r in allr)}/{len(allr)} |", "",

@@ -152,7 +152,11 @@ SQLite, one row per SKU per ingest run; money in integer satang (no floats anywh
   follow-up like "what was the total again?" must call the tool again (the system prompt says so). If the model
   doesn't, the reply fails the check and the customer gets the template reply.
 - **The reply check is about numbers and names, not prose.** It can't tell that "matte" was said of a gloss item,
-  misses paraphrased product names, and only ties a price to a product when the SKU is on the same line.
+  misses paraphrased product names, and only ties a price to a product when the SKU is on the same line. The one
+  exception is a claim that a total leaves out delivery, caught by wording in English and Thai, so a paraphrase can
+  get past it.
+- **The model can make suggestions no tool calculated,** such as "8 reams should fit your budget". There's no figure
+  to check, so the reply check doesn't catch it.
 - **One bad row holds its whole page without an API key.** A row missing a required field (e.g. a flyer with no
   sides) sends the page to the LLM fallback; with no key every SKU on that page is stored not quotable.
 - **Two requests on the same chat session at once aren't serialised.** Different sessions are safe (the shared

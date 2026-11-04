@@ -151,3 +151,48 @@ def test_eval_offline_replycheck_cases(v1_items):
     from pl.evaluate import ROOT, score_replycheck
     cases = [c for c in yaml.safe_load((ROOT / "requests.yaml").read_text()) if c.get("offline")]
     assert cases and all(score_replycheck(c, v1_items)["pass"] for c in cases)
+
+
+LOGGED_CLAIM = ("The totals above are the single-item figures and include VAT, but not delivery. Delivery is ฿150.00 below a "
+                "฿3,000.00 subtotal. I haven't included it, so the Siam Office total would be higher once it's added.")
+
+
+def test_false_delivery_claims_are_rejected():
+    """req_c09cb9339d0d: 1,210.17 already includes the 150.00 delivery."""
+    for reply in (LOGGED_CLAIM,
+                  "I haven't included delivery, so the total would be higher once it's added.",
+                  "The total shown already includes VAT, but I haven't included delivery in it.",
+                  "Your total of ฿1,210.17 does not include delivery.",
+                  "These totals exclude the ฿150.00 delivery fee.",
+                  "Delivery isn't included in the total.",
+                  "Once delivery is added, the total will be higher.",
+                  "ยอดรวม 1,210.17 บาท ยังไม่รวมค่าจัดส่ง"):
+        assert any("leaves out delivery" in p for p in check(reply, [], "", ())), reply
+
+
+def test_correct_delivery_wording_passes():
+    results = [json.dumps({"total_incl_delivery_and_vat_if_ordered_alone": "1,210.17", "line_total": "981.00", "delivery_if_ordered_alone": "150.00"})]
+    for reply in ("Delivery: ฿150.00",
+                  "Delivery is free from a ฿3,000.00 subtotal.",
+                  "Total: ฿1,210.17, including delivery and VAT.",
+                  "The total includes delivery and VAT.",
+                  "9 reams is ฿981.00 before VAT and delivery.",
+                  "Prices exclude VAT and delivery.",
+                  "The subtotal of ฿981.00 doesn't include delivery.",
+                  "The line total of ฿981.00 excludes delivery.",
+                  "After VAT and delivery are added, your total is ฿1,210.17.",
+                  "The total is higher than your budget once delivery is included.",
+                  "Your total could be higher once delivery to Chiang Mai is confirmed by our sales team."):
+        assert check(reply, results, "", ()) == [], reply
+
+
+def test_scorer_fails_the_claim_even_where_the_reply_check_misses_it():
+    from pl.evaluate import score
+    out = {"decision": "no_exact_match", "criteria": {}, "items": [], "quote": None, "reply_check_passed": True, "template_used": False}
+    case = {"decision": "no_exact_match"}
+    for ok in ("Total: ฿1,210.17, including delivery and VAT.", "The total including delivery and VAT is not within your budget.",
+               "That total is ฿10.17 higher than your budget once delivery is included."):
+        assert score(case, out | {"reply": ok})["pass"], ok
+    assert not score(case, out | {"reply": LOGGED_CLAIM})["pass"]
+    paraphrase = "Delivery gets charged separately from that total."       # the reply check misses this wording
+    assert check(paraphrase, [], "", ()) == [] and not score(case, out | {"reply": paraphrase})["pass"]

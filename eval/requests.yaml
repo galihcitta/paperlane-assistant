@@ -249,3 +249,12 @@
   decision: no_exact_match
   notes: Exported from req_5be5878bf35a (eval, snapshot 20261103T144315978835Z); observed decision matches, items
     ['PL-CP-A4-70', 'PL-CP-A4-75', 'PL-CP-A4-80-NUSA'], total 393.76.
+
+# From a live check: the reply said the total left out delivery, though 1,210.17 includes it (981.00 + 150.00 + 79.17).
+- id: X-req_c09cb9339d0d
+  turns:
+  - 9 reams of Siam Office A4 70gsm, my budget is 1,200 baht including VAT
+  decision: no_exact_match
+  top1: PL-CP-A4-70
+  reply_has_any: ["1,210.17"]
+  notes: Every case now also fails on wording that delivery is outside a total (delivery_wording). The figures here always passed.

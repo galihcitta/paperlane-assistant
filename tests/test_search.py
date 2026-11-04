@@ -169,3 +169,11 @@ def test_catalog_brand_and_colour_keywords_are_filters(v1_items):
 def test_generic_keywords_only_rank(v1_items, kw):
     r = S(v1_items, product_type="paper", size="A4", keywords=[kw], quantity={"value": 2})
     assert r["decision"] == "matches" and r["match_count"] > 3
+
+
+def test_candidate_totals_say_they_include_delivery(v1_items):
+    """req_c09cb9339d0d: the model read a total labelled only 'incl_vat' as leaving delivery out."""
+    out = search(Criteria(size="A4", weight_gsm=70, product_type="paper", keywords=["Siam Office"], quantity={"value": 9, "unit": "reams"},
+                          budget_total={"amount": 1200, "includes_vat": True}), v1_items)
+    a = next(x for x in out["alternatives"] if x["sku"] == "PL-CP-A4-70")
+    assert (a["line_total"], a["delivery_if_ordered_alone"], a["total_incl_delivery_and_vat_if_ordered_alone"]) == ("981.00", "150.00", "1,210.17")

@@ -4,9 +4,11 @@
   appears in this turn's tool results or the customer's own message this turn (or is a fixed policy figure);
 - a figure on a line that names one SKU belongs to that SKU's tool data (or is a quote total);
 - a line labelled "Total" / "Subtotal" (the breakdown line) states a quote's total / subtotal;
-- every SKU and every catalog product name in the reply appears in this turn's tool results.
+- every SKU and every catalog product name in the reply appears in this turn's tool results;
+- no sentence claims a total excludes delivery (every total the tools return includes it).
 
-It cannot tell whether prose claims (e.g. "matte finish") are right, and it misses paraphrased product names.
+Apart from that delivery claim it cannot tell whether prose claims (e.g. "matte finish") are right, and it misses
+paraphrased product names.
 """
 import json
 import re
@@ -28,6 +30,19 @@ _SKU = re.compile(r"\bPL-[A-Z0-9]+(?:-[A-Z0-9]+)+\b")
 # The breakdown line: "Total: 1,546.15", "- Subtotal 1,295.00", "**Total incl. VAT**: ...". Not "the total would rise".
 _TOTAL = re.compile(r"^\s*(?:[-*•]\s*)?(?:\*\*)?(sub)?total\b", re.I)
 POLICY = {Decimal("3000"), Decimal("150")}   # free-delivery threshold and fee, stated in the system prompt
+# Claims that a total leaves delivery out. Subtotals, line totals and unit prices really do exclude it, so they don't count.
+_D = r"(?:delivery|shipping)"
+_NOT_TOTAL = re.compile(r"\b(?:line|item|goods|product)\s+totals?\b|\btotals?\s+budget\b", re.I)
+_TOTAL_WORD = re.compile(r"\btotals?\b", re.I)
+_LEAVES_OUT = re.compile(
+    rf"\btotals?\b.{{0,120}}?(?:(?:exclud\w*|(?:not|n['’]t)\s+(?:yet\s+)?(?:includ\w*|count\w*))\s+(?:\S+\s+){{0,3}}?{_D}"
+    rf"|without\s+(?:the\s+)?{_D}|(?:but\s+|and\s+|,\s*)not\s+(?:the\s+)?{_D})", re.I)
+_D_LEFT_OUT = re.compile(rf"{_D}\W+(?:\S+\s+){{0,2}}?(?:(?:not|\w*n['’]t)\s+(?:yet\s+)?includ|exclud)|{_D}.{{0,40}}?\bon top of\b", re.I)
+_RISES = r"(?:higher|more|increase\w*|go(?:es)? up|rises?)\b(?!\s+than\b)"     # "higher than your budget" is about the budget
+_HIGHER_ONCE = re.compile(rf"\btotals?\b.{{0,100}}?\b{_RISES}.{{0,50}}?\b(?:once|when|after)\b.{{0,40}}?{_D}"
+                          rf"|\b(?:once|when|after)\b.{{0,30}}?{_D}.{{0,40}}?\b(?:added|included)\b.{{0,80}}?\btotals?\b.{{0,40}}?\b{_RISES}", re.I)
+_HIGHER_IT = re.compile(rf"\btotals?\b.{{0,100}}?\b{_RISES}.{{0,50}}?\b(?:once|when|after)\s+it['’]?s?\s+(?:is\s+)?(?:added|included)", re.I)
+_LEAVES_OUT_TH = re.compile(r"(?:ยอดรวม|ราคารวม|รวมทั้งหมด|ยอดสุทธิ).{0,60}?ไม่รวมค่า(?:จัด)?ส่ง")
 
 
 def _dec(s: str) -> Decimal | None:
@@ -61,6 +76,19 @@ def _walk(x, per_sku: dict, quotes: list):
     elif isinstance(x, list):
         for v in x:
             _walk(v, per_sku, quotes)
+
+
+def false_delivery_claim(reply: str) -> str | None:
+    """The first sentence saying a total excludes delivery. "Could be higher once delivery is confirmed" is honest
+    (delivery outside the service area needs the sales team), so it doesn't count."""
+    for line in reply.splitlines():
+        for s in re.split(r"(?<=[.!?])\s+", line):
+            t = _NOT_TOTAL.sub(" ", s)
+            if _LEAVES_OUT.search(t) or _LEAVES_OUT_TH.search(t) or (_TOTAL_WORD.search(t) and _D_LEFT_OUT.search(t)):
+                return s
+            if "confirm" not in t.lower() and (_HIGHER_ONCE.search(t) or (re.search(_D, line, re.I) and _HIGHER_IT.search(t))):
+                return s
+    return None
 
 
 def check(reply: str, results: list[str], customer: str = "", catalog_names=()) -> list[str]:
@@ -106,4 +134,6 @@ def check(reply: str, results: list[str], customer: str = "", catalog_names=()) 
                 if want and v is not None and v not in want and v not in POLICY:   # "free from a 3,000 subtotal"
                     label = "subtotal" if m.group(1) else "total"
                     problems.append(f"stated {label} {v} does not match the quote ({', '.join(map(str, sorted(want)))})")
+    if (claim := false_delivery_claim(reply)):
+        problems.append(f"a claim that a total leaves out delivery ({claim!r}), but every total already includes delivery and VAT")
     return problems
