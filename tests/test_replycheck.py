@@ -165,6 +165,8 @@ def test_false_delivery_claims_are_rejected():
                   "Your total of ฿1,210.17 does not include delivery.",
                   "These totals exclude the ฿150.00 delivery fee.",
                   "Delivery isn't included in the total.",
+                  "The totals above are for the paper alone, before delivery.",
+                  "Delivery is ฿150.00 for orders under a ฿3,000.00 subtotal, and that isn't included in the totals above.",
                   "Once delivery is added, the total will be higher.",
                   "ยอดรวม 1,210.17 บาท ยังไม่รวมค่าจัดส่ง"):
         assert any("leaves out delivery" in p for p in check(reply, [], "", ())), reply
@@ -179,6 +181,7 @@ def test_correct_delivery_wording_passes():
                   "9 reams is ฿981.00 before VAT and delivery.",
                   "Prices exclude VAT and delivery.",
                   "The subtotal of ฿981.00 doesn't include delivery.",
+                  "Delivery is ฿150.00, and the subtotal doesn't include it, but the total does.",
                   "The line total of ฿981.00 excludes delivery.",
                   "After VAT and delivery are added, your total is ฿1,210.17.",
                   "The total is higher than your budget once delivery is included.",

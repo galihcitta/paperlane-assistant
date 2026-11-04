@@ -36,8 +36,9 @@ _NOT_TOTAL = re.compile(r"\b(?:line|item|goods|product)\s+totals?\b|\btotals?\s+
 _TOTAL_WORD = re.compile(r"\btotals?\b", re.I)
 _LEAVES_OUT = re.compile(
     rf"\btotals?\b.{{0,120}}?(?:(?:exclud\w*|(?:not|n['’]t)\s+(?:yet\s+)?(?:includ\w*|count\w*))\s+(?:\S+\s+){{0,3}}?{_D}"
-    rf"|without\s+(?:the\s+)?{_D}|(?:but\s+|and\s+|,\s*)not\s+(?:the\s+)?{_D})", re.I)
-_D_LEFT_OUT = re.compile(rf"{_D}\W+(?:\S+\s+){{0,2}}?(?:(?:not|\w*n['’]t)\s+(?:yet\s+)?includ|exclud)|{_D}.{{0,40}}?\bon top of\b", re.I)
+    rf"|(?:without|before)\s+(?:the\s+)?{_D}|(?:but\s+|and\s+|,\s*)not\s+(?:the\s+)?{_D})", re.I)
+_D_LEFT_OUT = re.compile(rf"{_D}\W+(?:\S+\s+){{0,2}}?(?:(?:not|\w*n['’]t)\s+(?:yet\s+)?includ|exclud)|{_D}.{{0,40}}?\bon top of\b"
+                         rf"|{_D}\b.{{0,80}}?(?:not|\w*n['’]t)\s+includ\w*\s+in\s+(?:\S+\s+){{0,2}}?totals?\b", re.I)
 _RISES = r"(?:higher|more|increase\w*|go(?:es)? up|rises?)\b(?!\s+than\b)"     # "higher than your budget" is about the budget
 _HIGHER_ONCE = re.compile(rf"\btotals?\b.{{0,100}}?\b{_RISES}.{{0,50}}?\b(?:once|when|after)\b.{{0,40}}?{_D}"
                           rf"|\b(?:once|when|after)\b.{{0,30}}?{_D}.{{0,40}}?\b(?:added|included)\b.{{0,80}}?\btotals?\b.{{0,40}}?\b{_RISES}", re.I)
